@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light margin-bottom">
+  <a class="navbar-brand" routerLink="">Angular 5 trainingapp</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+
+      <li>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </li>
+
+      <!--if user is NOT logged in-->
+      <li class="nav-item"><a routerLink="/register" class="nav-link">Register</a></li>
+      <li class="nav-item"><a routerLink="/login" class="nav-link">Login</a></li>
+
+      <!--if user IS logged in-->
+      <li class="nav-item"><a routerLink="/posts" class="nav-link">All posts</a></li>
+      <li class="nav-item"><a routerLink="/posts/create" class="nav-link">Create Post</a></li>
+      <li class="nav-item"><a routerLink="/profile/" class="nav-link">My Profile</a></li>
+      <li class="nav-item"><a routerLink="/logout" class="nav-link">Logout</a></li>
+    </ul>
+  </div>
+</nav>
