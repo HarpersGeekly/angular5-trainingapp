@@ -8,4 +8,11 @@ export class Post {
   body: string;
   date: Date;
   user: User;
+  voteCount: number;
+  hoursMinutes: string;
+  formatDate: string;
+  htmlTitle: string;
+  htmlBody: string;
+  htmlSubtitle: string;
+  htmlLeadImage: string;
 }
