@@ -9,7 +9,6 @@ import { PostService } from '../services/post.service';
 })
 export class PostsIndexComponent implements OnInit {
   posts: Post[];
-  sortedPostsById: Post[];
   constructor(private postSvc: PostService) {
   }
 
@@ -20,8 +19,12 @@ export class PostsIndexComponent implements OnInit {
   getPosts() {
     this.postSvc.getPosts()
       .subscribe(posts => {
-        this.sortedPostsById = posts.sort(function(a, b) { return b.id - a.id; });
+        this.posts = posts;
         console.log(posts); // .subscribe() is like .then(), response is posts that I assign to the variable posts
       });
+  }
+
+  sortedPostsById(posts: Post[]) {
+    return posts.sort(function(a, b) { return b.id - a.id; });
   }
 }

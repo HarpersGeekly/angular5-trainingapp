@@ -1,6 +1,6 @@
 <div class="container">
 
-  <div *ngFor="let post of sortedPostsById">
+  <div *ngFor="let post of sortedPostsById(posts)">
     <a routerLink="/posts/{{post.id}}/{{post.title}}">
       <h3 [innerHTML]="post.htmlTitle">{{post.title}}</h3>
     </a>
