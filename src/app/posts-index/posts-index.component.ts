@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Pipe, PipeTransform} from '@angular/core';
 import { Post } from '../models/post';
 import { PostService } from '../services/post.service';
 
@@ -9,6 +9,7 @@ import { PostService } from '../services/post.service';
 })
 export class PostsIndexComponent implements OnInit {
   posts: Post[];
+  sortedPostsById: Post[];
   constructor(private postSvc: PostService) {
   }
 
@@ -19,7 +20,7 @@ export class PostsIndexComponent implements OnInit {
   getPosts() {
     this.postSvc.getPosts()
       .subscribe(posts => {
-        this.posts = posts;
+        this.sortedPostsById = posts.sort(function(a, b) { return b.id - a.id; });
         console.log(posts); // .subscribe() is like .then(), response is posts that I assign to the variable posts
       });
   }
