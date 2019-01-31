@@ -8,7 +8,7 @@
 
     By: <a routerLink="/profile/{{post.user.id}}/{{post.user.username}}" class="margin-right">{{post.user.username}}</a>
     <span class="margin-right-lt">{{post.hoursMinutes}}</span><span class="margin-right">{{post.formatDate}}</span>
-    <i class="fas fa-thumbs-up margin-right-lt"></i>{{post.voteCount}}
+    <i class="fa fa-thumbs-up margin-right-lt"></i>{{post.voteCount}}
     <a routerLink="/posts/{{post.id}}/{{post.title}}"><div [innerHTML]="post.htmlLeadImage" id="index-post-image">{{post.leadImage}}</div></a>
   </div>
 

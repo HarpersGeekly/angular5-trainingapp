@@ -1,9 +1,16 @@
 <div class="container">
-    <h3 [innerHTML]="post.htmlTitle">{{post.title}}</h3>
-    <h4 [innerHTML]="post.htmlSubtitle">{{post.subtitle}}</h4>
+    <h1 [innerHTML]="post.htmlTitle">{{post.title}}</h1>
+    <h2 [innerHTML]="post.htmlSubtitle">{{post.subtitle}}</h2>
 
     By: <a routerLink="/profile/{{post.user.id}}/{{post.user.username}}" class="margin-right">{{post.user.username}}</a>
     <span class="margin-right-lt">{{post.hoursMinutes}}</span><span class="margin-right">{{post.formatDate}}</span>
-    <i class="fas fa-thumbs-up margin-right-lt"></i>{{post.voteCount}}
+    <i class="fa fa-thumbs-up margin-right-lt"></i>{{post.voteCount}}
    <div [innerHTML]="post.htmlLeadImage" id="index-post-image">{{post.leadImage}}</div>
+
+    <a routerLink="/login" class="margin-right-lt"><i class="fa fa-2x fa-thumbs-up"></i></a>
+    <span class="margin-right-lt">{{post.voteCount}}</span>
+    <a routerLink="/login"><i class="fa fa-2x fa-thumbs-down"></i></a>
 </div>
+
+
+

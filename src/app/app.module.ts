@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { PostService} from './services/post.service';
 import { PostShowComponent } from './post-show/post-show.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { PostShowComponent } from './post-show/post-show.component';
     AppComponent,
     PostsIndexComponent,
     PostShowComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
