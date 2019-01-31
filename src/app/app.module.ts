@@ -6,12 +6,14 @@ import { PostsIndexComponent } from './posts-index/posts-index.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { PostService} from './services/post.service';
+import { PostShowComponent } from './post-show/post-show.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     PostsIndexComponent,
+    PostShowComponent,
   ],
   imports: [
     BrowserModule,

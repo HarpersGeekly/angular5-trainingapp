@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PostsIndexComponent } from './posts-index/posts-index.component';
+import { PostShowComponent } from './post-show/post-show.component';
 
 const routes: Routes = [
-  { path: '', component: PostsIndexComponent}
+  { path: '', component: PostsIndexComponent},
+  { path: 'posts/:id/:title', component: PostShowComponent}
 ];
 
 @NgModule({
