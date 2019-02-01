@@ -8,6 +8,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { PostService} from './services/post.service';
 import { PostShowComponent } from './post-show/post-show.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { RegisterComponent } from './register/register.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 
 @NgModule({
@@ -16,6 +18,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     PostsIndexComponent,
     PostShowComponent,
     NavbarComponent,
+    RegisterComponent,
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,
