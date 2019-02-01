@@ -2,7 +2,7 @@
   <h1 [innerHTML]="post.htmlTitle">{{post.title}}</h1>
   <h2 [innerHTML]="post.htmlSubtitle">{{post.subtitle}}</h2>
 
-  By: <a routerLink="/profile/{{post.user.id}}/{{post.user.username}}" class="margin-right">{{post.user.username}}</a>
+  By: <a routerLink="/user/profile/{{post.user.id}}/{{post.user.username}}" class="margin-right">{{post.user.username}}</a>
   <span class="margin-right-lt">{{post.hoursMinutes}}</span><span class="margin-right">{{post.formatDate}}</span>
   <i class="fa fa-thumbs-up margin-right-lt"></i>{{post.voteCount}}
   <div [innerHTML]="post.htmlLeadImage" id="index-post-image">{{post.leadImage}}</div>

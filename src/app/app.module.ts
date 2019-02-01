@@ -10,6 +10,7 @@ import { PostShowComponent } from './post-show/post-show.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RegisterComponent } from './register/register.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { UserService } from './services/user.service';
 
 
 @NgModule({
@@ -26,7 +27,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [PostService],
+  providers: [PostService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
