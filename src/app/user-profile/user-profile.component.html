@@ -1,0 +1,18 @@
+<!--if your profile  -->
+<h3 class="profileUsername">Welcome, {{user.username}}!</h3>
+<!--if not your profile-->
+<h3 class="profileUsername">{{user.username}}'s profile</h3>
+<h4 id="profileJoinedDate">Joined: {{user.formatDate}}</h4>
+<h4 id="profileBio">Bio: {{user.bio}}</h4>
+
+<h3>You are currently logged in. <span ng-if="posts != undefined || posts.length > 0"><a href="/posts/create"> Create a post.</a></span></h3>
+
+<ul class="nav nav-tabs">
+  <li class="nav active"><a data-toggle="tab" href="#posts">Posts</a></li>
+  <li class="nav"><a data-toggle="tab" href="#comments">Comments</a></li>
+
+  <!--if your profile-->
+  <li class="nav"><a data-toggle="tab" href="#messages">Messages</a></li>
+  <li class="nav"><a data-toggle="tab" href="#settings">Account Settings</a></li>
+
+</ul>
