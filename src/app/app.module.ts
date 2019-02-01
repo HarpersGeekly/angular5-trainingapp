@@ -12,7 +12,6 @@ import { RegisterComponent } from './register/register.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserService } from './services/user.service';
 
-
 @NgModule({
   declarations: [
     AppComponent,
