@@ -15,8 +15,14 @@ export class PostService {
 
   constructor(private http: HttpClient) { }
 
-  getPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>(this.postsUrl + '/posts');
+  getPosts(id: number): Observable<Post[]> {
+    let url: string = this.postsUrl;
+    if (id != null) {
+      url = url + '/postsByUserId/' + id;
+    } else if (id == null) {
+      url = url + '/posts';
+    }
+    return this.http.get<Post[]>(url);
   }
 
   getPost(id: number): Observable<Post> {

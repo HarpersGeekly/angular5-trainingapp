@@ -13,11 +13,12 @@ export class PostsIndexComponent implements OnInit {
   }
 
   ngOnInit() {
+    // check for userId
     this.getPosts();
   }
 
   getPosts() {
-    this.postSvc.getPosts()
+    this.postSvc.getPosts(null)
       .subscribe(posts => {
         this.posts = posts;
         console.log(posts); // .subscribe() is like .then(), response is posts that I assign to the variable posts
