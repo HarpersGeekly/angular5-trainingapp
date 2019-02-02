@@ -27,7 +27,8 @@ export class UserProfileComponent implements OnInit {
 
   getUser() {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.userSvc.getUser(id).subscribe(user => this.user = user);
+    this.userSvc.getUser(id).subscribe(user => { this.user = user; console.log(user); });
+
   }
 
   getPosts() {
@@ -36,7 +37,11 @@ export class UserProfileComponent implements OnInit {
   }
 
   sortedPostsById(posts: Post[]) {
-    return posts.sort(function(a, b) { return b.id - a.id; });
+    if (posts != null) {
+      return posts.sort(function (a, b) {
+        return b.id - a.id;
+      });
+    }
   }
 
 }

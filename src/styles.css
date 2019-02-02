@@ -14,8 +14,12 @@
   display: none;
 }
 
+.margin-top {
+  margin-top: 25px;
+}
+
 .margin-bottom {
-  margin-bottom: 50px;
+  margin-bottom: 25px;
 }
 
 .margin-right {

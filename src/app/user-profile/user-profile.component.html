@@ -1,18 +1,83 @@
-<!--if your profile  -->
-<h3 class="profileUsername">Welcome, {{user.username}}!</h3>
-<!--if not your profile-->
-<h3 class="profileUsername">{{user.username}}'s profile</h3>
-<h4 id="profileJoinedDate">Joined: {{user.formatDate}}</h4>
-<h4 id="profileBio">Bio: {{user.bio}}</h4>
+<!--if your profile-->
+<div class="container">
+  <h3 class="profileUsername">Welcome, {{user?.username}}!</h3>
+  <!--if not your profile-->
+  <h3 class="profileUsername">{{user?.username}}'s profile</h3>
+  <h4 id="profileJoinedDate">Joined: {{user?.formatDate}}</h4>
+  <h4 id="profileBio">Bio: {{user?.bio}}</h4>
 
-<h3>You are currently logged in. <span ng-if="posts != undefined || posts.length > 0"><a href="/posts/create"> Create a post.</a></span></h3>
+  <h3>You are currently logged in. <span *ngIf="posts?.length > 0"><a routerLink="/posts/create"> Create a post.</a></span></h3>
+</div>
 
-<ul class="nav nav-tabs">
-  <li class="nav active"><a data-toggle="tab" href="#posts">Posts</a></li>
-  <li class="nav"><a data-toggle="tab" href="#comments">Comments</a></li>
+<div class="container">
 
-  <!--if your profile-->
-  <li class="nav"><a data-toggle="tab" href="#messages">Messages</a></li>
-  <li class="nav"><a data-toggle="tab" href="#settings">Account Settings</a></li>
 
-</ul>
+  <ngb-tabset>
+    <ngb-tab title="Posts">
+      <ng-template ngbTabContent>
+
+        <div *ngIf="posts?.length == 0">Posts are empty. <a routerLink="/posts/create"> Create a post.</a></div>
+        <div *ngFor="let post of sortedPostsById(posts)" class="margin-top">
+
+          <a routerLink="/post/{{post.id}}/{{post.title}}">
+            <h4 [innerHTML]="post.htmlTitle" id="profile-post-title">{{post.title}}</h4>
+          </a>
+          <h5 [innerHTML]="post.htmlSubtitle" id="profile-post-subtitle">{{post.subtitle}}</h5>
+          <span class="margin-right-lt">{{post.hoursMinutes}}</span><span class="margin-right">{{post.formatDate}}</span>
+          <i class="fa fa-thumbs-up margin-right-lt"></i>{{post.voteCount}}
+          <a routerLink="/post/{{post.id}}/{{post.title}}"><div [innerHTML]="post.htmlLeadImage" id="profile-post-image">{{post.leadImage}}</div></a>
+
+          <div ngbDropdown class="d-inline-block">
+
+            <i class="fa fa-ellipsis-h fa-2x options-ellipsis dropdown-toggle" id="dropdownBasic1" ngbDropdownToggle></i>
+
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="edit-delete-dropdown">
+              <div>
+                <a href="/posts/{{post.id}}/edit" class="dropdown-edit-btn">
+                  <i class="fa fa-edit"></i> edit
+                </a>
+              </div>
+              <div>
+                <a ng-click="deletePost(post)" class="dropdown-delete-btn">
+                  <i class="fa fa-trash"></i> delete
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Comments">
+      <!--<ng-template ngbTabTitle><b>Fancy</b> title</ng-template>-->
+      <ng-template ngbTabContent>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.
+        <p>Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table
+          craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl
+          cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia
+          yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean
+          shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero
+          sint qui sapiente accusamus tattooed echo park.</p>
+      </ng-template>
+    </ngb-tab>
+    <!--<ngb-tab title="Account Settings" [disabled]="true">-->
+    <ngb-tab title="Account Settings">
+      <ng-template ngbTabContent>
+        <p>Sed commodo, leo at suscipit dictum, quam est porttitor sapien, eget sodales nibh elit id diam. Nulla facilisi. Donec egestas ligula vitae odio interdum aliquet. Duis lectus turpis, luctus eget tincidunt eu, congue et odio. Duis pharetra et nisl at faucibus. Quisque luctus pulvinar arcu, et molestie lectus ultrices et. Sed diam urna, egestas ut ipsum vel, volutpat volutpat neque. Praesent fringilla tortor arcu. Vivamus faucibus nisl enim, nec tristique ipsum euismod facilisis. Morbi ut bibendum est, eu tincidunt odio. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Mauris aliquet odio ac lorem aliquet ultricies in eget neque. Phasellus nec tortor vel tellus pulvinar feugiat.</p>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+
+  <p>
+    <ngb-alert [dismissible]="false">
+      <i class="fa fa-check"></i><strong>Warning!</strong> Figure out ng-bootstrap alerts. Dissmissable? Colors: success, danger? How?
+    </ngb-alert>
+  </p>
+
+  <p>
+    <ngb-alert [dismissible]="false">
+      <i class="fa fa-check"></i><strong>Warning!</strong> Figure out font awesome, Do I need Font Awesome 5 for angular? why does chrome make ellipsis squares?
+    </ngb-alert>
+  </p>
+
+</div>

@@ -8,9 +8,29 @@
   <div [innerHTML]="post.htmlLeadImage" id="index-post-image">{{post.leadImage}}</div>
   <div [innerHTML]="post.htmlBody">{{post.body}}</div>
 
-  <a routerLink="/login" class="margin-right-lt"><i class="fa fa-2x fa-thumbs-up"></i></a>
-  <span class="margin-right-lt">{{post.voteCount}}</span>
-  <a routerLink="/login"><i class="fa fa-2x fa-thumbs-down"></i></a>
+  <div class="vote-options-row">
+    <div class="thumbs-wrapper">
+      <a routerLink="/login" class="margin-right-lt"><i class="fa fa-2x fa-thumbs-up"></i></a>
+      <span class="margin-right-lt">{{post.voteCount}}</span>
+      <a routerLink="/login"><i class="fa fa-2x fa-thumbs-down"></i></a>
+    </div>
+
+    <div ngbDropdown class="d-inline-block">
+      <i class="fa fa-ellipsis-h fa-lg options-ellipsis dropdown-toggle" id="dropdownBasic1" ngbDropdownToggle></i>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="edit-delete-dropdown">
+        <div>
+          <a href="/posts/{{post.id}}/edit" class="dropdown-edit-btn">
+            <i class="fa fa-edit"></i> edit
+          </a>
+        </div>
+        <div>
+          <a ng-click="deletePost(post)" class="dropdown-delete-btn">
+            <i class="fa fa-trash-o"></i> delete
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 
