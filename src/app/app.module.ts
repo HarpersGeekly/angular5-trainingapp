@@ -11,6 +11,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { RegisterComponent } from './register/register.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserService } from './services/user.service';
+import {NgbAlertConfig, NgbDropdownConfig, NgbModule, NgbTabsetConfig} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -24,9 +25,10 @@ import { UserService } from './services/user.service';
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule
   ],
-  providers: [PostService, UserService],
+  providers: [PostService, UserService, NgbAlertConfig, NgbDropdownConfig, NgbTabsetConfig],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

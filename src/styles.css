@@ -89,6 +89,7 @@ body {
 
 .dropdown-edit-btn, .dropdown-delete-btn {
   display: block;
+  text-align: center;
   border: none;
   background-color: #fffafc;
   padding: 1em;
@@ -108,4 +109,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+
+.dropdown-toggle:empty::after {
+  display: none;
 }
