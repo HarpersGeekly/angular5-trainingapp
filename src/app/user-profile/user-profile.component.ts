@@ -35,4 +35,8 @@ export class UserProfileComponent implements OnInit {
     this.postSvc.getPosts(id).subscribe(posts => this.posts = posts);
   }
 
+  sortedPostsById(posts: Post[]) {
+    return posts.sort(function(a, b) { return b.id - a.id; });
+  }
+
 }
