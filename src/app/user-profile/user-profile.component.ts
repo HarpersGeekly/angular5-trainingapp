@@ -13,7 +13,9 @@ import {PostService} from '../services/post.service';
 export class UserProfileComponent implements OnInit {
 
   user: User;
+  isLoggedIn: boolean; // maybe put this in a Service?
   posts: Post[];
+  showEditUserForm = false;
 
   constructor(
     private userSvc: UserService,
@@ -27,13 +29,17 @@ export class UserProfileComponent implements OnInit {
 
   getUser() {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.userSvc.getUser(id).subscribe(user => { this.user = user; console.log(user); });
-
+    this.userSvc.getUser(id).subscribe(user => {
+      this.userSvc.user = user; // any component that injects the UserService can use this user
+      this.user = this.userSvc.user;
+      console.log(user);
+    });
   }
 
   getPosts() {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.postSvc.getPosts(id).subscribe(posts => this.posts = posts);
+    this.postSvc.getPosts(id).subscribe(posts =>
+      this.posts = posts);
   }
 
   sortedPostsById(posts: Post[]) {
@@ -42,6 +48,10 @@ export class UserProfileComponent implements OnInit {
         return b.id - a.id;
       });
     }
+  }
+
+  toggleEditUserForm() {
+    this.showEditUserForm = !this.showEditUserForm;
   }
 
 }
