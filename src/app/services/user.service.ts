@@ -11,22 +11,27 @@ const httpOptions =  {
 export class UserService {
 
   user: User;
+  foundUser: User;
   successfulEdit: boolean;
   successfulDelete: boolean;
 
-  private usersUrl = 'http://localhost:8888/api/user';
+  private usersUrl = '/api/user'; // URL to rest api, look at file: proxy.conf.json
 
   constructor(private http: HttpClient) { }
+
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.usersUrl + '/users');
+  }
 
   getUser(id: number): Observable<User> {
     return this.http.get<User>(this.usersUrl + '/id/' + id);
   }
 
-  findByUsername(username: string): Observable<User> {
+  findByUsername(username: string) {
     return this.http.get<User>(this.usersUrl + '/username/' + username);
   }
 
-  findByEmail(email: string): Observable<User> {
+  findByEmail(email: string) {
     return this.http.get<User>(this.usersUrl + '/email/' + email);
   }
 
@@ -41,13 +46,8 @@ export class UserService {
     });
   }
 
-  delete(user: User) {
-    return this.http.post(this.usersUrl + '/deleteUser', JSON.stringify(user), {headers: httpOptions.headers}).subscribe(response => {
-      if (this.getUser(user.id) == null) {
-        this.successfulDelete = true;
-      }
-      console.log('response ' + response);
-    });
+  delete(id: number) {
+    return this.http.delete(this.usersUrl + '/deleteUser/' + id, {headers: httpOptions.headers}).subscribe();
 }
 
 }

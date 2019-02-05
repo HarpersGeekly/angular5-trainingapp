@@ -11,7 +11,7 @@ const httpOptions = {
 @Injectable()
 export class PostService {
 
-  private postsUrl = 'http://localhost:8888/api/post';  // URL to rest api
+  private postsUrl = '/api/post';  // URL to rest api, look at file: proxy.conf.json
 
   constructor(private http: HttpClient) { }
 
