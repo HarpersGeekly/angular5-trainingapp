@@ -1,0 +1,9 @@
+<div class="container">
+  <div *ngFor="let user of users">
+    id: {{user.id}}
+    username:
+    <a routerLink="/users/profile/{{user.id}}/{{user.username}}">
+      {{user.username}}
+    </a>
+  </div>
+</div>
