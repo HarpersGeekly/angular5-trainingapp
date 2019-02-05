@@ -47,7 +47,10 @@ export class UserService {
   }
 
   delete(id: number) {
-    return this.http.delete(this.usersUrl + '/deleteUser/' + id, {headers: httpOptions.headers}).subscribe();
+    this.http.delete(this.usersUrl + '/deleteUser/' + id, {headers: httpOptions.headers}).subscribe();
+    this.getUser(id);
+    this.successfulDelete = this.foundUser == null;
+    return this.successfulDelete;
 }
 
 }
