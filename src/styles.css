@@ -4,10 +4,14 @@
   display:flex;
   justify-content: center;
   align-content: center;
+  align-items: center;
 }
 
-.show {
+.flex {
   display: flex;
+}
+.flex1 {
+  flex: 1;
 }
 
 .hidden {

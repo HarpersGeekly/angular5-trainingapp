@@ -1,16 +1,24 @@
-<app-users></app-users>
-<div class="container">
-
-  <div *ngFor="let post of sortedPostsById(posts)">
-    <a routerLink="/post/{{post.id}}/{{post.title}}">
-      <h3 [innerHTML]="post.htmlTitle">{{post.title}}</h3>
-    </a>
-    <h4 [innerHTML]="post.htmlSubtitle">{{post.subtitle}}</h4>
-
-    By: <a routerLink="/user/profile/{{post.user.id}}/{{post.user.username}}" class="margin-right">{{post.user.username}}</a>
-    <span class="margin-right-lt">{{post.hoursMinutes}}</span><span class="margin-right">{{post.formatDate}}</span>
-    <i class="fa fa-thumbs-up margin-right-lt"></i>{{post.voteCount}}
-    <a routerLink="/post/{{post.id}}/{{post.title}}"><div [innerHTML]="post.htmlLeadImage" id="index-post-image">{{post.leadImage}}</div></a>
+<div class="index-wrapper flex">
+  <div class="container flex1">
+    <div class="row flex-center">
+      <i class="fas fa-2x fa-users margin-right-lt"></i>
+      <h2>Top Users:</h2>
+    </div>
+    <app-users></app-users>
   </div>
 
+  <div class="container">
+    <div *ngFor="let post of sortedPostsById(posts)">
+      <a routerLink="/post/{{post.id}}/{{post.title}}">
+        <h3 [innerHTML]="post.htmlTitle">{{post.title}}</h3>
+      </a>
+      <h4 [innerHTML]="post.htmlSubtitle">{{post.subtitle}}</h4>
+
+      By: <a routerLink="/user/profile/{{post.user.id}}/{{post.user.username}}" class="margin-right">{{post.user.username}}</a>
+      <span class="margin-right-lt">{{post.hoursMinutes}}</span><span class="margin-right">{{post.formatDate}}</span>
+      <i class="fa fa-thumbs-up margin-right-lt"></i>{{post.voteCount}}
+      <a routerLink="/post/{{post.id}}/{{post.title}}"><div [innerHTML]="post.htmlLeadImage" id="index-post-image">{{post.leadImage}}</div></a>
+    </div>
+
+  </div>
 </div>
