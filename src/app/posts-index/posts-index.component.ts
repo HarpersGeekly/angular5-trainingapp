@@ -26,6 +26,10 @@ export class PostsIndexComponent implements OnInit {
   }
 
   sortedPostsById(posts: Post[]) {
-    return posts.sort(function(a, b) { return b.id - a.id; });
+    if (posts != null) {
+      return posts.sort(function (a, b) {
+        return b.id - a.id;
+      });
+    }
   }
 }
