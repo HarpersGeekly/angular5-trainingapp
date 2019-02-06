@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../services/user.service';
 import {UserProfileComponent} from '../user-profile/user-profile.component';
-import {AlertService} from '../services/alert.service';
 import {User} from '../models/user';
-import {Observable} from 'rxjs/Observable';
 import {Router} from '@angular/router';
 
 @Component({
@@ -15,46 +13,104 @@ export class EditUserComponent implements OnInit {
   constructor(
     public userSvc: UserService,
     private userComponent: UserProfileComponent,
-    private alert: AlertService,
     private router: Router) { }
-
-  submitted = false;
-  user = new User();
-  existingUser = new Observable<User>();
+  userOnForm = new User();
+  foundUser: User;
   userExists = false;
+  loading = false;
 
-  onSubmit() {
-    console.log('submitted');
-    console.log('username field:' + this.userSvc.user.username );
-    this.user.id = this.userSvc.user.id;
-    this.user.username = this.userSvc.user.username;
-    this.user.email = this.userSvc.user.email;
-    this.user.bio = this.userSvc.user.bio;
-    this.existingUser = this.userSvc.findByUsername(this.user.username);
-    console.log(this.existingUser.pipe());
-    // if (this.existingUser != null) {
-    //   this.userExists = true;
-    // } else if (this.existingUser == null) {
-      this.userSvc.update(this.user);
-      // if (this.userSvc.successfulEdit === true) {
-        this.alert.success('Profile Successfully Updated!');
-      // } else {
-      //   this.alert.error('There was an error when updating your profile');
-      // }
-      this.userComponent.showEditUserForm = false;
-      this.submitted = true;
-    // }
+  onUsernameFormSubmit(username) {
+    this.findByUsernameAndUpdate(username);
   }
 
-  deleteUser(user: User) {
-    this.userSvc.delete(user);
+  onEmailFormSubmit(email) {
+    this.findByEmailAndUpdate(email);
+  }
+
+  onBioFormSubmit(bio) {
+    this.updateBio(bio);
+  }
+
+  onChange(value, type) {
+      this.userOnForm[type] = value;
+  }
+
+  findByUsernameAndUpdate(username) {
+    this.userSvc.findByUsername(username).toPromise().then(response => {
+      this.foundUser = response;
+      console.log(response);
+      console.log('return from REST: ' + this.foundUser);
+      if (this.foundUser == null || undefined) {
+        this.userExists = false;
+      } else {
+        this.userExists = true;
+      }
+      console.log('userexists: ' + this.userExists);
+      if (!this.userExists) {
+        console.log('submitted');
+        this.userExists = false;
+        this.loading = true;
+        this.userOnForm.id = this.userSvc.user.id;
+        this.userOnForm.username = username;
+        this.userOnForm.email = this.userSvc.user.email;
+        this.userOnForm.bio = this.userSvc.user.bio;
+        this.updateUser(this.userOnForm);
+        this.userSvc.user.username = username;
+        this.userComponent.showEditUserForm = false;
+      }
+    });
+  }
+
+  findByEmailAndUpdate(email) {
+    this.userSvc.findByEmail(email).toPromise().then(response => {
+      this.foundUser = response;
+      console.log('return from REST: ' + this.foundUser);
+      if (this.foundUser == null || undefined) {
+        this.userExists = false;
+      } else {
+        this.userExists = true;
+      }
+      console.log('userexists: ' + this.userExists);
+      if (!this.userExists) {
+        console.log('submitted');
+        this.userExists = false;
+        this.loading = true;
+        this.userOnForm.id = this.userSvc.user.id;
+        this.userOnForm.username = this.userSvc.user.username;
+        this.userOnForm.email = email;
+        this.userOnForm.bio = this.userSvc.user.bio;
+        this.updateUser(this.userOnForm);
+        this.userSvc.user.email = email;
+        this.userComponent.showEditUserForm = false;
+      }
+    });
+  }
+
+  updateBio(bio) {
+    this.userOnForm.id = this.userSvc.user.id;
+    this.userOnForm.username = this.userSvc.user.username;
+    this.userOnForm.email = this.userSvc.user.email;
+    this.userOnForm.bio = bio;
+    this.updateUser(this.userOnForm);
+    this.userSvc.user.bio = bio;
+    this.userComponent.showEditUserForm = false;
+  }
+
+  updateUser(user: User) {
+    this.userSvc.update(user);
+  }
+
+  deleteUser(id: number) {
+    this.userSvc.delete(id);
     if (this.userSvc.successfulDelete === true) {
-      this.router.navigate(['/register']);
+      this.router.navigate(['/', 'register', {success: true}]);
+      // TODO: how can I make an alert popup in /register that says "successful delete"?
     } else {
-      this.alert.error('Sorry. There was an error when deleting your profile');
+
     }
   }
 
-  ngOnInit() {}
-
+  ngOnInit() {
+    this.loading = false;
+  }
 }

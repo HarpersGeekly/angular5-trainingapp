@@ -1,25 +1,15 @@
-<!--if your profile-->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<!-- FontAwesome -->
-<link
-  rel="stylesheet"
-  href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
-  integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-
-<app-alert></app-alert>
-
 <div class="container">
   <h3 class="profileUsername">Welcome, {{user?.username}}!</h3>
   <!--if not your profile-->
   <h3 class="profileUsername">{{user?.username}}'s profile</h3>
-  <h4 id="profileJoinedDate">Joined: {{user?.formatDate}}</h4>
-  <h4 id="profileBio">Bio: {{user?.bio}}</h4>
+  <h5 id="profileJoinedDate">Joined: {{user?.formatDate}}</h5>
+  <h5 class="profileEmail">Email: {{user?.email}}</h5>
+  <h5 id="profileBio">Bio: {{user?.bio}}</h5>
 
   <h3>You are currently logged in. <span *ngIf="posts?.length > 0"><a routerLink="/posts/create"> Create a post.</a></span></h3>
 </div>
 
 <div class="container">
-
 
   <ngb-tabset>
     <ngb-tab title="Posts">
@@ -68,8 +58,6 @@
     <ngb-tab title="Account Settings">
       <ng-template ngbTabContent>
 
-
-
         <div class="container">
             <button class="btn btn-primary" (click)="toggleEditUserForm()">
               Edit Account
@@ -84,11 +72,5 @@
       </ng-template>
     </ngb-tab>
   </ngb-tabset>
-
-  <!--<p>-->
-    <!--<ngb-alert [dismissible]="false">-->
-      <!--<i class="fa fa-check"></i><strong>Warning!</strong> Figure out ng-bootstrap alerts. Dissmissable? Colors: success, danger? How?-->
-    <!--</ngb-alert>-->
-  <!--</p>-->
 
 </div>

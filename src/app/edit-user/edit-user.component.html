@@ -1,42 +1,44 @@
 
 <h3>Edit User:</h3>
-<form (ngSubmit)="onSubmit()" #editUserForm="ngForm">
+<form (ngSubmit)="onUsernameFormSubmit(userOnForm.username)" #editUsernameForm="ngForm">
 
   <div class="container form-group">
-
-    <!--<input type="hidden" name="id" [(ngModel)]="userSvc.user.id" value="{{userSvc.user.id}}">-->
-
-    <label for="userEditName">Change username:</label>
-    <input #username="ngModel" id="userEditName" class="form-control" type="text" name="username" [(ngModel)]="userSvc.user.username" required minlength="2" maxlength="20" appUsernameValidator/>
-    <!--<div [hidden]="username.valid || username.pristine"-->
-         <!--class="alert alert-danger">-->
-      <!--Username is required.-->
-    <!--</div>-->
+    <label for="userEditName">Username:</label>
+    <input #username="ngModel" id="userEditName" class="form-control" type="text" name="username" [ngModel]="userSvc.user.username" (ngModelChange)="onChange($event, 'username')" required minlength="2" maxlength="20" appUsernameValidator/>
     <div *ngIf="username.errors && (username.dirty || username.touched)" class="alert alert-danger">
       <p *ngIf="username?.errors.required">Username is required</p>
       <p *ngIf="username?.errors.minlength">Username must be between 2-20 characters</p>
       <p *ngIf="username?.errors.appUsernameValidator">Username must be alphanumeric only</p>
-      <p *ngIf="userExists">Sorry. That name is not available. Please choose a different name. Ignore if necessary.</p>
     </div>
+    <p *ngIf="userExists" class="alert alert-danger">Sorry. That name is not available. Please choose a different name.</p>
+  </div>
+  <button class="btn btn-success" [disabled]="!editUsernameForm.form.valid || !username.touched || !username.dirty || userOnForm.username == userSvc.user.username"> <!-- button disabled if there are errors-->
+    Update Username
+  </button>
+</form>
 
-    <label for="userEditEmail">Change email:</label>
-    <input #email="ngModel" id="userEditEmail" class="form-control" type="email" name="email" [(ngModel)]="userSvc.user.email"  required appEmailValidator maxlength="254" />
-    <!--<div [hidden]="email.valid || email.pristine"-->
-         <!--class="alert alert-danger">-->
-      <!--Email is required.-->
-    <!--</div>-->
+<form (ngSubmit)="onEmailFormSubmit(userOnForm.email)" #editEmailForm="ngForm">
+  <div class="container form-group">
+    <label for="userEditEmail">Email:</label>
+    <input #email="ngModel" id="userEditEmail" class="form-control" type="email" name="email" [ngModel]="userSvc.user.email" (ngModelChange)="onChange($event, 'email')" required appEmailValidator maxlength="254" />
     <div *ngIf="email.errors && (email.dirty || email.touched)">
       <p *ngIf="email?.errors.required" class="alert alert-danger">Email is required</p>
       <p *ngIf="email?.errors.appEmailValidator" class="alert alert-danger">Email must be valid</p>
     </div>
-
-    <label for="userEditBio">Change bio:</label>
-    <textarea #bio="ngModel" id="userEditBio" class="form-control" name="bio" [(ngModel)]="userSvc.user.bio" style="resize:none" maxlength="1500">{{userSvc.user.bio}}</textarea>
-    <span class="pull-right char"><em>{{ 1500 - userSvc.user.bio.length }} characters left</em></span>
-
   </div>
-  <button class="btn btn-success" [disabled]="!editUserForm.form.valid"> <!-- button disabled if there are errors-->
-    Save Changes
+  <button class="btn btn-success" [disabled]="!editEmailForm.form.valid || !email.touched || !email.dirty || userOnForm.email == userSvc.user.email"> <!-- button disabled if there are errors-->
+    Update Email
+  </button>
+</form>
+
+<form (ngSubmit)="onBioFormSubmit(userOnForm.bio)" #editBioForm="ngForm">
+  <div class="container form-group">
+  <label for="userEditBio">Change bio:</label>
+  <textarea #bio="ngModel" id="userEditBio" class="form-control" name="bio" [ngModel]="userSvc.user.bio" (ngModelChange)="onChange($event, 'bio')" style="resize:none" maxlength="1500" >{{userSvc.user.bio}}</textarea>
+  <span><em>{{ 1500 - userSvc.user.bio.length }} characters left</em></span>
+  </div>
+  <button class="btn btn-success" [disabled]="!editBioForm.form.valid"> <!-- button disabled if there are errors-->
+    Update Bio
   </button>
 </form>
 
@@ -48,3 +50,8 @@
   <button class="btn btn-danger margin-bottom" (click)="deleteUser(userSvc.user.id)">
     Delete Your Account
   </button>
+
+<!--<div [hidden]="email.valid || email.pristine"-->
+<!--class="alert alert-danger">-->
+<!--Email is required.-->
+<!--</div>-->
