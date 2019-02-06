@@ -6,33 +6,45 @@
 
     <!--<input type="hidden" name="id" [(ngModel)]="userSvc.user.id" value="{{userSvc.user.id}}">-->
 
-    <label for="userEditName">Username:</label>
-    <input id="userEditName" class="form-control" type="text" name="username" [(ngModel)]="userSvc.user.username" required #username="ngModel">
-    <div [hidden]="username.valid || username.pristine"
-         class="alert alert-danger">
-      Username is required.
-    </div>
-    <div *ngIf="userExists" class="alert alert-danger">Sorry. A user with that username already exists. Choose a different name</div>
-
-    <label for="userEditEmail">Email:</label>
-    <input id="userEditEmail" class="form-control" type="text" name="email" [(ngModel)]="userSvc.user.email" required #email="ngModel">
-    <div [hidden]="email.valid || email.pristine"
-         class="alert alert-danger">
-      Email is required.
+    <label for="userEditName">Change username:</label>
+    <input #username="ngModel" id="userEditName" class="form-control" type="text" name="username" [(ngModel)]="userSvc.user.username" required minlength="2" maxlength="20" appUsernameValidator/>
+    <!--<div [hidden]="username.valid || username.pristine"-->
+         <!--class="alert alert-danger">-->
+      <!--Username is required.-->
+    <!--</div>-->
+    <div *ngIf="username.errors && (username.dirty || username.touched)" class="alert alert-danger">
+      <p *ngIf="username?.errors.required">Username is required</p>
+      <p *ngIf="username?.errors.minlength">Username must be between 2-20 characters</p>
+      <p *ngIf="username?.errors.appUsernameValidator">Username must be alphanumeric only</p>
+      <p *ngIf="userExists">Sorry. That name is not available. Please choose a different name. Ignore if necessary.</p>
     </div>
 
-    <label for="userEditBio">Bio:</label>
-    <textarea id="userEditBio" class="form-control" name="bio" [(ngModel)]="userSvc.user.bio" style="resize:none">{{userSvc.user.bio}}</textarea>
+    <label for="userEditEmail">Change email:</label>
+    <input #email="ngModel" id="userEditEmail" class="form-control" type="email" name="email" [(ngModel)]="userSvc.user.email"  required appEmailValidator maxlength="254" />
+    <!--<div [hidden]="email.valid || email.pristine"-->
+         <!--class="alert alert-danger">-->
+      <!--Email is required.-->
+    <!--</div>-->
+    <div *ngIf="email.errors && (email.dirty || email.touched)">
+      <p *ngIf="email?.errors.required" class="alert alert-danger">Email is required</p>
+      <p *ngIf="email?.errors.appEmailValidator" class="alert alert-danger">Email must be valid</p>
+    </div>
+
+    <label for="userEditBio">Change bio:</label>
+    <textarea #bio="ngModel" id="userEditBio" class="form-control" name="bio" [(ngModel)]="userSvc.user.bio" style="resize:none" maxlength="1500">{{userSvc.user.bio}}</textarea>
+    <span class="pull-right char"><em>{{ 1500 - userSvc.user.bio.length }} characters left</em></span>
+
   </div>
   <button class="btn btn-success" [disabled]="!editUserForm.form.valid"> <!-- button disabled if there are errors-->
     Save Changes
   </button>
-
 </form>
 
+  <ng-container *ngIf="loading">
+    <img src="https://wubook.net/shstatic/imgs/cloading.gif" width="64px" alt="loader"/>
+  </ng-container>
 
-<h3>Danger Zone:</h3>
-    <h3>Remove Account:</h3>
-    <button class="btn btn-danger" (click)="deleteUser(user)">
+  <h3 class="margin-top margin-bottom">Danger Zone:</h3>
+  <button class="btn btn-danger margin-bottom" (click)="deleteUser(userSvc.user.id)">
     Delete Your Account
-    </button>
+  </button>
