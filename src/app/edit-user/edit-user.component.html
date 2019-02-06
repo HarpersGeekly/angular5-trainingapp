@@ -37,7 +37,7 @@
   <textarea #bio="ngModel" id="userEditBio" class="form-control" name="bio" [ngModel]="userSvc.user.bio" (ngModelChange)="onChange($event, 'bio')" style="resize:none" maxlength="1500" >{{userSvc.user.bio}}</textarea>
   <span><em>{{ 1500 - userSvc.user.bio.length }} characters left</em></span>
   </div>
-  <button class="btn btn-success" [disabled]="!editBioForm.form.valid"> <!-- button disabled if there are errors-->
+  <button class="btn btn-success" [disabled]="!editBioForm.form.valid || !bio.touched || !bio.dirty || userOnForm.bio == userSvc.user.bio"> <!-- button disabled if there are errors-->
     Update Bio
   </button>
 </form>
