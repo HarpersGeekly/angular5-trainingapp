@@ -12,12 +12,27 @@ export class UserService {
 
   user: User;
   foundUser: User;
+  loggedInUser: User;
   successfulEdit: boolean;
   successfulDelete: boolean;
 
   private usersUrl = '/api/user'; // URL to rest api, look at file: proxy.conf.json
 
   constructor(private http: HttpClient) { }
+
+  login(user: User) {
+    return this.http.post<any>(this.usersUrl + '/authenticate', user);
+  }
+
+  logout() {
+    // remove user from local storage to log user out
+    localStorage.removeItem('currentUser');
+    this.loggedInUser = null;
+  }
+
+  register(user: User) {
+    return this.http.post(this.usersUrl + '/saveUser', user);
+  }
 
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.usersUrl + '/users');
@@ -33,10 +48,6 @@ export class UserService {
 
   findByEmail(email: string) {
     return this.http.get<User>(this.usersUrl + '/email/' + email);
-  }
-
-  register(user: User) {
-    return this.http.post(this.usersUrl + '/saveUser', user);
   }
 
   update(user: User) {
