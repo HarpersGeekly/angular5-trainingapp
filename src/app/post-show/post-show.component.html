@@ -15,7 +15,7 @@
       <a routerLink="/login"><i class="fa fa-2x fa-thumbs-down"></i></a>
     </div>
 
-    <div ngbDropdown class="d-inline-block">
+    <div ngbDropdown class="d-inline-block" *ngIf="isOwnPost">
       <i class="fa fa-ellipsis-h fa-lg options-ellipsis dropdown-toggle" id="dropdownBasic1" ngbDropdownToggle></i>
       <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="edit-delete-dropdown">
         <div>
