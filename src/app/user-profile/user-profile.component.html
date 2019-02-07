@@ -1,12 +1,18 @@
 <div class="container">
-  <h3 class="profileUsername">Welcome, {{user?.username}}!</h3>
+  <ng-container *ngIf="isOwnProfile">
+    <h3 class="profileUsername">Welcome, {{user?.username}}!</h3>
+  </ng-container>
   <!--if not your profile-->
-  <h3 class="profileUsername">{{user?.username}}'s profile</h3>
+  <ng-container *ngIf="!isOwnProfile">
+    <h3 class="profileUsername">{{user?.username}}'s profile</h3>
+  </ng-container>
+
+
   <h5 id="profileJoinedDate">Joined: {{user?.formatDate}}</h5>
   <h5 class="profileEmail">Email: {{user?.email}}</h5>
   <h5 id="profileBio">Bio: {{user?.bio}}</h5>
 
-  <h3>You are currently logged in. <span *ngIf="posts?.length > 0"><a routerLink="/posts/create"> Create a post.</a></span></h3>
+  <h3 *ngIf="isOwnProfile">You are currently logged in. <span *ngIf="posts?.length > 0"><a routerLink="/posts/create"> Create a post.</a></span></h3>
 </div>
 
 <div class="container">
@@ -15,7 +21,7 @@
     <ngb-tab title="Posts">
       <ng-template ngbTabContent>
 
-        <div *ngIf="posts?.length == 0">Posts are empty. <a routerLink="/posts/create"> Create a post.</a></div>
+        <div *ngIf="posts?.length == 0">Posts are empty. <a routerLink="/posts/create" *ngIf="isOwnProfile"> Create a post.</a></div>
         <div *ngFor="let post of sortedPostsById(posts)" class="margin-top">
 
           <a routerLink="/post/{{post.id}}/{{post.title}}">
@@ -26,7 +32,7 @@
           <i class="fa fa-thumbs-up margin-right-lt"></i>{{post.voteCount}}
           <a routerLink="/post/{{post.id}}/{{post.title}}"><div [innerHTML]="post.htmlLeadImage" id="profile-post-image">{{post.leadImage}}</div></a>
 
-          <div ngbDropdown class="d-inline-block">
+          <div ngbDropdown class="d-inline-block" *ngIf="isOwnProfile">
 
             <i class="fas fa-ellipsis-h options-ellipsis dropdown-toggle" id="dropdownBasic1" ngbDropdownToggle></i>
 
@@ -51,11 +57,11 @@
     <ngb-tab title="Comments">
       <!--<ng-template ngbTabTitle><b>Fancy</b> title</ng-template>-->
       <ng-template ngbTabContent>
-        A list of comments the user has made will go here. Seen by everyone.
+        <div *ngIf="comments?.length == 0">Posts are empty.>A list of comments the user has made will go here. Seen by everyone.</div>
       </ng-template>
     </ngb-tab>
     <!--<ngb-tab title="Account Settings" [disabled]="true">-->
-    <ngb-tab title="Account Settings">
+    <ngb-tab title="Account Settings" *ngIf="isOwnProfile">
       <ng-template ngbTabContent>
 
         <div class="container">

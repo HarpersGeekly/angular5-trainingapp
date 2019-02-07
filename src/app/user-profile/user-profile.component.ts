@@ -13,7 +13,7 @@ import {PostService} from '../services/post.service';
 export class UserProfileComponent implements OnInit {
 
   user: User;
-  isLoggedIn: boolean; // maybe put this in a Service?
+  isOwnProfile: boolean;
   posts: Post[];
   showEditUserForm = false;
 
@@ -32,7 +32,7 @@ export class UserProfileComponent implements OnInit {
     this.userSvc.getUser(id).subscribe(user => {
       this.userSvc.user = user; // any component that injects the UserService can use this user
       this.user = this.userSvc.user;
-      console.log(user);
+      this.isOwnProfile = (this.userSvc.loggedInUser.id === this.user.id);
     });
   }
 
