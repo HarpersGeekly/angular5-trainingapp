@@ -6,4 +6,5 @@ export class User {
   password: string;
   date: Date;
   formatDate: string;
+  token: string;
 }
