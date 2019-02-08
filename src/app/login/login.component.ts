@@ -17,19 +17,18 @@ export class LoginComponent implements OnInit {
 
   model: any = {};
   loading = false;
-  errorLoggingIn = false;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private userService: UserService) {
+    private userService: UserService,
+    private alertService: AlertService) {
   }
 
   ngOnInit() {
   }
 
   login() {
-    this.errorLoggingIn = false;
     this.loading = true;
     this.userService.login(this.model).toPromise().then(response => {
       if (response && response.token) {
@@ -37,7 +36,7 @@ export class LoginComponent implements OnInit {
         this.userService.loggedInUser = response;
         this.router.navigate(['/user/profile/' + this.userService.loggedInUser.id + '/' + this.userService.loggedInUser.username]);
       } else {
-          this.errorLoggingIn = true;
+          this.alertService.error('Invalid Login Credentials');
           this.loading = false;
         }
     });
