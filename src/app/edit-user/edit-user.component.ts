@@ -3,6 +3,7 @@ import {UserService} from '../services/user.service';
 import {UserProfileComponent} from '../user-profile/user-profile.component';
 import {User} from '../models/user';
 import {Router} from '@angular/router';
+import {AlertService} from '../services/alert.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -13,7 +14,8 @@ export class EditUserComponent implements OnInit {
   constructor(
     public userSvc: UserService,
     private userComponent: UserProfileComponent,
-    private router: Router) { }
+    private router: Router,
+    private alertService: AlertService) { }
   userOnForm = new User();
   foundUser: User;
   userExists = false;
@@ -103,8 +105,9 @@ export class EditUserComponent implements OnInit {
   deleteUser(id: number) {
     this.userSvc.delete(id);
     if (this.userSvc.successfulDelete === true) {
+      this.userSvc.logout();
       this.router.navigate(['/', 'register', {success: true}]);
-      // TODO: how can I make an alert popup in /register that says "successful delete"?
+      this.alertService.success('Sorry to see you go! This account has been successfully deleted and removed from our database', true);
     } else {
 
     }

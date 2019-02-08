@@ -10,7 +10,7 @@
       <p *ngIf="username?.errors.minlength">Username must be between 2-20 characters</p>
       <p *ngIf="username?.errors.appUsernameValidator">Username must be alphanumeric only</p>
     </div>
-    <p *ngIf="userExists" class="alert alert-danger">Sorry. That name is not available. Please choose a different name.</p>
+    <p *ngIf="userExists" class="alert alert-danger">Sorry. That name is unavailable. Please choose a different name.</p>
   </div>
   <button class="btn btn-success" [disabled]="!editUsernameForm.form.valid || !username.touched || !username.dirty || userOnForm.username == userSvc.user.username"> <!-- button disabled if there are errors-->
     Update Username
