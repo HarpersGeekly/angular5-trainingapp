@@ -47,7 +47,7 @@ export class UserService {
   }
 
   findByEmail(email: string) {
-    return this.http.get<User>(this.usersUrl + '/email/' + email);
+    return this.http.get<User>(this.usersUrl + '/email?email=' + email);
   }
 
   update(user: User) {
