@@ -10,7 +10,7 @@
 
   <h5 id="profileJoinedDate">Joined: {{user?.formatDate}}</h5>
   <h5 class="profileEmail">Email: {{user?.email}}</h5>
-  <h5 id="profileBio">Bio: {{user?.bio}}</h5>
+  <h5 id="profileBio">Bio: {{user?.bio == null ? '(No Bio)' : user?.bio}}</h5>
 
   <h3 *ngIf="isOwnProfile">You are currently logged in. <span *ngIf="posts?.length > 0"><a routerLink="/posts/create"> Create a post.</a></span></h3>
 </div>
