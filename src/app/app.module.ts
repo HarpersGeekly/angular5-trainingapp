@@ -21,6 +21,7 @@ import { UsersComponent } from './users/users.component';
 import { EmailValidatorDirective } from './directives/email-validator.directive';
 import { UsernameValidatorDirective } from './directives/username-validator.directive';
 import { AlertComponent } from './alert/alert.component';
+import { PostCreateComponent } from './post-create/post-create.component';
 // import { JwtInterceptor } from './services/jwt-interceptor.service';
 
 @NgModule({
@@ -36,7 +37,8 @@ import { AlertComponent } from './alert/alert.component';
     UsersComponent,
     EmailValidatorDirective,
     UsernameValidatorDirective,
-    AlertComponent
+    AlertComponent,
+    PostCreateComponent
   ],
   imports: [
     BrowserModule,
