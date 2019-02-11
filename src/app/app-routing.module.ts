@@ -7,16 +7,18 @@ import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import {AuthGuard} from './services/authGuard.service';
 import {EditUserComponent} from './edit-user/edit-user.component';
+import {PostCreateComponent} from './post-create/post-create.component';
 
 const routes: Routes = [
   { path: '', component: PostsIndexComponent},
   { path: 'post/:id/:title', component: PostShowComponent},
+  { path: 'post/create', component: PostCreateComponent, canActivate: [AuthGuard]},
   { path: 'user/profile/:id/:username', component: UserProfileComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'register/:success', component: EditUserComponent},
   { path: 'login', component: LoginComponent}
 ];
-/*canActivate: [AuthGuard]*/
+
 @NgModule({
   exports: [ RouterModule ],
   imports: [ RouterModule.forRoot(routes) ], // You first must initialize the router and start it listening for browser location changes.

@@ -40,16 +40,12 @@ export class EditUserComponent implements OnInit {
   findByUsernameAndUpdate(username) {
     this.userSvc.findByUsername(username).toPromise().then(response => {
       this.foundUser = response;
-      console.log(response);
-      console.log('return from REST: ' + this.foundUser);
       if (this.foundUser == null || undefined) {
         this.userExists = false;
       } else {
         this.userExists = true;
       }
-      console.log('userexists: ' + this.userExists);
       if (!this.userExists) {
-        console.log('submitted');
         this.userExists = false;
         this.loading = true;
         this.userOnForm.id = this.userSvc.user.id;
