@@ -16,12 +16,13 @@ import { NgbAlertConfig, NgbDropdownConfig, NgbModule, NgbTabsetConfig} from '@n
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './services/authGuard.service';
 import { AlertService} from './services/alert.service';
-import { EditUserComponent } from './edit-user/edit-user.component';
+import { UserEditComponent } from './user-edit/user-edit-component';
 import { UsersComponent } from './users/users.component';
 import { EmailValidatorDirective } from './directives/email-validator.directive';
 import { UsernameValidatorDirective } from './directives/username-validator.directive';
 import { AlertComponent } from './alert/alert.component';
 import { PostCreateComponent } from './post-create/post-create.component';
+import { SimpleMdeditorComponent } from './simple-mdeditor/simple-mdeditor.component';
 // import { JwtInterceptor } from './services/jwt-interceptor.service';
 
 @NgModule({
@@ -33,12 +34,13 @@ import { PostCreateComponent } from './post-create/post-create.component';
     RegisterComponent,
     UserProfileComponent,
     LoginComponent,
-    EditUserComponent,
+    UserEditComponent,
     UsersComponent,
     EmailValidatorDirective,
     UsernameValidatorDirective,
     AlertComponent,
-    PostCreateComponent
+    PostCreateComponent,
+    SimpleMdeditorComponent
   ],
   imports: [
     BrowserModule,
