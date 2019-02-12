@@ -9,7 +9,6 @@ const httpOptions = {
 
 @Injectable()
 export class PostService {
-
   private postsUrl = '/api/post';  // URL to rest api, look at file: proxy.conf.json
 
   constructor(private http: HttpClient) { }
@@ -26,5 +25,10 @@ export class PostService {
 
   getPost(id: number): Observable<Post> {
     return this.http.get<Post>(this.postsUrl + '/postById/' + id);
+  }
+
+  createPost(post: Post) {
+    console.log('post service: ' + post.title);
+    return this.http.post<Post>(this.postsUrl + '/savePost', post);
   }
 }
