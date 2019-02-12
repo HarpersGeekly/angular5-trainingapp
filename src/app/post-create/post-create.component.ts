@@ -27,12 +27,15 @@ export class PostCreateComponent implements OnInit {
     private userSvc: UserService) { }
 
   createPost() {
+    this.loading = true;
     this.post.user = this.userSvc.loggedInUser;
       this.newPost = this.post;
     this.postSvc.createPost(this.newPost).toPromise().then(response => {
       console.log('success: ' + inspect(response));
+      this.loading = false;
     }).catch(response => {
       console.log('error: ' + inspect(response));
+      this.loading = false;
     });
   }
 
