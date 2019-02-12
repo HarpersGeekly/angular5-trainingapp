@@ -1,6 +1,8 @@
 import {Component, OnInit, Pipe, PipeTransform} from '@angular/core';
 import { Post } from '../models/post';
 import { PostService } from '../services/post.service';
+import {User} from '../models/user';
+import {UserService} from '../services/user.service';
 
 @Component({
   selector: 'app-posts-index',
@@ -9,11 +11,14 @@ import { PostService } from '../services/post.service';
 })
 export class PostsIndexComponent implements OnInit {
   posts: Post[];
-  constructor(private postSvc: PostService) {
+  constructor(private postSvc: PostService, private userSvc: UserService) {
   }
 
   ngOnInit() {
-    // check for userId
+    // check for user in localStorage
+    if (localStorage.getItem('currentUser')) {
+      this.userSvc.loggedInUser = JSON.parse(localStorage.getItem('currentUser'));
+    }
     this.getPosts();
   }
 
