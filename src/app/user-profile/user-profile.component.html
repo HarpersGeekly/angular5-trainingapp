@@ -12,7 +12,7 @@
   <h5 class="profileEmail">Email: {{user?.email}}</h5>
   <h5 id="profileBio">Bio: {{user?.bio == null ? '(No Bio)' : user?.bio}}</h5>
 
-  <h3 *ngIf="isOwnProfile">You are currently logged in. <span *ngIf="posts?.length > 0"><a routerLink="/posts/create"> Create a post.</a></span></h3>
+  <h3 *ngIf="isOwnProfile">You are currently logged in. <span *ngIf="posts?.length > 0"><a routerLink="/post/create"> Create a post.</a></span></h3>
 </div>
 
 <div class="container">
@@ -21,7 +21,7 @@
     <ngb-tab title="Posts">
       <ng-template ngbTabContent>
 
-        <div *ngIf="posts?.length == 0">Posts are empty. <a routerLink="/posts/create" *ngIf="isOwnProfile"> Create a post.</a></div>
+        <div *ngIf="posts?.length == 0">Posts are empty. <a routerLink="/post/create" *ngIf="isOwnProfile"> Create a post.</a></div>
         <div *ngFor="let post of sortedPostsById(posts)" class="margin-top">
 
           <a routerLink="/post/{{post.id}}/{{post.title}}">
