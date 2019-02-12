@@ -1,3 +1,47 @@
-<p>
-  post-create works!
-</p>
+<div class="container">
+  <h1>
+    Create a post
+  </h1>
+
+  <form name="form" (ngSubmit)="form.form.valid && createPost()" #form="ngForm" novalidate>
+    <div class="form-group" [ngClass]="{ 'has-error': form.submitted && !title.valid }">
+      <label for="title">Title:</label>
+      <textarea id="title" type="text" class="form-control" name="title" [(ngModel)]="post.title" #title="ngModel" required minlength="5" maxlength="100"></textarea>
+      <div *ngIf="form.submitted && !title.valid" class="help-block alert alert-danger">Title is Required</div>
+      <div *ngIf="title.errors && (title.dirty || title.touched)">
+        <p *ngIf="title?.errors.minlength" class="alert alert-danger">title must be between 5-100 characters</p>
+      </div>
+    </div>
+
+    <div class="form-group" [ngClass]="{ 'has-error': form.submitted && !subtitle.valid }">
+      <label for="subtitle">Subtitle:</label>
+      <textarea id="subtitle" type="text" class="form-control" name="subtitle" [(ngModel)]="post.subtitle" #subtitle="ngModel" required minlength="5" maxlength="200"></textarea>
+      <div *ngIf="form.submitted && !subtitle.valid" class="help-block alert alert-danger">Subtitle is required</div>
+    </div>
+
+    <div class="form-group" [ngClass]="{ 'has-error': form.submitted && !leadImage.valid }">
+      <label for="leadImage">Headline Lead Image:</label>
+      <textarea id="leadImage" type="text" class="form-control" name="leadImage" [(ngModel)]="post.leadImage" #leadImage="ngModel"></textarea>
+    </div>
+
+    <div class="form-group" [ngClass]="{ 'has-error': form.submitted && !body.valid }">
+      <label for="body">Post Body:</label>
+      <textarea id="body" type="text" class="form-control" name="body" [(ngModel)]="post.body" #body="ngModel" required minlength="5" maxlength="50000"></textarea>
+      <div *ngIf="form.submitted && !body.valid" class="help-block alert alert-danger">Body is required</div>
+    </div>
+
+    <div class="form-group">
+      <button [disabled]="loading" class="btn btn-primary">Create Post</button>
+      <!--<img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />-->
+      <!--<a [routerLink]="['/login']" class="btn btn-link">Cancel</a>-->
+    </div>
+  </form>
+</div>
+
+
+<!--<app-simplemde-title [markdown]="title" (markdownChange)="onMarkdownChangeTitle($event)"></app-simplemde-title>-->
+<!--<app-simplemde-subtitle [markdown]="subtitle" (markdownChange)="onMarkdownChangeSubtitle($event)"></app-simplemde-subtitle>-->
+  <!--<simplemde [formControl]="title" [options]="{ toolbar: ['bold', 'italic', 'heading', '|', 'quote'] }"></simplemde>-->
+
+<!--<simplemde [(ngModel)]="x" [options]="{ autosave: { enabled: true, uniqueId: 1 } }"></simplemde>-->
+<!--<simplemde [(ngModel)]="y" [options]="{ autosave: { enabled: true, uniqueId: 2 } }"></simplemde>-->
