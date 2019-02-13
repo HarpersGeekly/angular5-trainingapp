@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
 import {Post} from '../models/post';
 import {PostService} from '../services/post.service';
-import {User} from '../models/user';
 import {inspect} from 'util';
 import {UserService} from '../services/user.service';
 
@@ -13,12 +11,12 @@ import {UserService} from '../services/user.service';
 })
 export class PostCreateComponent implements OnInit {
   title: string;
+  titleIsEmpty: boolean;
   subtitle: string;
   leadImage: string;
   body: string;
-  post: any = {};
+  post = new Post();
   loading = false;
-  newPost = new Post();
 
   ngOnInit() {
   }
@@ -27,10 +25,17 @@ export class PostCreateComponent implements OnInit {
     private userSvc: UserService) { }
 
   createPost() {
+    if (this.title === null) {
+      this.titleIsEmpty = false;
+    }
     this.loading = true;
+    console.log('post from form: ' + this.post.title);
+    console.log('post from form: ' + this.post.subtitle);
+    console.log('post from form: ' + this.post.body);
+    console.log('post from form: ' + this.post.leadImage);
+    console.log('post: ' +  this.post.htmlTitle);
     this.post.user = this.userSvc.loggedInUser;
-      this.newPost = this.post;
-    this.postSvc.createPost(this.newPost).toPromise().then(response => {
+    this.postSvc.createPost(this.post).toPromise().then(response => {
       console.log('success: ' + inspect(response));
       this.loading = false;
     }).catch(response => {
@@ -38,18 +43,4 @@ export class PostCreateComponent implements OnInit {
       this.loading = false;
     });
   }
-
-// <!--<app-simplemde-title [markdown]="title" (markdownChange)="onMarkdownChangeTitle($event)"></app-simplemde-title>-->
-
-
-  onMarkdownChangeTitle(markdown: string) {
-    this.title = markdown;
-    console.log(`markdown: ${this.title}`);
-  }
-
-  onMarkdownChangeSubtitle(markdown: string) {
-    this.subtitle = markdown;
-    console.log(`markdown: ${this.subtitle}`);
-  }
-
 }

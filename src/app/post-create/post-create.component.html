@@ -7,18 +7,18 @@
     <div class="form-group" [ngClass]="{ 'has-error': form.submitted && !title.valid }">
       <label for="title">Title:</label>
 
-      <simplemde id="title" type="text" name="title" [(ngModel)]="post.title" [options]="{ toolbar: ['bold', 'italic', '|', 'preview'] }" #title="ngModel" [ngModelOptions]="{standalone: true}"></simplemde>
-      <textarea class="hidden" name="title" [(ngModel)]="post.title" #title="ngModel"></textarea>
+      <simplemde id="title" type="text" name="title" [(ngModel)]="post.title" [options]="{ toolbar: ['bold', 'italic', '|', 'preview'] }" #title="ngModel" [ngModelOptions]="{standalone: true}" required minlength="5" maxlength="100"></simplemde>
+      <textarea class="hidden" name="title" [(ngModel)]="post.title" #title="ngModel" ></textarea>
 
       <div *ngIf="form.submitted && !title.valid" class="help-block alert alert-danger">Title is Required</div>
       <div *ngIf="title.errors && (title.dirty || title.touched)">
-        <p *ngIf="title?.errors.minlength" class="alert alert-danger">title must be between 5-100 characters</p>
+        <p *ngIf="title?.errors.minlength" class="alert alert-danger">Title must be between 5-100 characters</p>
       </div>
     </div>
 
     <div class="form-group" [ngClass]="{ 'has-error': form.submitted && !subtitle.valid }">
       <label for="subtitle">Subtitle:</label>
-      <simplemde id="subtitle" type="text" name="subtitle" [(ngModel)]="post.subtitle" [options]="{ toolbar: ['bold', 'italic', '|', 'preview'] }" #subtitle="ngModel" [ngModelOptions]="{standalone: true}"></simplemde>
+      <simplemde id="subtitle" type="text" name="subtitle" [(ngModel)]="post.subtitle" [options]="{ toolbar: ['bold', 'italic', '|', 'preview'] }" #subtitle="ngModel" [ngModelOptions]="{standalone: true}" required minlength="5" maxlength="200"></simplemde>
       <textarea class="hidden" name="subtitle" [(ngModel)]="post.subtitle" #subtitle="ngModel"></textarea>
 
       <div *ngIf="form.submitted && !subtitle.valid" class="help-block alert alert-danger">Subtitle is required</div>
@@ -33,7 +33,7 @@
 
     <div class="form-group" [ngClass]="{ 'has-error': form.submitted && !body.valid }">
       <label for="body">Post Body:</label>
-      <simplemde id="body" type="text" name="body" [(ngModel)]="post.body" #body="ngModel" [ngModelOptions]="{standalone: true}"></simplemde>
+      <simplemde id="body" type="text" name="body" [(ngModel)]="post.body" #body="ngModel" [ngModelOptions]="{standalone: true}" required minlength="5" maxlength="50000"></simplemde>
       <textarea class="hidden" name="body" [(ngModel)]="post.body" #body="ngModel"></textarea>
 
       <div *ngIf="form.submitted && !body.valid" class="help-block alert alert-danger">Body is required</div>
