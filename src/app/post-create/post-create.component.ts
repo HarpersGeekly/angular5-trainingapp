@@ -3,6 +3,8 @@ import {Post} from '../models/post';
 import {PostService} from '../services/post.service';
 import {inspect} from 'util';
 import {UserService} from '../services/user.service';
+import {Router} from '@angular/router';
+import {AlertService} from '../services/alert.service';
 
 @Component({
   selector: 'app-post-create',
@@ -22,25 +24,26 @@ export class PostCreateComponent implements OnInit {
   }
   constructor(
     private postSvc: PostService,
-    private userSvc: UserService) { }
+    private userSvc: UserService,
+    private router: Router,
+    private alertSvc: AlertService) { }
 
   createPost() {
     if (this.title === null) {
       this.titleIsEmpty = false;
     }
     this.loading = true;
-    console.log('post from form: ' + this.post.title);
-    console.log('post from form: ' + this.post.subtitle);
-    console.log('post from form: ' + this.post.body);
-    console.log('post from form: ' + this.post.leadImage);
-    console.log('post: ' +  this.post.htmlTitle);
     this.post.user = this.userSvc.loggedInUser;
     this.postSvc.createPost(this.post).toPromise().then(response => {
       console.log('success: ' + inspect(response));
       this.loading = false;
+      this.router.navigate(['/user/profile/' + this.userSvc.loggedInUser.id + '/'
+      + this.userSvc.loggedInUser.username, {success: true}]);
+      this.alertSvc.success('New post created!', true);
     }).catch(response => {
       console.log('error: ' + inspect(response));
       this.loading = false;
+      this.alertSvc.error('Sorry. There was an error creating a post.', true);
     });
   }
 }
