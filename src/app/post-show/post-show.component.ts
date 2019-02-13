@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {PostService} from '../services/post.service';
 import {Post} from '../models/post';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../services/user.service';
+import {AlertService} from '../services/alert.service';
 
 @Component({
   selector: 'app-post-show',
@@ -17,7 +18,9 @@ export class PostShowComponent implements OnInit {
   constructor(
     private postSvc: PostService,
     private userSvc: UserService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private router: Router,
+    private alertSvc: AlertService) { }
 
   ngOnInit() {
     this.getPost();
@@ -29,6 +32,18 @@ export class PostShowComponent implements OnInit {
       this.post = post;
       this.isOwnPost = this.userSvc.loggedInUser.id === this.post.user.id;
     });
+  }
+
+  deletePost(id: number) {
+    this.postSvc.deletePost(id);
+    if (this.postSvc.successfulDelete === true) {
+      this.router.navigate(['/', '/user/profile'
+      + this.userSvc.loggedInUser.id + '/'
+      + this.userSvc.loggedInUser.username, {success: true}]);
+      this.alertSvc.success('Post Deleted!');
+    } else {
+      this.alertSvc.error('Sorry. There was error deleting this post');
+    }
   }
 
 }

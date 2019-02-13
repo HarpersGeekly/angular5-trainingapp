@@ -26,9 +26,9 @@
           </a>
         </div>
         <div>
-          <a ng-click="deletePost(post)" class="dropdown-delete-btn">
+          <button (click)="deletePost(post.id)" class="dropdown-delete-btn">
             <i class="fas fa-trash"></i> delete
-          </a>
+          </button>
         </div>
       </div>
     </div>
