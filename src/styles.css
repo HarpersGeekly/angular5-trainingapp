@@ -1,5 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+.editor-statusbar .lines:before {
+  content: 'lines：' !important;
+}
 
+.editor-statusbar .words:before {
+  content: 'words：' !important;
+}
 .flex-center {
   display:flex;
   justify-content: center;
