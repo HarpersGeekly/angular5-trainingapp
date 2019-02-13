@@ -1,19 +1,20 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Optional, SkipSelf} from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { SimplemdeModule } from 'ngx-simplemde';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
+import { NgbAlertConfig, NgbDropdownConfig, NgbModule, NgbTabsetConfig} from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { PostsIndexComponent } from './posts-index/posts-index.component';
 import { HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import { AppRoutingModule } from './app-routing.module';
 import { PostService} from './services/post.service';
 import { PostShowComponent } from './post-show/post-show.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './user-register/register.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserService } from './services/user.service';
-import { ReactiveFormsModule } from '@angular/forms';
-import { NgbAlertConfig, NgbDropdownConfig, NgbModule, NgbTabsetConfig} from '@ng-bootstrap/ng-bootstrap';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './user-login/login.component';
 import { AuthGuard } from './services/authGuard.service';
 import { AlertService} from './services/alert.service';
 import { UserEditComponent } from './user-edit/user-edit-component';
@@ -22,8 +23,9 @@ import { EmailValidatorDirective } from './directives/email-validator.directive'
 import { UsernameValidatorDirective } from './directives/username-validator.directive';
 import { AlertComponent } from './alert/alert.component';
 import { PostCreateComponent } from './post-create/post-create.component';
-import { SimpleMdeditorComponent } from './simple-mdeditor/simple-mdeditor.component';
 // import { JwtInterceptor } from './services/jwt-interceptor.service';
+import { PostEditComponent } from './post-edit/post-edit.component';
+
 
 @NgModule({
   declarations: [
@@ -40,7 +42,7 @@ import { SimpleMdeditorComponent } from './simple-mdeditor/simple-mdeditor.compo
     UsernameValidatorDirective,
     AlertComponent,
     PostCreateComponent,
-    SimpleMdeditorComponent
+    PostEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,9 +50,10 @@ import { SimpleMdeditorComponent } from './simple-mdeditor/simple-mdeditor.compo
     AppRoutingModule,
     FormsModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SimplemdeModule.forRoot({}),
   ],
-  providers: [PostService, UserService,
+  providers: [PostService, UserService, SimplemdeModule,
     // {
     // provide: HTTP_INTERCEPTORS,
     // useClass: JwtInterceptor,
@@ -62,4 +65,5 @@ import { SimpleMdeditorComponent } from './simple-mdeditor/simple-mdeditor.compo
     NgbAlertConfig, NgbDropdownConfig, NgbTabsetConfig],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

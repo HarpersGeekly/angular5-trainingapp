@@ -28,7 +28,10 @@ export class PostService {
   }
 
   createPost(post: Post) {
-    console.log('post service: ' + post.title);
     return this.http.post<Post>(this.postsUrl + '/savePost', post);
+  }
+
+  editPost(post: Post) {
+    return this.http.put<Post>(this.postsUrl + '/editPost', post);
   }
 }
