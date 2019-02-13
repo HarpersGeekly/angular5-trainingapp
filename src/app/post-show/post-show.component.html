@@ -16,7 +16,8 @@
     </div>
 
     <div ngbDropdown class="d-inline-block" *ngIf="isOwnPost">
-      <i class="fa fa-ellipsis-h fa-lg options-ellipsis dropdown-toggle" id="dropdownBasic1" ngbDropdownToggle></i>
+      <i class="fas fa-ellipsis-h options-ellipsis dropdown-toggle" id="dropdownBasic1" ngbDropdownToggle></i>
+
       <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="edit-delete-dropdown">
         <div>
           <a href="/posts/{{post.id}}/edit" class="dropdown-edit-btn">
@@ -25,7 +26,7 @@
         </div>
         <div>
           <a ng-click="deletePost(post)" class="dropdown-delete-btn">
-            <i class="fa fa-trash-o"></i> delete
+            <i class="fa fa-trash"></i> delete
           </a>
         </div>
       </div>
