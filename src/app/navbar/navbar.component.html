@@ -30,7 +30,7 @@
       <!--if user IS logged in-->
       <ng-container *ngIf="userSvc.loggedInUser != null">
         <li class="nav-item"><a routerLink="/post/create" class="nav-link">Create Post</a></li>
-        <li class="nav-item"><a routerLink="/user/profile/" class="nav-link">My Profile</a></li>
+        <li class="nav-item"><a routerLink="/user/profile/{{userSvc.loggedInUser.id}}/{{userSvc.loggedInUser.username}}" class="nav-link">My Profile</a></li>
         <li class="nav-item nav-link" style="cursor: pointer" (click)="logout()">Logout</li>
       </ng-container>
     </ul>
