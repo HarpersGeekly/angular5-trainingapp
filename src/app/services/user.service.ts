@@ -11,7 +11,7 @@ const httpOptions =  {
 export class UserService {
 
   user: User;
-  foundUser: User;
+  foundUser: Observable<User>;
   loggedInUser: User;
   successfulEdit: boolean;
   successfulDelete: boolean;
@@ -58,10 +58,11 @@ export class UserService {
   }
 
   delete(id: number) {
-    this.http.delete(this.usersUrl + '/deleteUser/' + id, {headers: httpOptions.headers}).subscribe();
-    this.getUser(id);
-    this.successfulDelete = this.foundUser == null;
-    return this.successfulDelete;
+    this.http.delete(this.usersUrl + '/deleteUser/' + id, {headers: httpOptions.headers}).subscribe(response => {
+      this.foundUser = this.getUser(id);
+      this.successfulDelete = this.foundUser == null;
+      return this.successfulDelete;
+    });
 }
 
 }

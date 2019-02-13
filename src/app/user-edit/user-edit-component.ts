@@ -103,9 +103,9 @@ export class UserEditComponent implements OnInit {
     if (this.userSvc.successfulDelete === true) {
       this.userSvc.logout();
       this.router.navigate(['/', 'register', {success: true}]);
-      this.alertService.success('Sorry to see you go! This account has been successfully deleted and removed from our database', true);
+      this.alertService.success('Sorry to see you go! This account has been deleted and removed from our database', true);
     } else {
-
+      this.alertService.error('Sorry. There was an error when deleting your account.');
     }
   }
 
