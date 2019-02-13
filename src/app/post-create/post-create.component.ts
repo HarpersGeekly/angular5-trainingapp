@@ -37,9 +37,9 @@ export class PostCreateComponent implements OnInit {
     this.postSvc.createPost(this.post).toPromise().then(response => {
       console.log('success: ' + inspect(response));
       this.loading = false;
-      this.router.navigate(['/user/profile/' + this.userSvc.loggedInUser.id + '/'
-      + this.userSvc.loggedInUser.username, {success: true}]);
-      this.alertSvc.success('New post created!', true);
+      this.router.navigate(['/post/' + this.post.id + '/'
+      + this.post.title, {success: true}]);
+      this.alertSvc.success('Post created!', true);
     }).catch(response => {
       console.log('error: ' + inspect(response));
       this.loading = false;
