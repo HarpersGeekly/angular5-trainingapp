@@ -10,9 +10,9 @@
 
   <div class="vote-options-row">
     <div class="thumbs-wrapper">
-      <a routerLink="/login" class="margin-right-lt"><i class="fa fa-2x fa-thumbs-up"></i></a>
+      <a routerLink="/login" class="margin-right-lt"><i class="fas fa-2x fa-thumbs-up"></i></a>
       <span class="margin-right-lt">{{post.voteCount}}</span>
-      <a routerLink="/login"><i class="fa fa-2x fa-thumbs-down"></i></a>
+      <a routerLink="/login"><i class="fas fa-2x fa-thumbs-down"></i></a>
     </div>
 
     <div ngbDropdown class="d-inline-block" *ngIf="isOwnPost">
@@ -20,7 +20,7 @@
 
       <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="edit-delete-dropdown">
         <div>
-          <a href="/post/{{post.id}}/edit" class="dropdown-edit-btn">
+          <a routerLink="/post/{{post.id}}/edit" class="dropdown-edit-btn">
             <i class="fa fa-edit"></i> edit
           </a>
         </div>
