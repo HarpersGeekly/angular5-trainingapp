@@ -38,13 +38,13 @@
 
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="edit-delete-dropdown">
               <div>
-                <a routerLink="/post/{{post.id}}/edit" class="dropdown-edit-btn">
-                  <i class="fa fa-edit"></i> edit
+                <a routerLink="/post/edit/id/{{post.id}}" class="dropdown-edit-btn">
+                  <i class="fas fa-edit"></i> edit
                 </a>
               </div>
               <div>
                 <a ng-click="deletePost(post)" class="dropdown-delete-btn">
-                  <i class="fa fa-trash"></i> delete
+                  <i class="fas fa-trash"></i> delete
                 </a>
               </div>
             </div>
