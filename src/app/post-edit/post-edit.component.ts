@@ -23,10 +23,6 @@ export class PostEditComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.postSvc.getPost(id).subscribe(post => {
       this.post = post;
-      console.log(post.title);
-      console.log(post.subtitle);
-      console.log(post.leadImage);
-      console.log(post.body);
     });
   }
 
