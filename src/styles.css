@@ -66,7 +66,16 @@
 }
 
 body {
-  background-color: var(--main-bg-color);
+  background-color: var(--main-bg-color) !important;
+}
+
+.navbar {
+  background-color: var(--main-bg-color) !important;
+}
+
+.nav-tabs .nav-link.active {
+  background-color: var(--main-bg-color) !important;
+  border-color: #dee2e6 #dee2e6 var(--main-bg-color);
 }
 
 .CodeMirror-scroll {
