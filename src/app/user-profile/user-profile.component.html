@@ -23,7 +23,6 @@
 
         <div *ngIf="posts?.length == 0">Posts are empty. <a routerLink="/post/create" *ngIf="isOwnProfile"> Create a post.</a></div>
         <div *ngFor="let post of sortedPostsById(posts)" class="margin-top">
-
           <a routerLink="/post/{{post.id}}/{{post.title}}">
             <h4 [innerHTML]="post.htmlTitle" id="profile-post-title">{{post.title}}</h4>
           </a>
@@ -43,9 +42,9 @@
                 </a>
               </div>
               <div>
-                <a ng-click="deletePost(post)" class="dropdown-delete-btn">
+                <button (click)="deletePost(post.id)" class="dropdown-delete-btn">
                   <i class="fas fa-trash"></i> delete
-                </a>
+                </button>
               </div>
             </div>
           </div>

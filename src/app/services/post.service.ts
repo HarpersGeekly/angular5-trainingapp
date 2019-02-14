@@ -10,6 +10,7 @@ const httpOptions = {
 @Injectable()
 export class PostService {
   private postsUrl = '/api/post';  // URL to rest api, look at file: proxy.conf.json
+  successfulDelete: boolean;
 
   constructor(private http: HttpClient) { }
 
@@ -33,5 +34,24 @@ export class PostService {
 
   editPost(post: Post) {
     return this.http.put<Post>(this.postsUrl + '/editPost', post);
+  }
+
+  deletePost(id: number) {
+    this.successfulDelete = true;
+    return this.http.delete(this.postsUrl + '/deletePost/' + id);
+    //   {headers: httpOptions.headers, observe: 'response'}).subscribe(response => {
+    //     console.log(response.status);
+    //     if (response.status === 200) {
+    //       console.log('back from deleting in REST API');
+    //       this.successfulDelete = true;
+    //     } else {
+    //       console.log('else false');
+    //       this.successfulDelete = false;
+    //     }
+    //     console.log(this.successfulDelete);
+    //     return this.successfulDelete;
+    //   },
+    //   // error goes here );
+    // );
   }
 }

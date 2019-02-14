@@ -4,6 +4,7 @@ import {User} from '../models/user';
 import {ActivatedRoute} from '@angular/router';
 import {Post} from '../models/post';
 import {PostService} from '../services/post.service';
+import {AlertService} from '../services/alert.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -20,7 +21,8 @@ export class UserProfileComponent implements OnInit {
   constructor(
     private userSvc: UserService,
     private postSvc: PostService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private alertSvc: AlertService) { }
 
   ngOnInit() {
     this.getUser();
@@ -42,6 +44,20 @@ export class UserProfileComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.postSvc.getPosts(id).subscribe(posts =>
       this.posts = posts);
+  }
+
+  deletePost(id: number) {
+    this.postSvc.deletePost(id).subscribe(response => {
+        console.log(response);
+      const userId = +this.route.snapshot.paramMap.get('id');
+      this.postSvc.getPosts(userId).subscribe(posts => {
+        this.posts = posts;
+        this.alertSvc.success('Post Deleted!');
+      });
+      }, () => {
+        console.log('error');
+        this.alertSvc.error('Sorry. There was error deleting this post');
+        });
   }
 
   sortedPostsById(posts: Post[]) {
