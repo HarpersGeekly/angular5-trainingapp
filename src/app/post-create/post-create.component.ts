@@ -13,7 +13,6 @@ import {AlertService} from '../services/alert.service';
 })
 export class PostCreateComponent implements OnInit {
   title: string;
-  titleIsEmpty: boolean;
   subtitle: string;
   leadImage: string;
   body: string;
@@ -29,19 +28,15 @@ export class PostCreateComponent implements OnInit {
     private alertSvc: AlertService) { }
 
   createPost() {
-    if (this.title === null) {
-      this.titleIsEmpty = false;
-    }
     this.loading = true;
     this.post.user = this.userSvc.loggedInUser;
-    this.postSvc.createPost(this.post).toPromise().then(response => {
-      console.log('success: ' + inspect(response));
+    this.postSvc.createPost(this.post).toPromise().then(post => {
+      console.log('success: ' + inspect(post));
       this.loading = false;
-      this.router.navigate(['/post/' + this.post.id + '/'
-      + this.post.title, {success: true}]);
+      this.router.navigate(['/post/' + post.id + '/' + post.title]);
       this.alertSvc.success('Post created!', true);
-    }).catch(response => {
-      console.log('error: ' + inspect(response));
+    }).catch(post => {
+      console.log('error: ' + inspect(post));
       this.loading = false;
       this.alertSvc.error('Sorry. There was an error creating a post.', true);
     });
