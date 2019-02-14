@@ -11,7 +11,6 @@ const httpOptions =  {
 export class UserService {
 
   user: User;
-  foundUser: Observable<User>;
   loggedInUser: User;
   successfulEdit: boolean;
   successfulDelete: boolean;
@@ -51,18 +50,30 @@ export class UserService {
   }
 
   update(user: User) {
+    this.successfulEdit = true;
     return this.http.put(this.usersUrl + '/editUser',
-      JSON.stringify(user), {headers: httpOptions.headers}).subscribe(response => {
+      JSON.stringify(user), {headers: httpOptions.headers, observe: 'response'}).subscribe(response => {
       console.log('response ' + response);
+      if (response.status !== 200) {
+        this.successfulEdit = false;
+      }
     });
   }
 
   delete(id: number) {
-    this.http.delete(this.usersUrl + '/deleteUser/' + id, {headers: httpOptions.headers}).subscribe(response => {
-      this.foundUser = this.getUser(id);
-      this.successfulDelete = this.foundUser == null;
-      return this.successfulDelete;
+    this.successfulDelete = true;
+    this.http.delete(this.usersUrl + '/deleteUser/' + id, {headers: httpOptions.headers, observe: 'response'}).subscribe(response => {
+      if (response.status === 200) {
+        try {
+          this.getUser(id).subscribe();
+        } catch {
+          this.successfulDelete = false;
+        }
+      } else {
+          this.successfulDelete = false;
+      }
+        return this.successfulDelete;
     });
-}
+  }
 
 }

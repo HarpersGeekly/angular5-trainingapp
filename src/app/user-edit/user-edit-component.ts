@@ -96,6 +96,11 @@ export class UserEditComponent implements OnInit {
 
   updateUser(user: User) {
     this.userSvc.update(user);
+    if (this.userSvc.successfulEdit === true) {
+      this.alertService.success('Profile Updated!');
+    } else {
+      this.alertService.error('Sorry. There was an error when updating your account');
+    }
   }
 
   deleteUser(id: number) {
