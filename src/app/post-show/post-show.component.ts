@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {PostService} from '../services/post.service';
 import {Post} from '../models/post';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -10,7 +10,7 @@ import {AlertService} from '../services/alert.service';
   templateUrl: './post-show.component.html',
   styleUrls: ['./post-show.component.css']
 })
-export class PostShowComponent implements OnInit {
+export class PostShowComponent implements OnInit, AfterViewInit {
 
   post: Post;
   isOwnPost: boolean;
@@ -26,6 +26,10 @@ export class PostShowComponent implements OnInit {
     this.getPost();
   }
 
+  ngAfterViewInit() {
+    this.getPost();
+  }
+
   getPost() {
     const id = +this.route.snapshot.paramMap.get('id');
     this.postSvc.getPost(id).subscribe(post => {
@@ -37,9 +41,7 @@ export class PostShowComponent implements OnInit {
   deletePost(id: number) {
     this.postSvc.deletePost(id);
     if (this.postSvc.successfulDelete === true) {
-      this.router.navigate(['/', '/user/profile'
-      + this.userSvc.loggedInUser.id + '/'
-      + this.userSvc.loggedInUser.username, {success: true}]);
+      this.router.navigate(['/']);
       this.alertSvc.success('Post Deleted!');
     } else {
       this.alertSvc.error('Sorry. There was error deleting this post');

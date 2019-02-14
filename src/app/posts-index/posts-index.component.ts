@@ -1,7 +1,6 @@
-import {Component, OnInit, Pipe, PipeTransform} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import { Post } from '../models/post';
 import { PostService } from '../services/post.service';
-import {User} from '../models/user';
 import {UserService} from '../services/user.service';
 
 @Component({
@@ -9,7 +8,7 @@ import {UserService} from '../services/user.service';
   templateUrl: './posts-index.component.html',
   styleUrls: ['./posts-index.component.css']
 })
-export class PostsIndexComponent implements OnInit {
+export class PostsIndexComponent implements OnInit, AfterViewInit {
   posts: Post[];
   constructor(private postSvc: PostService, private userSvc: UserService) {
   }
@@ -19,6 +18,10 @@ export class PostsIndexComponent implements OnInit {
     if (localStorage.getItem('currentUser')) {
       this.userSvc.loggedInUser = JSON.parse(localStorage.getItem('currentUser'));
     }
+    this.getPosts();
+  }
+
+  ngAfterViewInit() {
     this.getPosts();
   }
 
