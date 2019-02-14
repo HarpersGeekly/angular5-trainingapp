@@ -104,14 +104,17 @@ export class UserEditComponent implements OnInit {
   }
 
   deleteUser(id: number) {
-    this.userSvc.delete(id);
-    if (this.userSvc.successfulDelete === true) {
+    this.loading = true;
+    this.userSvc.delete(id).subscribe(response => {
+      console.log(response);
+      this.loading = false;
       this.userSvc.logout();
       this.router.navigate(['/', 'register', {success: true}]);
       this.alertService.success('Sorry to see you go! This account has been deleted and removed from our database', true);
-    } else {
+    }, () => {
+      this.loading = false;
       this.alertService.error('Sorry. There was an error when deleting your account.');
-    }
+    });
   }
 
   ngOnInit() {
