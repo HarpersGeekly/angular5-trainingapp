@@ -48,7 +48,7 @@ export class UserProfileComponent implements OnInit {
 
   deletePost(id: number) {
     this.postSvc.deletePost(id).subscribe(response => {
-        console.log(response);
+      console.log(response);
       const userId = +this.route.snapshot.paramMap.get('id');
       this.postSvc.getPosts(userId).subscribe(posts => {
         this.posts = posts;
