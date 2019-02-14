@@ -39,13 +39,15 @@ export class PostShowComponent implements OnInit, AfterViewInit {
   }
 
   deletePost(id: number) {
-    this.postSvc.deletePost(id);
-    if (this.postSvc.successfulDelete === true) {
-      this.router.navigate(['/']);
-      this.alertSvc.success('Post Deleted!');
-    } else {
-      this.alertSvc.error('Sorry. There was error deleting this post');
-    }
+    this.postSvc.deletePost(id).subscribe(response => {
+        console.log(response);
+      // if (response === null) {
+        this.router.navigate(['/']);
+        this.alertSvc.success('Post Deleted!');
+      }, () => {
+        console.log('error');
+        this.alertSvc.error('Sorry. There was error deleting this post');
+      });
   }
 
 }
