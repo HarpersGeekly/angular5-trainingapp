@@ -1,4 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+  --main-bg-color: #fffafb;
+  --main-nav-background: #3f403c;
+  --main-og-blue: #7DE2D1;
+  --main-blue: #0bd8ff;
+  --main-blue-hover: #339989;
+  --main-login-green: lime;
+  --main-neon-green: #50f9b7;
+  --main-pink: #fc32be;
+  --main-pink-alt: #ed5f79;
+  --main-red: #a94442;
+  --main-red-lite: #f2dede;
+  --main-yellow: #f1ff40;
+  --main-orange: #E07A5F;
+  --main-dark-gray: #373737;
+  --main-gray: #888888;
+  --main-light-gray: #c0c0c0;
+  --main-font-size: 14px;
+  --main-font: Roboto, sans-serif;
+  /*--main-font-logo: East Sea Dokdo, regular;*/
+  --main-font-logo: Big John, regular;
+  --main-font-post: Oswald, regular, sans-serif;
+  --main-font-subtitle: Playfair Display, regular;
+}
+
 .editor-statusbar .lines:before {
   content: 'lines：' !important;
 }
@@ -39,10 +65,6 @@
   margin-right: 10px;
 }
 
-:root {
-  --main-bg-color: #fffafb;
-}
-
 body {
   background-color: var(--main-bg-color);
 }
@@ -57,6 +79,26 @@ body {
 .CodeMirror-fullscreen .CodeMirror-scroll {
   max-height: none;
 }
+
+.posts-hr {
+  border-top: 5px solid var(--main-pink);
+  width: 8%;
+  margin-bottom: -10px;
+}
+
+.post-wrapper {
+  margin-bottom: 40px;
+}
+
+/*.post-title {*/
+  /*cursor: pointer;*/
+  /*font-family: var(--main-font-post);*/
+  /*color: var(--main-dark-gray);*/
+  /*transition: color 0.1s linear;*/
+  /*-webkit-transition: color 0.1s linear;*/
+  /*-moz-transition: color 0.1s linear;*/
+  /*position : relative; !* needed for ::before to work, which has absolute. *!*/
+/*}*/
 
 #profile-post-image > p > img {
   max-width:300px;
