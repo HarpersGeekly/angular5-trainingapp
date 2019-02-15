@@ -22,7 +22,8 @@
         "styles.css",
         "../node_modules/bootstrap/dist/css/bootstrap.css",
         "../node_modules/@fortawesome/fontawesome-free/css/all.css",
-        "../node_modules/simplemde/dist/simplemde.min.css"
+        "../node_modules/simplemde/dist/simplemde.min.css",
+        "../node_modules/ngx-simplemde/src/index.css"
       ],
       "scripts": ["../node_modules/simplemde/dist/simplemde.min.js"],
       "environmentSource": "environments/environment.ts",
