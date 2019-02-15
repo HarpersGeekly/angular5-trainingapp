@@ -19,6 +19,7 @@ export class UserEditComponent implements OnInit {
   userOnForm = new User();
   foundUser: User;
   userExists = false;
+  emailExists = false;
   loading = false;
 
   onUsernameFormSubmit(username) {
@@ -64,14 +65,14 @@ export class UserEditComponent implements OnInit {
       this.foundUser = response;
       console.log('return from REST: ' + this.foundUser);
       if (this.foundUser == null || undefined) {
-        this.userExists = false;
+        this.emailExists = false;
       } else {
-        this.userExists = true;
+        this.emailExists = true;
       }
-      console.log('userexists: ' + this.userExists);
-      if (!this.userExists) {
+      console.log('emailexists: ' + this.emailExists);
+      if (!this.emailExists) {
         console.log('submitted');
-        this.userExists = false;
+        this.emailExists = false;
         this.loading = true;
         this.userOnForm.id = this.userSvc.user.id;
         this.userOnForm.username = this.userSvc.user.username;

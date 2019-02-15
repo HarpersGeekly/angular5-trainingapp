@@ -12,8 +12,7 @@ export class UserService {
 
   user: User;
   loggedInUser: User;
-  successfulEdit: boolean;
-  successfulDelete: boolean;
+  successfulEdit = true;
 
   private usersUrl = '/api/user'; // URL to rest api, look at file: proxy.conf.json
 
@@ -50,30 +49,32 @@ export class UserService {
   }
 
   update(user: User) {
-    this.successfulEdit = true;
     return this.http.put(this.usersUrl + '/editUser',
       JSON.stringify(user), {headers: httpOptions.headers, observe: 'response'}).subscribe(response => {
-      console.log('response ' + response);
-      if (response.status !== 200) {
-        this.successfulEdit = false;
+        console.log(response);
+      if (response.status === 200) {
+        this.successfulEdit = true;
       }
+      this.successfulEdit = true; // TODO figure out a way to wait for this function to end in the component. This is "always" true...
+      return this.successfulEdit;
     });
   }
 
   delete(id: number) {
-    this.successfulDelete = true;
-    this.http.delete(this.usersUrl + '/deleteUser/' + id, {headers: httpOptions.headers, observe: 'response'}).subscribe(response => {
-      if (response.status === 200) {
-        try {
-          this.getUser(id).subscribe();
-        } catch {
-          this.successfulDelete = false;
-        }
-      } else {
-          this.successfulDelete = false;
-      }
-        return this.successfulDelete;
-    });
+    return this.http.delete(this.usersUrl + '/deleteUser/' + id);
+    // {headers: httpOptions.headers, observe: 'response'})
+    //   .subscribe(response => {
+    //   if (response.status === 200) {
+    //     try {
+    //       this.getUser(id).subscribe();
+    //     } catch {
+    //       this.successfulDelete = false;
+    //     }
+    //   } else {
+    //       this.successfulDelete = false;
+    //   }
+    //     return this.successfulDelete;
+    // });
   }
 
 }
