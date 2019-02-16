@@ -10,13 +10,20 @@
   <div class="container">
     <div *ngFor="let post of sortedPostsById(posts)">
       <div class="post-wrapper">
-        <a routerLink="/post/{{post.id}}/{{post.title}}">
+        <a class="post-title" routerLink="/post/{{post.id}}/{{post.title}}">
           <h3 [innerHTML]="post.htmlTitle">{{post.title}}</h3>
         </a>
-        <h4 [innerHTML]="post.htmlSubtitle">{{post.subtitle}}</h4>
-        By: <a routerLink="/user/profile/{{post.user.id}}/{{post.user.username}}" class="margin-right">{{post.user.username}}</a>
-        <span class="margin-right-lt">{{post.hoursMinutes}}</span><span class="margin-right">{{post.formatDate}}</span>
-        <i class="fa fa-thumbs-up margin-right-lt"></i>{{post.voteCount}}
+        <h4 class="post-subtitle" [innerHTML]="post.htmlSubtitle">{{post.subtitle}}</h4>
+        <span class="flex post-info-wrapper">
+          <span class="margin-right-sm">By:</span><span class="post-username margin-right" routerLink="/user/profile/{{post.user.id}}/{{post.user.username}}">{{post.user.username}}</span>
+          <span class="margin-right-sm">{{post.hoursMinutes}}</span><span class="margin-right">{{post.formatDate}}</span>
+          <!--<i class="fa fa-thumbs-up margin-right-lt"></i>{{post.voteCount}}-->
+          <span class="flex">
+            <mat-icon class="post-info-icon margin-left-xsm margin-right-xsm">thumb_up_alt</mat-icon>{{post.voteCount}}
+            <mat-icon class="post-info-icon margin-left-xsm margin-right-xsm">remove_red_eye</mat-icon>{{post.voteCount}}
+            <mat-icon class="post-info-icon margin-left-xsm margin-right-xsm">star_border</mat-icon>{{post.voteCount}}
+          </span>
+        </span>
         <a routerLink="/post/{{post.id}}/{{post.title}}"><div [innerHTML]="post.htmlLeadImage" id="index-post-image">{{post.leadImage}}</div></a>
       </div>
     </div>

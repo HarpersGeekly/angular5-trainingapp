@@ -68,8 +68,21 @@
 .margin-right {
   margin-right: 20px;
 }
-.margin-right-lt {
+
+.margin-right-sm {
   margin-right: 10px;
+}
+
+.margin-left-sm {
+  margin-left: 10px;
+}
+
+.margin-right-xsm {
+  margin-right: 5px;
+}
+
+.margin-left-xsm {
+  margin-left: 5px;
 }
 
 body {
@@ -107,20 +120,7 @@ body {
   margin-bottom: 40px;
 }
 
-.post-title {
-  cursor: pointer;
-  font-family: var(--main-font-post);
-  color: var(--main-dark-gray);
-  transition: color 0.1s linear;
-  -webkit-transition: color 0.1s linear;
-  -moz-transition: color 0.1s linear;
-  position : relative; /* needed for ::before to work, which has absolute. */
-}
 
-.post-title:hover {
-  text-decoration: none;
-  color: var(--main-pink);
-}
 
 #profile-post-image > p > img {
   max-width:300px;

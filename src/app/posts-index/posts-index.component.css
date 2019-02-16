@@ -1,0 +1,34 @@
+.post-title {
+  cursor: pointer;
+  font-family: var(--main-font-post);
+  color: var(--main-dark-gray);
+  transition: color 0.1s linear;
+  -webkit-transition: color 0.1s linear;
+  -moz-transition: color 0.1s linear;
+  position : relative; /* needed for ::before to work, which has absolute. */
+}
+
+.post-title:hover {
+  text-decoration: none;
+  color: var(--main-pink);
+}
+
+.post-subtitle {
+  font-family: var(--main-font-subtitle);
+  color: var(--main-gray);
+  font-style: italic;
+  font-weight: bolder;
+  font-size: 1.4em;
+}
+
+.post-info-wrapper {
+  color: var(--main-gray);
+}
+
+.post-username {
+  cursor: pointer;
+}
+
+.post-username:hover {
+  color: var(--main-blue);
+}
