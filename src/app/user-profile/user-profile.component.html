@@ -23,32 +23,59 @@
 
         <div *ngIf="posts?.length == 0">Posts are empty. <a routerLink="/post/create" *ngIf="isOwnProfile"> Create a post.</a></div>
         <div *ngFor="let post of sortedPostsById(posts)" class="margin-top">
-          <a routerLink="/post/{{post.id}}/{{post.title}}">
-            <h4 [innerHTML]="post.htmlTitle" id="profile-post-title">{{post.title}}</h4>
-          </a>
-          <h5 [innerHTML]="post.htmlSubtitle" id="profile-post-subtitle">{{post.subtitle}}</h5>
-          <span class="margin-right-lt">{{post.hoursMinutes}}</span><span class="margin-right">{{post.formatDate}}</span>
-          <i class="fa fa-thumbs-up margin-right-lt"></i>{{post.voteCount}}
-          <a routerLink="/post/{{post.id}}/{{post.title}}"><div [innerHTML]="post.htmlLeadImage" id="profile-post-image">{{post.leadImage}}</div></a>
+          <div class="post-wrapper">
+            <a routerLink="/post/{{post.id}}/{{post.title}}">
+              <h4 [innerHTML]="post.htmlTitle" id="profile-post-title">{{post.title}}</h4>
+            </a>
+            <h5 [innerHTML]="post.htmlSubtitle" id="profile-post-subtitle">{{post.subtitle}}</h5>
+            <span class="flex post-info-wrapper">
+              <span class="margin-right-sm">By:</span><span class="post-username margin-right" routerLink="/user/profile/{{post.user.id}}/{{post.user.username}}">{{post.user.username}}</span>
+              <span class="margin-right-sm">{{post.hoursMinutes}}</span><span class="margin-right">{{post.formatDate}}</span>
 
-          <div ngbDropdown class="d-inline-block" *ngIf="isOwnProfile">
-
-            <i class="fas fa-ellipsis-h options-ellipsis dropdown-toggle" id="dropdownBasic1" ngbDropdownToggle></i>
-
-            <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="edit-delete-dropdown">
-              <div>
-                <a routerLink="/post/edit/id/{{post.id}}" class="dropdown-edit-btn">
-                  <i class="fas fa-edit"></i> edit
-                </a>
-              </div>
-              <div>
-                <button (click)="deletePost(post.id)" class="dropdown-delete-btn">
-                  <i class="fas fa-trash"></i> delete
-                </button>
-              </div>
+            </span>
+            <a routerLink="/post/{{post.id}}/{{post.title}}"><div [innerHTML]="post.htmlLeadImage" id="profile-post-image">{{post.leadImage}}</div></a>
+            <div class="flex" style="width:30%;justify-content: space-between;">
+              <span class="flex">
+                <mat-icon class="post-info-icon margin-left-xsm margin-right-xsm">thumb_up_alt_sharp</mat-icon>{{post.voteCount}}
+                <mat-icon class="post-info-icon margin-left-xsm margin-right-xsm">remove_red_eye</mat-icon>{{post.voteCount}}
+                <mat-icon class="post-info-icon margin-left-xsm margin-right-xsm">star_border</mat-icon>{{post.voteCount}}
+              </span>
+              <span>
+                <mat-icon [matMenuTriggerFor]="appMenu" *ngIf="isOwnProfile" style="cursor: pointer">more_horiz</mat-icon>
+                <mat-menu #appMenu="matMenu">
+                  <button mat-menu-item [matMenuTriggerFor]="post_remove" class="dropdown-delete-btn"><mat-icon>delete</mat-icon>delete?</button>
+                  <button mat-menu-item routerLink="/post/edit/id/{{post.id}}" class="dropdown-edit-btn"><mat-icon>edit</mat-icon>edit</button>
+                  <mat-menu #post_remove="matMenu">
+                    <button mat-menu-item>
+                      <mat-icon>done</mat-icon>
+                      <span>delete</span>
+                    </button>
+                  </mat-menu>
+                </mat-menu>
+              </span>
             </div>
+
           </div>
 
+
+
+          <!--<div ngbDropdown class="d-inline-block" *ngIf="isOwnProfile">-->
+
+            <!--<i class="fas fa-ellipsis-h options-ellipsis dropdown-toggle" id="dropdownBasic1" ngbDropdownToggle></i>-->
+
+            <!--<div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="edit-delete-dropdown">-->
+              <!--<div>-->
+                <!--<a routerLink="/post/edit/id/{{post.id}}" class="dropdown-edit-btn">-->
+                  <!--<i class="fas fa-edit"></i> edit-->
+                <!--</a>-->
+              <!--</div>-->
+              <!--<div>-->
+                <!--<button (click)="deletePost(post.id)" class="dropdown-delete-btn">-->
+                  <!--<i class="fas fa-trash"></i> delete-->
+                <!--</button>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
         </div>
 
       </ng-template>

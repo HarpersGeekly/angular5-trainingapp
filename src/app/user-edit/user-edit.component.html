@@ -23,7 +23,7 @@
     <input #email="ngModel" id="userEditEmail" class="form-control" type="email" name="email" [ngModel]="userSvc.user.email" (ngModelChange)="onChange($event, 'email')" required appEmailValidator maxlength="254" />
     <div *ngIf="email.errors && (email.dirty || email.touched)">
       <p *ngIf="email?.errors.required" class="alert alert-danger">Email is required</p>
-      <p *ngIf="email?.errors.appEmailValidator" class="alert alert-danger">Email must be valid</p>
+      <p *ngIf="email?.errors.appEmailValidator" class="alert alert-danger"></p>
     </div>
     <p *ngIf="emailExists" class="alert alert-danger">Sorry. That email is unavailable. Please choose a different email.</p>
   </div>
