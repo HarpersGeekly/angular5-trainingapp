@@ -1,4 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+
 
 :root {
   --main-bg-color: #fffafb;
@@ -58,6 +61,10 @@
   margin-bottom: 25px;
 }
 
+.margin-bottom-lg {
+  margin-bottom: 50px;
+}
+
 .margin-right {
   margin-right: 20px;
 }
@@ -69,14 +76,15 @@ body {
   background-color: var(--main-bg-color) !important;
 }
 
-.navbar {
-  background-color: var(--main-bg-color) !important;
-}
+/*.navbar {*/
+  /*background-color: var(--main-bg-color) !important;*/
+/*}*/
 
-.nav-tabs .nav-link.active {
-  background-color: var(--main-bg-color) !important;
-  border-color: #dee2e6 #dee2e6 var(--main-bg-color);
-}
+/*.nav-tabs .nav-link.active {*/
+  /*background-color: var(--main-bg-color) !important;*/
+  /*border-color: #dee2e6 #dee2e6 var(--main-bg-color);*/
+/*}*/
+
 
 .CodeMirror-scroll {
   max-height: 300px;
@@ -99,15 +107,20 @@ body {
   margin-bottom: 40px;
 }
 
-/*.post-title {*/
-  /*cursor: pointer;*/
-  /*font-family: var(--main-font-post);*/
-  /*color: var(--main-dark-gray);*/
-  /*transition: color 0.1s linear;*/
-  /*-webkit-transition: color 0.1s linear;*/
-  /*-moz-transition: color 0.1s linear;*/
-  /*position : relative; !* needed for ::before to work, which has absolute. *!*/
-/*}*/
+.post-title {
+  cursor: pointer;
+  font-family: var(--main-font-post);
+  color: var(--main-dark-gray);
+  transition: color 0.1s linear;
+  -webkit-transition: color 0.1s linear;
+  -moz-transition: color 0.1s linear;
+  position : relative; /* needed for ::before to work, which has absolute. */
+}
+
+.post-title:hover {
+  text-decoration: none;
+  color: var(--main-pink);
+}
 
 #profile-post-image > p > img {
   max-width:300px;
