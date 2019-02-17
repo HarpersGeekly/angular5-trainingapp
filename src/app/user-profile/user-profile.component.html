@@ -44,8 +44,8 @@
                   <button mat-menu-item [matMenuTriggerFor]="post_remove" class="dropdown-delete-btn"><mat-icon>delete</mat-icon>delete?</button>
                   <button mat-menu-item routerLink="/post/edit/id/{{post.id}}" class="dropdown-edit-btn"><mat-icon>edit</mat-icon>edit</button>
                   <mat-menu #post_remove="matMenu">
-                    <button mat-menu-item>
-                      <mat-icon (click)="deletePost(post.id)">done</mat-icon>
+                    <button mat-menu-item (click)="deletePost(post.id)">
+                      <mat-icon>done</mat-icon>
                       <span>delete</span>
                     </button>
                   </mat-menu>
@@ -89,10 +89,11 @@
       <ng-template ngbTabContent>
 
         <div class="container margin-top">
-            <button class="btn btn-primary margin-bottom" (click)="toggleEditUserForm()">
+            <button mat-raised-button (click)="toggleEditUserForm()">
               Edit Account
             </button>
         <!--<button class="btn" ng-click="toggleEditPasswordForm()"></button>-->
+          <button mat-raised-button (click)="openDialog()">Change Profile Picture</button>
           <ng-container *ngIf="showEditUserForm">
             <app-user-edit></app-user-edit>
           </ng-container>

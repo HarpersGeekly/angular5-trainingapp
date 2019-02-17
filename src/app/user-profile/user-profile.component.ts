@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {UserService} from '../services/user.service';
 import {User} from '../models/user';
 import {ActivatedRoute} from '@angular/router';
 import {Post} from '../models/post';
 import {PostService} from '../services/post.service';
 import {AlertService} from '../services/alert.service';
+import {MatDialog, MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-user-profile',
@@ -22,7 +23,9 @@ export class UserProfileComponent implements OnInit {
     private userSvc: UserService,
     private postSvc: PostService,
     private route: ActivatedRoute,
-    private alertSvc: AlertService) { }
+    private alertSvc: AlertService,
+    public dialog: MatDialog,
+    public snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.getUser();
@@ -52,13 +55,28 @@ export class UserProfileComponent implements OnInit {
       const userId = +this.route.snapshot.paramMap.get('id');
       this.postSvc.getPosts(userId).subscribe(posts => {
         this.posts = posts;
-        this.alertSvc.success('Post Deleted!');
+        this.snackBar.open('Post Deleted!', 'OK', {
+          duration: 3000,
+          panelClass: ['success-snackbar']
+        });
+        // this.alertSvc.success('Post Deleted!');
       });
       }, () => {
         console.log('error');
-        this.alertSvc.error('Sorry. There was error deleting this post');
+      this.snackBar.open( 'Sorry. There was error deleting this post', 'OK', {
+        duration: 3000,
+        panelClass: ['danger-snackbar']
+      });
+        // this.alertSvc.error('');
         });
   }
+
+  // openSnackBar(message: string, action: string, className: string) {
+  //   this.snackBar.open(message, action, {
+  //     duration: 2000,
+  //     extraClasses: [className]
+  //   });
+  // }
 
   sortedPostsById(posts: Post[]) {
     if (posts != null) {

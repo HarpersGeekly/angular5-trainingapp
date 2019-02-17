@@ -212,6 +212,47 @@ body {
   border-left: 5px solid #a94442; /* red */
 }
 
+/*================= snackbar ==============*/
+.mat-snack-bar-container {
+  max-width: 100% !important;
+}
+
+.primary-snackbar {
+  color: black !important;
+  background: #cce5ff !important;
+}
+
+.primary-snackbar .mat-simple-snackbar-action {
+  color: black !important;
+}
+
+.success-snackbar {
+  max-width: 100% !important;
+  color: black !important;
+  background: #d4edda !important;
+}
+
+.success-snackbar .mat-simple-snackbar-action {
+  color: black !important;
+}
+
+.warning-snackbar {
+  color: black !important;
+  background: #fff3cd !important;
+}
+
+.warning-snackbar .mat-simple-snackbar-action {
+  color: black !important;
+}
+
+.danger-snackbar {
+  color: black !important;
+  background: #f8d7da !important;
+}
+
+.danger-snackbar .mat-simple-snackbar-action {
+  color: black !important;
+}
 /**:focus {*/
   /*outline: none !important;*/
   /*border: 0 !important;*/
