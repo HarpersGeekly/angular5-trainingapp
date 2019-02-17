@@ -245,15 +245,26 @@ body {
   color: black !important;
 }
 
-.danger-snackbar {
+.error-snackbar {
   color: black !important;
   background: #f8d7da !important;
 }
 
-.danger-snackbar .mat-simple-snackbar-action {
+.error-snackbar .mat-simple-snackbar-action {
   color: black !important;
 }
 /**:focus {*/
   /*outline: none !important;*/
   /*border: 0 !important;*/
 /*}*/
+
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}

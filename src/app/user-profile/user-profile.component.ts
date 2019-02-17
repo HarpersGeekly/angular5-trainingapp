@@ -65,7 +65,7 @@ export class UserProfileComponent implements OnInit {
         console.log('error');
       this.snackBar.open( 'Sorry. There was error deleting this post', 'OK', {
         duration: 3000,
-        panelClass: ['danger-snackbar']
+        panelClass: ['error-snackbar']
       });
         // this.alertSvc.error('');
         });
