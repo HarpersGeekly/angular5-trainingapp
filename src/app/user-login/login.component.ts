@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import {AlertService} from '../services/alert.service';
 import {UserService} from '../services/user.service';
-import {User} from '../models/user';
-import {toPromise} from 'rxjs/operator/toPromise';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   moduleId: module.id,
@@ -22,7 +20,7 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private userService: UserService,
-    private alertService: AlertService) {
+    private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -35,8 +33,15 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('currentUser', JSON.stringify(response));
         this.userService.loggedInUser = response;
         this.router.navigate(['/user/profile/' + this.userService.loggedInUser.id + '/' + this.userService.loggedInUser.username]);
+        this.snackBar.open('Login Successful!', '', {
+          duration: 3000,
+          panelClass: ['success-snackbar']
+        });
       } else {
-          this.alertService.error('Invalid Login Credentials');
+        this.snackBar.open('Invalid Login Credentials!', '', {
+          duration: 3000,
+          panelClass: ['error-snackbar']
+        });
           this.loading = false;
         }
     });
