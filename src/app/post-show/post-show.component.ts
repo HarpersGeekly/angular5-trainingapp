@@ -4,6 +4,7 @@ import {Post} from '../models/post';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../services/user.service';
 import {AlertService} from '../services/alert.service';
+import {User} from '../models/user';
 
 @Component({
   selector: 'app-post-show',
@@ -17,7 +18,7 @@ export class PostShowComponent implements OnInit, AfterViewInit {
 
   constructor(
     private postSvc: PostService,
-    private userSvc: UserService,
+    public userSvc: UserService,
     private route: ActivatedRoute,
     private router: Router,
     private alertSvc: AlertService) { }

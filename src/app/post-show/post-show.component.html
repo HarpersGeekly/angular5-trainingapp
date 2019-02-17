@@ -3,7 +3,7 @@
   <h1 [innerHTML]="post.htmlTitle">{{post.title}}</h1>
   <h2 [innerHTML]="post.htmlSubtitle">{{post.subtitle}}</h2>
   <span class="flex post-info-wrapper">
-          <span class="margin-right-sm">By:</span><span class="post-username cursor margin-right" routerLink="/user/profile/{{post.user.id}}/{{post.user.username}}">{{post.user.username}}</span>
+          <span class="margin-right-sm">By:</span><span class="post-username cursor margin-right" routerLink="/user/profile/{{post.user?.id}}/{{post.user?.username}}">{{post.user?.username}}</span>
           <span class="margin-right-sm">{{post.hoursMinutes}}</span><span class="margin-right">{{post.formatDate}}</span>
           <span class="flex">
             <mat-icon class="post-info-icon margin-left-xsm margin-right-xsm">thumb_up_alt</mat-icon>{{post.voteCount}}
@@ -13,10 +13,15 @@
   <div [innerHTML]="post.htmlBody">{{post.body}}</div>
 
   <div class="vote-options-row">
-    <div class="thumbs-wrapper flex">
-      <mat-icon routerLink="/login" class="cursor margin-left-xsm margin-right-xsm">thumb_up</mat-icon>
+    <div class="thumbs-wrapper flex-center" *ngIf="userSvc.loggedInUser == null">
+      <button mat-icon-button routerLink="/login" class="cursor margin-left-xsm margin-right-xsm"><mat-icon >thumb_up</mat-icon></button>
       <span class="margin-left-xsm margin-right-xsm">{{post.voteCount}}</span>
-      <mat-icon routerLink="/login" class="cursor margin-left-xsm margin-right-xsm">thumb_down</mat-icon>
+      <button mat-icon-button routerLink="/login" class="cursor margin-left-xsm margin-right-xsm"><mat-icon>thumb_down</mat-icon></button>
+    </div>
+    <div class="thumbs-wrapper flex-center" *ngIf="userSvc.loggedInUser != null">
+      <button mat-icon-button class="cursor margin-left-xsm margin-right-xsm" (click)="postVoteUp(post.id, userSvc.loggedInUser.id, 1)"><mat-icon >thumb_up</mat-icon></button>
+      <span class="margin-left-xsm margin-right-xsm">{{post.voteCount}}</span>
+      <button mat-icon-button class="cursor margin-left-xsm margin-right-xsm" (click)="postVoteDown(post.id, userSvc.loggedInUser.id, -1)"><mat-icon>thumb_down</mat-icon></button>
     </div>
 
     <span>

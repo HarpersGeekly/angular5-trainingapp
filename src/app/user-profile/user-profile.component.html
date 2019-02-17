@@ -1,6 +1,6 @@
 <div class="container">
   <ng-container *ngIf="isOwnProfile">
-    <h3 class="profileUsername">Welcome, {{user?.username}}!</h3>
+    <h3 class="profileUsername">Welcome, {{userSvc.loggedInUser?.username}}!</h3>
   </ng-container>
   <!--if not your profile-->
   <ng-container *ngIf="!isOwnProfile">

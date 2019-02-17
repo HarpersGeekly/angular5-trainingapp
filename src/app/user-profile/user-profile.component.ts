@@ -20,7 +20,7 @@ export class UserProfileComponent implements OnInit {
   showEditUserForm = false;
 
   constructor(
-    private userSvc: UserService,
+    public userSvc: UserService,
     private postSvc: PostService,
     private route: ActivatedRoute,
     private alertSvc: AlertService,
