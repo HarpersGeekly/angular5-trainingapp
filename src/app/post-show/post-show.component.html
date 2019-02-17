@@ -2,36 +2,36 @@
 
   <h1 [innerHTML]="post.htmlTitle">{{post.title}}</h1>
   <h2 [innerHTML]="post.htmlSubtitle">{{post.subtitle}}</h2>
-
-  By: <a routerLink="/user/profile/{{post.user?.id}}/{{post.user?.username}}" class="margin-right">{{post.user?.username}}</a>
-  <span class="margin-right-lt">{{post.hoursMinutes}}</span><span class="margin-right">{{post.formatDate}}</span>
-  <i class="fa fa-thumbs-up margin-right-lt"></i>{{post.voteCount}}
-  <div [innerHTML]="post.htmlLeadImage" id="index-post-image">{{post.leadImage}}</div>
+  <span class="flex post-info-wrapper">
+          <span class="margin-right-sm">By:</span><span class="post-username cursor margin-right" routerLink="/user/profile/{{post.user.id}}/{{post.user.username}}">{{post.user.username}}</span>
+          <span class="margin-right-sm">{{post.hoursMinutes}}</span><span class="margin-right">{{post.formatDate}}</span>
+          <span class="flex">
+            <mat-icon class="post-info-icon margin-left-xsm margin-right-xsm">thumb_up_alt</mat-icon>{{post.voteCount}}
+            <mat-icon class="post-info-icon margin-left margin-right-xsm">remove_red_eye</mat-icon>{{post.voteCount}}
+          </span>
+        </span>  <div [innerHTML]="post.htmlLeadImage" id="index-post-image">{{post.leadImage}}</div>
   <div [innerHTML]="post.htmlBody">{{post.body}}</div>
 
   <div class="vote-options-row">
-    <div class="thumbs-wrapper">
-      <a routerLink="/login" class="margin-right-lt"><i class="fas fa-2x fa-thumbs-up"></i></a>
-      <span class="margin-right-lt">{{post.voteCount}}</span>
-      <a routerLink="/login"><i class="fas fa-2x fa-thumbs-down"></i></a>
+    <div class="thumbs-wrapper flex">
+      <mat-icon routerLink="/login" class="cursor margin-left-xsm margin-right-xsm">thumb_up</mat-icon>
+      <span class="margin-left-xsm margin-right-xsm">{{post.voteCount}}</span>
+      <mat-icon routerLink="/login" class="cursor margin-left-xsm margin-right-xsm">thumb_down</mat-icon>
     </div>
 
-    <div ngbDropdown class="d-inline-block" *ngIf="isOwnPost">
-      <i class="fas fa-ellipsis-h options-ellipsis dropdown-toggle" id="dropdownBasic1" ngbDropdownToggle></i>
-
-      <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="edit-delete-dropdown">
-        <div>
-          <a routerLink="/post/edit/id/{{post.id}}" class="dropdown-edit-btn">
-            <i class="fas fa-edit"></i> edit
-          </a>
-        </div>
-        <div>
-          <button (click)="deletePost(post.id)" class="dropdown-delete-btn">
-            <i class="fas fa-trash"></i> delete
+    <span>
+      <mat-icon [matMenuTriggerFor]="appMenu" *ngIf="isOwnPost" class="cursor">more_horiz</mat-icon>
+      <mat-menu #appMenu="matMenu">
+        <button mat-menu-item [matMenuTriggerFor]="post_remove" class="dropdown-delete-btn"><mat-icon>delete</mat-icon>delete?</button>
+        <button mat-menu-item routerLink="/post/edit/id/{{post.id}}" class="dropdown-edit-btn"><mat-icon>edit</mat-icon>edit</button>
+        <mat-menu #post_remove="matMenu">
+          <button mat-menu-item>
+            <mat-icon (click)="deletePost(post.id)">done</mat-icon>
+            <span>delete</span>
           </button>
-        </div>
-      </div>
-    </div>
+        </mat-menu>
+      </mat-menu>
+    </span>
   </div>
 </div>
 

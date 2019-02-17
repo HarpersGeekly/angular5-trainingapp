@@ -65,24 +65,32 @@
   margin-bottom: 50px;
 }
 
-.margin-right {
-  margin-right: 20px;
+.margin-right-xsm {
+  margin-right: 5px;
 }
 
 .margin-right-sm {
   margin-right: 10px;
 }
 
-.margin-left-sm {
-  margin-left: 10px;
-}
-
-.margin-right-xsm {
-  margin-right: 5px;
+.margin-right {
+  margin-right: 25px;
 }
 
 .margin-left-xsm {
   margin-left: 5px;
+}
+
+.margin-left-sm {
+  margin-left: 10px;
+}
+
+.margin-left {
+  margin-left: 25px;
+}
+
+.cursor {
+  cursor: pointer;
 }
 
 body {

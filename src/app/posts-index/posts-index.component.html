@@ -20,8 +20,7 @@
           <!--<i class="fa fa-thumbs-up margin-right-lt"></i>{{post.voteCount}}-->
           <span class="flex">
             <mat-icon class="post-info-icon margin-left-xsm margin-right-xsm">thumb_up_alt</mat-icon>{{post.voteCount}}
-            <mat-icon class="post-info-icon margin-left-xsm margin-right-xsm">remove_red_eye</mat-icon>{{post.voteCount}}
-            <mat-icon class="post-info-icon margin-left-xsm margin-right-xsm">star_border</mat-icon>{{post.voteCount}}
+            <mat-icon class="post-info-icon margin-left margin-right-xsm">remove_red_eye</mat-icon>{{post.voteCount}}
           </span>
         </span>
         <a routerLink="/post/{{post.id}}/{{post.title}}"><div [innerHTML]="post.htmlLeadImage" id="index-post-image">{{post.leadImage}}</div></a>
