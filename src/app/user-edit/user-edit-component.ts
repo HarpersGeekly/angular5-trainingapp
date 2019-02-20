@@ -21,6 +21,14 @@ export class UserEditComponent implements OnInit {
   userExists = false;
   emailExists = false;
   loading = false;
+  loadingUsername = false;
+  loadingEmail = false;
+  loadingBio = false;
+
+  ngOnInit() {
+    this.userSvc.loggedInUser = this.userSvc.user;
+    this.loading = false;
+  }
 
   onUsernameFormSubmit(username) {
     this.findByUsernameAndUpdate(username);
@@ -48,14 +56,12 @@ export class UserEditComponent implements OnInit {
       }
       if (!this.userExists) {
         this.userExists = false;
-        this.loading = true;
+        this.loadingUsername = true;
         this.userOnForm.id = this.userSvc.user.id;
         this.userOnForm.username = username;
         this.userOnForm.email = this.userSvc.user.email;
         this.userOnForm.bio = this.userSvc.user.bio;
         this.updateUser(this.userOnForm);
-        this.userSvc.user.username = username;
-        this.userComponent.showEditUserForm = false;
       }
     });
   }
@@ -63,51 +69,50 @@ export class UserEditComponent implements OnInit {
   findByEmailAndUpdate(email) {
     this.userSvc.findByEmail(email).toPromise().then(response => {
       this.foundUser = response;
-      console.log('return from REST: ' + this.foundUser);
       if (this.foundUser == null || undefined) {
         this.emailExists = false;
       } else {
         this.emailExists = true;
       }
-      console.log('emailexists: ' + this.emailExists);
       if (!this.emailExists) {
-        console.log('submitted');
         this.emailExists = false;
-        this.loading = true;
+        this.loadingEmail = true;
         this.userOnForm.id = this.userSvc.user.id;
         this.userOnForm.username = this.userSvc.user.username;
         this.userOnForm.email = email;
         this.userOnForm.bio = this.userSvc.user.bio;
         this.updateUser(this.userOnForm);
-        this.userSvc.user.email = email;
-        this.userComponent.showEditUserForm = false;
       }
     });
   }
 
   updateBio(bio) {
+    this.loadingBio = true;
     this.userOnForm.id = this.userSvc.user.id;
     this.userOnForm.username = this.userSvc.user.username;
     this.userOnForm.email = this.userSvc.user.email;
     this.userOnForm.bio = bio;
     this.updateUser(this.userOnForm);
-    this.userSvc.user.bio = bio;
-    this.userComponent.showEditUserForm = false;
   }
 
   updateUser(user: User) {
-    this.userSvc.update(user);
-    if (this.userSvc.successfulEdit === true) {
+    this.userSvc.update(user).subscribe(response => {
+      // TODO is this overkill? setting the response to THREE users?
+      this.userSvc.user = response.body;
+      this.userSvc.loggedInUser = response.body;
+      this.userComponent.user = response.body;
       this.alertService.success('Profile Updated!');
-    } else {
+      this.userComponent.showEditUserForm = false;
+      this.loading = false;
+    }, () => {
+      this.loading = false;
       this.alertService.error('Sorry. There was an error when updating your account');
-    }
+    });
   }
 
   deleteUser(id: number) {
     this.loading = true;
     this.userSvc.delete(id).subscribe(response => {
-      console.log(response);
       this.loading = false;
       this.userSvc.logout();
       this.router.navigate(['/', 'register', {success: true}]);
@@ -116,9 +121,5 @@ export class UserEditComponent implements OnInit {
       this.loading = false;
       this.alertService.error('Sorry. There was an error when deleting your account.');
     });
-  }
-
-  ngOnInit() {
-    this.loading = false;
   }
 }

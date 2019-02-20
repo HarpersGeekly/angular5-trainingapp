@@ -38,7 +38,10 @@ export class UserProfileComponent implements OnInit {
       this.userSvc.user = user; // any component that injects the UserService can use this user
       this.user = this.userSvc.user;
       if (this.userSvc.loggedInUser != null || undefined) {
-        this.isOwnProfile = (this.userSvc.loggedInUser.id === this.user.id);
+        if (this.userSvc.loggedInUser.id === this.user.id) {
+          this.userSvc.loggedInUser = this.user;
+          this.isOwnProfile = (this.userSvc.loggedInUser.id === this.user.id);
+        }
       }
     });
   }
