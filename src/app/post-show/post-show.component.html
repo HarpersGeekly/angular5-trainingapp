@@ -10,7 +10,7 @@
             <mat-icon class="post-info-icon margin-left margin-right-xsm">remove_red_eye</mat-icon>{{post.voteCount}}
           </span>
         </span>  <div [innerHTML]="post.htmlLeadImage" id="index-post-image">{{post.leadImage}}</div>
-  <div [innerHTML]="post.htmlBody">{{post.body}}</div>
+  <div class="post-show-body" [innerHTML]="post.htmlBody">{{post.body}}</div>
 
   <div class="vote-options-row">
     <div class="thumbs-wrapper flex-center" *ngIf="userSvc.loggedInUser == null">
@@ -30,8 +30,8 @@
         <button mat-menu-item [matMenuTriggerFor]="post_remove" class="dropdown-delete-btn"><mat-icon>delete</mat-icon>delete?</button>
         <button mat-menu-item routerLink="/post/edit/id/{{post.id}}" class="dropdown-edit-btn"><mat-icon>edit</mat-icon>edit</button>
         <mat-menu #post_remove="matMenu">
-          <button mat-menu-item>
-            <mat-icon (click)="deletePost(post.id)">done</mat-icon>
+          <button mat-menu-item (click)="deletePost(post.id)">
+            <mat-icon>done</mat-icon>
             <span>delete</span>
           </button>
         </mat-menu>
@@ -45,11 +45,12 @@
 
   <mat-divider></mat-divider>
 
-  <form class="example-form" *ngIf="userSvc.loggedInUser != null" (ngSubmit)="saveComment()">
+  <form class="example-form" *ngIf="userSvc.loggedInUser != null" (ngSubmit)="saveComment(post.id, userSvc.loggedInUser.id)">
     <mat-form-field class="example-full-width">
       <textarea matInput placeholder="Add a comment..."></textarea>
     </mat-form-field>
   </form>
+  <!--<app-comments></app-comments>-->
 </div>
 
 
