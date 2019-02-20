@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import {UserService} from '../services/user.service';
 import {AlertService} from '../services/alert.service';
 import {User} from '../models/user';
+import {FormControl, Validators} from '@angular/forms';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   moduleId: module.id,
@@ -14,13 +16,15 @@ export class RegisterComponent {
   foundUser: User;
   foundEmailUser: User;
   loading = false;
+  hidePassword = true;
   userExists = false;
   emailExists = false;
 
   constructor(
     private router: Router,
     private userSvc: UserService,
-    private alertService: AlertService) { }
+    private alertService: AlertService,
+    private snackBar: MatSnackBar) { }
 
   register() {
     this.loading = true;
@@ -29,12 +33,17 @@ export class RegisterComponent {
         .subscribe(
           data => {
             console.log(data);
-            // set success message and pass true parameter to persist the message after redirecting to the login page
-            this.alertService.success('Registration successful', true);
+            this.snackBar.open('Registration Successful!', '', {
+              duration: 3000,
+              panelClass: ['success-snackbar']
+            });
             this.router.navigate(['/login']);
           },
           error => {
-            this.alertService.error('There was an error when registering.');
+            this.snackBar.open('Registration Failed!', '', {
+              duration: 3000,
+              panelClass: ['error-snackbar']
+            });
             this.loading = false;
           });
     }
