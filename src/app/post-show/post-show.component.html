@@ -19,9 +19,9 @@
       <button mat-icon-button routerLink="/login" class="cursor margin-left-xsm margin-right-xsm"><mat-icon>thumb_down</mat-icon></button>
     </div>
     <div class="thumbs-wrapper flex-center" *ngIf="userSvc.loggedInUser != null">
-      <button mat-icon-button class="cursor margin-left-xsm margin-right-xsm" (click)="hasVotedUp ? removeVote(post.id, userSvc.loggedInUser.id) : postVote(post.id, userSvc.loggedInUser.id, 1)"><mat-icon [ngClass]="hasVotedUp ? 'voteUpIconActive' : 'voteUpIcon'">thumb_up</mat-icon></button>
+      <button mat-icon-button class="cursor margin-left-xsm margin-right-xsm" (click)="postVote(post.id, userSvc.loggedInUser.id, 1)"><mat-icon [ngClass]="post.userVote == 1 ? 'voteUpIconActive' : 'voteUpIcon'">thumb_up</mat-icon></button>
       <span class="margin-left-xsm margin-right-xsm">{{post.voteCount}}</span>
-      <button mat-icon-button class="cursor margin-left-xsm margin-right-xsm" (click)="hasVotedDown ? removeVote(post.id, userSvc.loggedInUser.id) : postVote(post.id, userSvc.loggedInUser.id, -1)"><mat-icon [ngClass]="hasVotedDown ? 'voteDownIconActive' : 'voteDownIcon'">thumb_down</mat-icon></button>
+      <button mat-icon-button class="cursor margin-left-xsm margin-right-xsm" (click)="postVote(post.id, userSvc.loggedInUser.id, -1)"><mat-icon [ngClass]="post.userVote == -1 ? 'voteDownIconActive' : 'voteDownIcon'">thumb_down</mat-icon></button>
     </div>
 
     <span>

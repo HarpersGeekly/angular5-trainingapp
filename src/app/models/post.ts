@@ -15,6 +15,5 @@ export class Post {
   htmlSubtitle: string;
   htmlLeadImage: string;
   voteCount: number;
-  loggedInUserHasVotedUp: boolean;
-  loggedInUserHasVotedDown: boolean;
+  userVote: number;
 }
