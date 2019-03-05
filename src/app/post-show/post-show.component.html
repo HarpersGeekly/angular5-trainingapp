@@ -39,19 +39,12 @@
     </span>
   </div>
 
-  <div class="flex-center" *ngIf="userSvc.loggedInUser == null">
-    <div>You must be <span><a routerLink="/login">logged in</a></span> to join the discussion</div>
+  <div>
+    <app-comment-create></app-comment-create>
+    <!--<app-comments></app-comments>-->
   </div>
-
-  <mat-divider></mat-divider>
-
-  <form class="example-form" *ngIf="userSvc.loggedInUser != null" (ngSubmit)="saveComment(post.id, userSvc.loggedInUser.id)">
-    <mat-form-field class="example-full-width">
-      <textarea matInput placeholder="Add a comment..."></textarea>
-    </mat-form-field>
-  </form>
-  <!--<app-comments></app-comments>-->
 </div>
+
 
 
 
