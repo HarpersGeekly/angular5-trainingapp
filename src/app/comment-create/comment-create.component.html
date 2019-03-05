@@ -1,0 +1,16 @@
+<div class="flex-center" *ngIf="userSvc.loggedInUser == null">
+  <div>You must be <span><a routerLink="/login">logged in</a></span> to join the discussion</div>
+</div>
+
+<mat-divider></mat-divider>
+
+
+<div class="margin-top" *ngIf="userSvc.loggedInUser != null">
+  <form (ngSubmit)="saveComment(post.id, userSvc.loggedInUser.id)">
+    <mat-form-field class="example-full-width" style="width: 100%;">
+      <mat-label>Comment</mat-label>
+      <textarea matInput placeholder="Add a comment..." matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=20></textarea>
+    </mat-form-field>
+    <button mat-flat-button [disabled]="">SUBMIT</button>
+  </form>
+</div>
