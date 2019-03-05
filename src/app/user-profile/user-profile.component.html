@@ -17,10 +17,8 @@
 
 <div class="container">
 
-  <ngb-tabset>
-    <ngb-tab title="Posts">
-      <ng-template ngbTabContent>
-
+  <mat-tab-group>
+    <mat-tab label="Posts">
         <div *ngIf="posts?.length == 0">Posts are empty. <a routerLink="/post/create" *ngIf="isOwnProfile"> Create a post.</a></div>
         <div *ngFor="let post of sortedPostsById(posts)" class="margin-top">
           <div class="post-wrapper">
@@ -54,40 +52,12 @@
             </div>
 
           </div>
-
-
-
-          <!--<div ngbDropdown class="d-inline-block" *ngIf="isOwnProfile">-->
-
-            <!--<i class="fas fa-ellipsis-h options-ellipsis dropdown-toggle" id="dropdownBasic1" ngbDropdownToggle></i>-->
-
-            <!--<div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="edit-delete-dropdown">-->
-              <!--<div>-->
-                <!--<a routerLink="/post/edit/id/{{post.id}}" class="dropdown-edit-btn">-->
-                  <!--<i class="fas fa-edit"></i> edit-->
-                <!--</a>-->
-              <!--</div>-->
-              <!--<div>-->
-                <!--<button (click)="deletePost(post.id)" class="dropdown-delete-btn">-->
-                  <!--<i class="fas fa-trash"></i> delete-->
-                <!--</button>-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
         </div>
-
-      </ng-template>
-    </ngb-tab>
-    <ngb-tab title="Comments">
-      <!--<ng-template ngbTabTitle><b>Fancy</b> title</ng-template>-->
-      <ng-template ngbTabContent>
+    </mat-tab>
+    <mat-tab label="Comments">
         <div *ngIf="comments?.length == 0">Posts are empty.>A list of comments the user has made will go here. Seen by everyone.</div>
-      </ng-template>
-    </ngb-tab>
-    <!--<ngb-tab title="Account Settings" [disabled]="true">-->
-    <ngb-tab title="Account Settings" *ngIf="isOwnProfile">
-      <ng-template ngbTabContent>
-
+    </mat-tab>
+    <mat-tab label="Account Settings" *ngIf="isOwnProfile">
         <div class="container margin-top">
             <button mat-raised-button (click)="toggleEditUserForm()">
               Edit Account
@@ -97,11 +67,8 @@
           <ng-container *ngIf="showEditUserForm">
             <app-user-edit></app-user-edit>
           </ng-container>
-
         </div>
-
-      </ng-template>
-    </ngb-tab>
-  </ngb-tabset>
+    </mat-tab>
+  </mat-tab-group>
 
 </div>

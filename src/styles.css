@@ -128,7 +128,9 @@ body {
   margin-bottom: 40px;
 }
 
-
+.post-show-body > p > img {
+  max-width: 600px;
+}
 
 #profile-post-image > p > img {
   max-width:300px;
@@ -140,27 +142,22 @@ body {
 
 #post-wrapper-show-page {
   margin-bottom: 65px;
+  width: 55%;
 }
 
-.upvoteIcon, .downvoteIcon {
+.voteUpIcon, .voteDownIcon {
   color: #8c8c8c;
 }
-
-.upvoteIcon:hover {
+.voteUpIconActive, .voteUpIcon:hover {
   color: #5bc0de;
-  cursor: pointer;
 }
-
-.upvoteActive {
+.voteUpIconActive:hover {
   color: #1b6d85;
 }
-
-.downvoteIcon:hover {
+.voteDownIconActive, .voteDownIcon:hover {
   color: #ce8483;
-  cursor: pointer;
 }
-
-.downvoteActive {
+.voteDownIconActive:hover {
   color: #761c19;
 }
 
