@@ -17,5 +17,8 @@
       <button mat-button (click)="cancelComment()">CANCEL</button>
       <button mat-flat-button type="submit" [disabled]="commentForm.pristine || commentForm.controls['body'].value.length < 1">SUBMIT</button>
     </div>
+    <div *ngIf="commentForm.controls['body'].hasError('maxlength')">
+      Maximum of 10 characters
+    </div>
   </form>
 </div>
