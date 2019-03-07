@@ -8,17 +8,15 @@
 <div class="margin-top" *ngIf="loggedInUser != null">
   <form (ngSubmit)="onSubmit()" [formGroup]="commentForm">
 
-    <mat-form-field class="example-full-width" style="width: 100%;">
+    <mat-form-field class="example-full-width" style="width: 100%;" hintLabel="">
       <mat-label>Add a comment...</mat-label>
-      <textarea matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=20 (focus)="toggleCommentCancelSubmit()" formControlName="body"></textarea>
+      <textarea matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=20 (focus)="toggleCommentCancelSubmit()" formControlName="body" maxlength="1500"></textarea>
+      <mat-hint align="left">{{commentForm.controls['body'].value?.length || 0}}/1500</mat-hint>
     </mat-form-field>
 
     <div class="float-rt" *ngIf="showCommentCancelSubmit">
       <button mat-button (click)="cancelComment()">CANCEL</button>
-      <button mat-flat-button type="submit" [disabled]="commentForm.pristine || commentForm.controls['body'].value.length < 1">SUBMIT</button>
-    </div>
-    <div *ngIf="commentForm.controls['body'].hasError('maxlength')">
-      Maximum of 10 characters
+      <button mat-flat-button type="submit" [disabled]="commentForm.pristine || commentForm.controls['body'].value.length < 1 || commentForm.controls['body'].value.length > 1500">SUBMIT</button>
     </div>
   </form>
 </div>
