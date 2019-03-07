@@ -24,8 +24,10 @@ import { AlertComponent } from './alert/alert.component';
 import { PostCreateComponent } from './post-create/post-create.component';
 // import { JwtInterceptor } from './services/jwt-interceptor.service';
 import { PostEditComponent } from './post-edit/post-edit.component';
+import { CommentCreateComponent } from './comment-create/comment-create.component';
+import {CommentService} from './services/comment.service';
 
-import { NgbAlertConfig, NgbDropdownConfig, NgbModule, NgbTabsetConfig} from '@ng-bootstrap/ng-bootstrap';
+// import { NgbAlertConfig, NgbDropdownConfig, NgbModule, NgbTabsetConfig} from '@ng-bootstrap/ng-bootstrap';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatCheckboxModule} from '@angular/material';
@@ -58,8 +60,11 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
-
-
+import { ImageCropperComponent } from './image-cropper/image-cropper.component';
+import {ImageCropperModule} from 'ngx-image-cropper';
+import { RegisterV2Component } from './register-v2/register-v2.component';
+import { CustomValidatorsDirective } from './directives/custom-validators.directive';
+import { UniqueUsernameValidatorDirective } from './directives/unique-username-validator.directive';
 
 @NgModule({
   declarations: [
@@ -77,16 +82,21 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     AlertComponent,
     PostCreateComponent,
     PostEditComponent,
+    ImageCropperComponent,
+    RegisterV2Component,
+    CustomValidatorsDirective,
+    UniqueUsernameValidatorDirective,
+    CommentCreateComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    NgbModule,
+    // NgbModule,
     ReactiveFormsModule,
     SimplemdeModule.forRoot({}),
-
+    ImageCropperModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
     MatCheckboxModule,
@@ -120,16 +130,17 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatSortModule,
     MatPaginatorModule
   ],
-  providers: [PostService, UserService, SimplemdeModule,
+  providers: [PostService, UserService, CommentService, SimplemdeModule,
     // {
     // provide: HTTP_INTERCEPTORS,
     // useClass: JwtInterceptor,
     // multi: true
     // },
     AuthGuard,
-    AlertService, EmailValidatorDirective, UsernameValidatorDirective,
+    AlertService, EmailValidatorDirective, UsernameValidatorDirective, CustomValidatorsDirective, UniqueUsernameValidatorDirective
     // JwtInterceptor,
-    NgbAlertConfig, NgbDropdownConfig, NgbTabsetConfig],
+    // NgbAlertConfig, NgbDropdownConfig, NgbTabsetConfig
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

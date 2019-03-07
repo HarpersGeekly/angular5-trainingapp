@@ -9,6 +9,7 @@ import {AuthGuard} from './services/authGuard.service';
 import {UserEditComponent} from './user-edit/user-edit-component';
 import {PostCreateComponent} from './post-create/post-create.component';
 import {PostEditComponent} from './post-edit/post-edit.component';
+import {RegisterV2Component} from './register-v2/register-v2.component';
 
 const routes: Routes = [
   { path: '', component: PostsIndexComponent},
@@ -17,7 +18,7 @@ const routes: Routes = [
   { path: 'post/edit/id/:id', component: PostEditComponent},
   { path: 'user/profile/:id/:username', component: UserProfileComponent},
   { path: 'user/my-profile/:id/:username', component: UserProfileComponent},
-  { path: 'register', component: RegisterComponent},
+  { path: 'register', component: RegisterV2Component},
   { path: 'register/:success', component: UserEditComponent},
   { path: 'login', component: LoginComponent}
 ];

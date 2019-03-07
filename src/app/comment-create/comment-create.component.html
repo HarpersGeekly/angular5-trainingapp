@@ -1,16 +1,24 @@
-<div class="flex-center" *ngIf="userSvc.loggedInUser == null">
+<div class="flex-center" *ngIf="loggedInUser == null">
   <div>You must be <span><a routerLink="/login">logged in</a></span> to join the discussion</div>
 </div>
 
 <mat-divider></mat-divider>
 
 
-<div class="margin-top" *ngIf="userSvc.loggedInUser != null">
-  <form (ngSubmit)="saveComment(post.id, userSvc.loggedInUser.id)">
+<div class="margin-top" *ngIf="loggedInUser != null">
+  <form (ngSubmit)="onSubmit()" [formGroup]="commentForm">
+
     <mat-form-field class="example-full-width" style="width: 100%;">
-      <mat-label>Comment</mat-label>
-      <textarea matInput placeholder="Add a comment..." matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=20></textarea>
+      <mat-label>Add a comment...</mat-label>
+      <textarea matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=20 (focus)="toggleCommentCancelSubmit()" formControlName="body"></textarea>
     </mat-form-field>
-    <button mat-flat-button [disabled]="">SUBMIT</button>
+
+    <div class="float-rt" *ngIf="showCommentCancelSubmit">
+      <button mat-button (click)="cancelComment()">CANCEL</button>
+      <button mat-flat-button type="submit" [disabled]="commentForm.pristine || commentForm.controls['body'].value.length < 1">SUBMIT</button>
+      <div [hidden]="!commentForm.hasError('maxlength')">
+        Only 10 characters allowed.
+      </div>
+    </div>
   </form>
 </div>
