@@ -8,5 +8,7 @@ export class Comment {
   post: Post;
   voteCount: number;
   date: Date;
+  hoursMinutes: string;
+  formatDate: string;
   isParentComment: boolean;
 }
