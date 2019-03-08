@@ -1,8 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-
-
 :root {
   --main-bg-color: #fffafb;
   --main-nav-background: #3f403c;
@@ -51,6 +49,14 @@
 
 .hidden {
   display: none;
+}
+
+.float-rt {
+  float: right;
+}
+
+.float-lft {
+  float: left;
 }
 
 .margin-top {
@@ -264,4 +270,10 @@ body {
 
 .example-full-width {
   width: 100%;
+}
+
+.comment {
+  background-color: #d3d3d35c;
+  border-radius: 10px;
+  padding: 5px;
 }
