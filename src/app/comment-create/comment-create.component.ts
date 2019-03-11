@@ -1,5 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {UserService} from '../services/user.service';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {CommentService} from '../services/comment.service';
 import {Post} from '../models/post';
@@ -50,6 +49,7 @@ export class CommentCreateComponent implements OnInit {
       this.comment.post = this.post;
       this.comment.user = this.user;
       this.commentSvc.create(this.comment).toPromise().then(response => {
+        this.commentSvc.comments.push(response);
         this.commentForm.reset({body: ''});
         this.showCommentCancelSubmit = false;
         this.loading = false;
