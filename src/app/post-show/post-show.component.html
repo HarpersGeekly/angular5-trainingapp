@@ -42,7 +42,7 @@
   <div>
     <app-comment-create [post]="post" [user]="userSvc.loggedInUser"></app-comment-create>
   </div>
-  <div *ngFor="let comment of comments" class="margin-top">
+  <div *ngFor="let comment of latestComments(commentSvc.comments)" class="margin-top">
     <app-comment [comment]="comment"></app-comment>
   </div>
 </div>

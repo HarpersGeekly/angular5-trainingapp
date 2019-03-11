@@ -17,12 +17,11 @@ export class PostShowComponent implements OnInit, AfterViewInit {
 
   post: Post;
   isOwnPost: boolean;
-  comments: Comment[];
 
   constructor(
     private postSvc: PostService,
-    public userSvc: UserService,
-    private commentSvc: CommentService,
+    protected userSvc: UserService,
+    protected commentSvc: CommentService,
     private route: ActivatedRoute,
     private router: Router,
     private alertSvc: AlertService) {
@@ -48,8 +47,16 @@ export class PostShowComponent implements OnInit, AfterViewInit {
   getComments() {
     const id = +this.route.snapshot.paramMap.get('id');
     this.commentSvc.getCommentsByPost(id).subscribe(response => {
-      this.comments = response;
+      this.commentSvc.comments = response;
     });
+  }
+
+  latestComments(comments: Comment[]) {
+    if (comments != null) {
+      return comments.sort(function (a, b) {
+        return b.id - a.id;
+      });
+    }
   }
 
   deletePost(id: number) {
