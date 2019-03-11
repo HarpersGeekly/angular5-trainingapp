@@ -6,6 +6,7 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class CommentService {
   private commentUrl = '/api/comment';
+  comments: Comment[];
 
   constructor(private http: HttpClient) { }
 
@@ -18,7 +19,6 @@ export class CommentService {
   }
 
   create(comment: Comment) {
-    this.http.post<Comment>(this.commentUrl + '/saveComment', comment);
+    return this.http.post<Comment>(this.commentUrl + '/saveComment', comment);
   }
-
 }
