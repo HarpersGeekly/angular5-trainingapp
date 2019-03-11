@@ -1,9 +1,8 @@
 <div class="flex-center" *ngIf="user == null">
-  <div>You must be <span><a routerLink="/login">logged in</a></span> to join the discussion</div>
+  <div>You must be <span><a routerLink="/login">logged in</a></span> to make comments</div>
 </div>
 
 <mat-divider></mat-divider>
-
 
 <div class="margin-top margin-bottom-lg" *ngIf="user != null">
   <form (ngSubmit)="onSubmit()" [formGroup]="commentForm">
