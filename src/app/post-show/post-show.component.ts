@@ -5,6 +5,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../services/user.service';
 import {AlertService} from '../services/alert.service';
 import {User} from '../models/user';
+import {Comment} from '../models/comment';
+import {CommentService} from '../services/comment.service';
 
 @Component({
   selector: 'app-post-show',
@@ -15,10 +17,12 @@ export class PostShowComponent implements OnInit, AfterViewInit {
 
   post: Post;
   isOwnPost: boolean;
+  comments: Comment[];
 
   constructor(
     private postSvc: PostService,
     public userSvc: UserService,
+    private commentSvc: CommentService,
     private route: ActivatedRoute,
     private router: Router,
     private alertSvc: AlertService) {
@@ -26,6 +30,7 @@ export class PostShowComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.getPost();
+    this.getComments();
   }
 
   ngAfterViewInit() {
@@ -36,14 +41,19 @@ export class PostShowComponent implements OnInit, AfterViewInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.postSvc.getPost(id).subscribe(post => {
       this.post = post;
-      console.log(post);
       this.isOwnPost = this.userSvc.loggedInUser.id === this.post.user.id;
+    });
+  }
+
+  getComments() {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.commentSvc.getCommentsByPost(id).subscribe(response => {
+      this.comments = response;
     });
   }
 
   deletePost(id: number) {
     this.postSvc.deletePost(id).subscribe(response => {
-      console.log(response);
       // if (response === null) {
       this.router.navigate(['/']);
       this.alertSvc.success('Post Deleted!');

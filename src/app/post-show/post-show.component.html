@@ -40,8 +40,10 @@
   </div>
 
   <div>
-    <app-comment-create></app-comment-create>
-    <!--<app-comments></app-comments>-->
+    <app-comment-create [post]="post" [user]="userSvc.loggedInUser"></app-comment-create>
+  </div>
+  <div *ngFor="let comment of comments" class="margin-top">
+    <app-comment [comment]="comment"></app-comment>
   </div>
 </div>
 
