@@ -1,11 +1,11 @@
-<div class="flex-center" *ngIf="loggedInUser == null">
+<div class="flex-center" *ngIf="user == null">
   <div>You must be <span><a routerLink="/login">logged in</a></span> to join the discussion</div>
 </div>
 
 <mat-divider></mat-divider>
 
 
-<div class="margin-top" *ngIf="loggedInUser != null">
+<div class="margin-top margin-bottom-lg" *ngIf="user != null">
   <form (ngSubmit)="onSubmit()" [formGroup]="commentForm">
 
     <mat-form-field class="example-full-width" style="width: 100%;" hintLabel="">
@@ -20,3 +20,4 @@
     </div>
   </form>
 </div>
+<mat-spinner *ngIf="loading" [diameter]="30"></mat-spinner>
