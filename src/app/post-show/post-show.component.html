@@ -38,10 +38,11 @@
       </mat-menu>
     </span>
   </div>
-
+  
   <div>
     <app-comment-create [post]="post" [user]="userSvc.loggedInUser"></app-comment-create>
   </div>
+  <div>{{commentSvc.comments.length}} Comments</div>
   <div *ngFor="let comment of latestComments(commentSvc.comments)" class="margin-top">
     <app-comment [comment]="comment"></app-comment>
   </div>
