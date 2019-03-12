@@ -8,6 +8,7 @@
           <span class="flex">
             <mat-icon class="post-info-icon margin-left-xsm margin-right-xsm">thumb_up_alt</mat-icon>{{post.voteCount}}
             <mat-icon class="post-info-icon margin-left margin-right-xsm">remove_red_eye</mat-icon>{{post.voteCount}}
+            <mat-icon class="post-info-icon margin-left margin-right-xsm">forum</mat-icon>{{commentSvc.comments.length}}
           </span>
         </span>  <div [innerHTML]="post.htmlLeadImage" id="index-post-image">{{post.leadImage}}</div>
   <div class="post-show-body" [innerHTML]="post.htmlBody">{{post.body}}</div>
@@ -38,7 +39,7 @@
       </mat-menu>
     </span>
   </div>
-  
+
   <div>
     <app-comment-create [post]="post" [user]="userSvc.loggedInUser"></app-comment-create>
   </div>
