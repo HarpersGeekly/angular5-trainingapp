@@ -10,7 +10,7 @@ import {UserService} from '../services/user.service';
 })
 export class PostsIndexComponent implements OnInit, AfterViewInit {
   posts: Post[];
-  constructor(private postSvc: PostService, private userSvc: UserService) {
+  constructor(private postSvc: PostService, protected userSvc: UserService) {
   }
 
   ngOnInit() {
