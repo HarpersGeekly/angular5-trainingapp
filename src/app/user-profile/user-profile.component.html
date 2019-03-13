@@ -35,6 +35,7 @@
               <span class="flex">
                 <mat-icon class="post-info-icon margin-left-xsm margin-right-xsm">thumb_up_alt_sharp</mat-icon>{{post.voteCount}}
                 <mat-icon class="post-info-icon margin-left margin-right-xsm">remove_red_eye</mat-icon>{{post.voteCount}}
+                <mat-icon class="post-info-icon margin-left margin-right-xsm">forum</mat-icon>{{post.commentCount}}
               </span>
               <span>
                 <mat-icon [matMenuTriggerFor]="appMenu" *ngIf="isOwnProfile" class="cursor">more_horiz</mat-icon>
@@ -55,7 +56,7 @@
         </div>
     </mat-tab>
     <mat-tab label="Comments">
-        <div *ngIf="comments?.length == 0">Posts are empty.>A list of comments the user has made will go here. Seen by everyone.</div>
+        <div *ngIf="comments?.length == 0">Comments are empty.>A list of comments the user has made will go here. Seen by everyone.</div>
     </mat-tab>
     <mat-tab label="Account Settings" *ngIf="isOwnProfile">
         <div class="container margin-top">
