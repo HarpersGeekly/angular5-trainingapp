@@ -16,4 +16,5 @@ export class Post {
   htmlLeadImage: string;
   voteCount: number;
   userVote: number;
+  commentCount: number;
 }
