@@ -8,7 +8,7 @@
           <span class="flex">
             <mat-icon class="post-info-icon margin-left-xsm margin-right-xsm">thumb_up_alt</mat-icon>{{post.voteCount}}
             <mat-icon class="post-info-icon margin-left margin-right-xsm">remove_red_eye</mat-icon>{{post.voteCount}}
-            <mat-icon class="post-info-icon margin-left margin-right-xsm">forum</mat-icon>{{post.commentCount}}
+            <mat-icon class="post-info-icon margin-left margin-right-xsm">forum</mat-icon>{{commentSvc.comments.length}}
           </span>
         </span>  <div [innerHTML]="post.htmlLeadImage" id="index-post-image">{{post.leadImage}}</div>
   <div class="post-show-body" [innerHTML]="post.htmlBody">{{post.body}}</div>
@@ -43,6 +43,7 @@
   <div>
     <app-comment-create [post]="post" [user]="userSvc.loggedInUser"></app-comment-create>
   </div>
+  <mat-divider></mat-divider>
   <div>{{commentSvc.comments.length}} Comments</div>
   <div *ngFor="let comment of latestComments(commentSvc.comments)" class="margin-top">
     <app-comment [comment]="comment"></app-comment>
