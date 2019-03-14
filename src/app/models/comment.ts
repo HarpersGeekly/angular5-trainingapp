@@ -11,4 +11,5 @@ export class Comment {
   hoursMinutes: string;
   formatDate: string;
   isParentComment: boolean;
+  userVote: number;
 }
