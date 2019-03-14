@@ -17,6 +17,7 @@ export class PostShowComponent implements OnInit, AfterViewInit {
 
   post: Post;
   isOwnPost: boolean;
+  loading: boolean;
 
   constructor(
     private postSvc: PostService,
@@ -37,8 +38,10 @@ export class PostShowComponent implements OnInit, AfterViewInit {
   }
 
   getPost() {
+    this.loading = true;
     const id = +this.route.snapshot.paramMap.get('id');
     this.postSvc.getPost(id).subscribe(post => {
+      this.loading = false;
       this.post = post;
       this.isOwnPost = this.userSvc.loggedInUser.id === this.post.user.id;
     });
