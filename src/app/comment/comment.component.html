@@ -1,5 +1,17 @@
 <div class="comment">
-  <span class="margin-right-sm">By:</span><span class="comment-username cursor margin-right" routerLink="/user/profile/{{comment.user?.id}}/{{comment.user?.username}}">{{comment.user?.username}}</span>
+  <span class="margin-right-sm">By:</span><span class="comment-username cursor margin-right" routerLink="/user/profile/{{comment.user.id}}/{{comment.user.username}}">{{comment.user.username}}</span>
   <span class="margin-right-sm">{{comment.hoursMinutes}}</span><span class="margin-right">{{comment.formatDate}}</span>
   <div>{{comment.body}}</div>
+
+  <div class="thumbs-wrapper" *ngIf="userSvc.loggedInUser == null">
+    <button mat-icon-button routerLink="/login" class="cursor margin-left-xsm margin-right-xsm"><mat-icon >thumb_up</mat-icon></button>
+    <span class="margin-left-xsm margin-right-xsm">{{comment.voteCount}}</span>
+    <button mat-icon-button routerLink="/login" class="cursor margin-left-xsm margin-right-xsm"><mat-icon>thumb_down</mat-icon></button>
+  </div>
+  <div class="thumbs-wrapper" *ngIf="userSvc.loggedInUser != null">
+    <button mat-icon-button class="cursor margin-left-xsm margin-right-xsm" (click)="commentVote(comment.id, userSvc.loggedInUser.id, 1)"><mat-icon [ngClass]="comment.userVote == 1 ? 'voteUpIconActive' : 'voteUpIcon'">thumb_up</mat-icon></button>
+    <span class="margin-left-xsm margin-right-xsm">{{comment.voteCount}}</span>
+    <button mat-icon-button class="cursor margin-left-xsm margin-right-xsm" (click)="commentVote(comment.id, userSvc.loggedInUser.id, -1)"><mat-icon [ngClass]="comment.userVote == -1 ? 'voteDownIconActive' : 'voteDownIcon'">thumb_down</mat-icon></button>
+  </div>
+
 </div>

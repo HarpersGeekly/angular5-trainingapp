@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Comment} from '../models/comment';
+import {UserService} from '../services/user.service';
 
 @Component({
   selector: 'app-comment',
@@ -9,7 +10,7 @@ import {Comment} from '../models/comment';
 export class CommentComponent implements OnInit {
 
   @Input() comment: Comment;
-  constructor() { }
+  constructor(public userSvc: UserService) { }
 
   ngOnInit() {
   }
