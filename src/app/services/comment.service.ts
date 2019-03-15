@@ -21,4 +21,8 @@ export class CommentService {
   create(comment: Comment) {
     return this.http.post<Comment>(this.commentUrl + '/saveComment', comment);
   }
+
+  delete(id: number) {
+    return this.http.delete(this.commentUrl + '/deleteComment/' + id);
+  }
 }
