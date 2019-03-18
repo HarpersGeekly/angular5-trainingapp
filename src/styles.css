@@ -33,10 +33,20 @@
 .editor-statusbar .words:before {
   content: 'words：' !important;
 }
+
+.center {
+  margin: 0 auto;
+}
+
 .flex-center {
   display:flex;
   justify-content: center;
   align-content: center;
+  align-items: center;
+}
+
+.flex-align {
+  display: flex;
   align-items: center;
 }
 
@@ -276,4 +286,8 @@ body {
   background-color: #d3d3d35c;
   border-radius: 10px;
   padding: 5px;
+}
+
+.commentDeleted {
+  opacity: 0.3;
 }
