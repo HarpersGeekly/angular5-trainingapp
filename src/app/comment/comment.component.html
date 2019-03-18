@@ -14,7 +14,7 @@
     <span class="margin-left-xsm margin-right-xsm">{{comment.voteCount}}</span>
     <button mat-icon-button class="cursor margin-left-xsm margin-right-xsm" (click)="commentVote(comment.id, userSvc.loggedInUser.id, -1)"><mat-icon [ngClass]="comment.userVote == -1 ? 'voteDownIconActive' : 'voteDownIcon'">thumb_down</mat-icon></button>
     <span class="margin-left">
-      <mat-icon [matMenuTriggerFor]="appMenu" *ngIf="isOwnComment && !hasBeenDeleted" class="cursor">more_horiz</mat-icon>
+      <mat-icon [matMenuTriggerFor]="appMenu" *ngIf="isOwnComment && !comment.hasBeenDeleted" class="cursor">more_horiz</mat-icon>
       <mat-menu #appMenu="matMenu">
         <button mat-menu-item [matMenuTriggerFor]="comment_remove" class="dropdown-delete-btn"><mat-icon>delete</mat-icon>delete?</button>
         <button mat-menu-item routerLink="/comment/edit/id/{{comment.id}}" class="dropdown-edit-btn"><mat-icon>edit</mat-icon>edit</button>
