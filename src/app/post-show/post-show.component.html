@@ -41,7 +41,13 @@
     </span>
   </div>
 
-  <div>
+  <div class="flex-center" *ngIf="userSvc.loggedInUser == null">
+    <div>You must be <span><a routerLink="/login">logged in</a></span> to make comments</div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="margin-top margin-bottom-lg" *ngIf="userSvc.loggedInUser != null">
     <app-comment-create [post]="post" [user]="userSvc.loggedInUser"></app-comment-create>
   </div>
   <mat-divider></mat-divider>
