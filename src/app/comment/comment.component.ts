@@ -13,6 +13,8 @@ export class CommentComponent implements OnInit {
 
   @Input() comment: any;
   isOwnComment: boolean;
+  showEditCommentForm = false;
+
   constructor(public commentSvc: CommentService, public userSvc: UserService, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
@@ -27,6 +29,15 @@ export class CommentComponent implements OnInit {
         panelClass: ['success-snackbar']
       });
     });
+  }
+
+  toggleEditCommentForm() {
+    this.showEditCommentForm = !this.showEditCommentForm;
+  }
+
+  cancelComment() {
+    this.showEditCommentForm = false;
+    // this.commentForm.reset({body: ''});
   }
 
 }
