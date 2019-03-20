@@ -6,6 +6,7 @@ import {Post} from '../models/post';
 import {PostService} from '../services/post.service';
 import {AlertService} from '../services/alert.service';
 import {MatDialog, MatSnackBar} from '@angular/material';
+import {CommentService} from '../services/comment.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -17,11 +18,13 @@ export class UserProfileComponent implements OnInit {
   user: User;
   isOwnProfile: boolean;
   posts: Post[];
+  userComments: any[];
   showEditUserForm = false;
 
   constructor(
     public userSvc: UserService,
     private postSvc: PostService,
+    private commentSvc: CommentService,
     private route: ActivatedRoute,
     private alertSvc: AlertService,
     public dialog: MatDialog,
@@ -30,6 +33,7 @@ export class UserProfileComponent implements OnInit {
   ngOnInit() {
     this.getUser();
     this.getPosts();
+    this.getComments();
   }
 
   getUser() {
@@ -50,6 +54,13 @@ export class UserProfileComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.postSvc.getPosts(id).subscribe(posts =>
       this.posts = posts);
+  }
+  getComments() {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.commentSvc.getCommentsByUser(id).subscribe(cmts => {
+      this.commentSvc.comments = cmts;
+      this.userComments = this.commentSvc.comments;
+    });
   }
 
   deletePost(id: number) {

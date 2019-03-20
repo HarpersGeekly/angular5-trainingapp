@@ -56,7 +56,10 @@
         </div>
     </mat-tab>
     <mat-tab label="Comments">
-        <div *ngIf="comments?.length == 0">Comments are empty.>A list of comments the user has made will go here. Seen by everyone.</div>
+      <div *ngIf="userComments?.length == 0">Comments are empty.</div>
+      <div *ngFor="let comment of userComments" class="margin-top">
+        <app-comment [comment]="comment"></app-comment>
+      </div>
     </mat-tab>
     <mat-tab label="Account Settings" *ngIf="isOwnProfile">
         <div class="container margin-top">
