@@ -12,6 +12,7 @@ import {MatSnackBar} from '@angular/material';
 export class CommentComponent implements OnInit {
 
   @Input() comment: any;
+  @Input() isCommentOnProfile: boolean;
   isOwnComment: boolean;
   showEditCommentForm = false;
 
