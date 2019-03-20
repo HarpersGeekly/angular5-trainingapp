@@ -58,7 +58,7 @@
     <mat-tab label="Comments">
       <div *ngIf="userComments?.length == 0">Comments are empty.</div>
       <div *ngFor="let comment of userComments" class="margin-top">
-        <app-comment [comment]="comment"></app-comment>
+        <app-comment [isCommentOnProfile]="isCommentOnProfile" [comment]="comment"></app-comment>
       </div>
     </mat-tab>
     <mat-tab label="Account Settings" *ngIf="isOwnProfile">

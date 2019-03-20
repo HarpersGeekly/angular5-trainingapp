@@ -17,6 +17,7 @@ export class UserProfileComponent implements OnInit {
 
   user: User;
   isOwnProfile: boolean;
+  isCommentOnProfile: boolean;
   posts: Post[];
   userComments: any[];
   showEditUserForm = false;
@@ -60,6 +61,7 @@ export class UserProfileComponent implements OnInit {
     this.commentSvc.getCommentsByUser(id).subscribe(cmts => {
       this.commentSvc.comments = cmts;
       this.userComments = this.commentSvc.comments;
+      this.isCommentOnProfile = true;
     });
   }
 
