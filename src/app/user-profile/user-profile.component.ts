@@ -62,6 +62,7 @@ export class UserProfileComponent implements OnInit {
       this.commentSvc.comments = cmts;
       this.userComments = this.commentSvc.comments;
       this.isCommentOnProfile = true;
+      console.log(cmts);
     });
   }
 

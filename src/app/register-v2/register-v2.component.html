@@ -1,0 +1,65 @@
+<div class="container col-md-6 col-md-offset-3">
+
+  <!--============ Reactive Form Example =============== (blur)="validateUsername(userRegistrationForm.get('username').value)" -->
+  <h2>Register</h2>
+<form [formGroup]="userRegistrationForm" (ngSubmit)="register()">
+  <!--(blur)="validateUsername(username.value)"-->
+
+
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Username" formControlName="username" required>
+      <mat-error *ngIf="username.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+
+  <span *ngIf="userRegistrationForm.invalid">
+    invalid.
+  </span>
+
+    <!--<mat-form-field class="example-full-width">-->
+  <!--<input matInput placeholder="Email address" type="email" formControlName="email" #email (blur)="validateEmail(email.value)">-->
+  <!--<mat-error>-->
+    <!--{{errors.email}}-->
+  <!--</mat-error>-->
+  <!--<mat-error *ngIf = "emailExists">-->
+    <!--This email already exists in our database-->
+  <!--</mat-error>-->
+<!--</mat-form-field>-->
+
+  <!--<mat-form-field class="example-full-width">-->
+    <!--<input matInput placeholder="Password" type="password" formControlName="password">-->
+    <!--<mat-error>-->
+      <!--{{errors.password}}-->
+    <!--</mat-error>-->
+  <!--</mat-form-field>-->
+
+  <!--<mat-form-field class="example-full-width">-->
+    <!--<input matInput placeholder="Confirm password" type="password" formControlName="confirmPassword" [errorStateMatcher]="confirmValidParentMatcher">-->
+    <!--<mat-error>-->
+      <!--{{errors.confirmPassword}}-->
+    <!--</mat-error>-->
+  <!--</mat-form-field>-->
+
+  <div class="form-group">
+    <button mat-raised-button [disabled]="userRegistrationForm.invalid">Register</button>
+    <mat-spinner *ngIf="loading" [diameter]="30"></mat-spinner>
+    <a [routerLink]="['/login']" class="btn btn-link">Cancel</a>
+  </div>
+
+</form>
+</div>
+
+<!--<mat-form-field class="example-full-width">-->
+<!--<input matInput id="username1" type="text" name="username" [(ngModel)]="user.username" #username="ngModel" placeholder="Username" minlength="2" maxlength="20" appUsernameValidator (focusout)="findByUsername(user.username)">-->
+<!--</mat-form-field>-->
+
+<!--<mat-error *ngIf="userExists" class="alert alert-danger">Sorry. That username is unavailable. Please choose a different username.</mat-error>-->
+
+<!--<mat-form-field class="example-full-width">-->
+<!--<input matInput id="email1" type="text" name="email" [(ngModel)]="user.email" #email="ngModel" placeholder="Email" maxlength="254" appEmailValidator (focusout)="findByEmail(user.email)">-->
+<!--</mat-form-field>-->
+<!--<mat-error *ngIf="emailExists" class="alert alert-danger">Sorry. That email is unavailable. Please choose a different email.</mat-error>-->
+
+<!--<mat-form-field class="example-full-width">-->
+<!--<input matInput id="password1" type="password" name="password" [(ngModel)]="user.password" #password="ngModel" placeholder="Password" [type]="hidePassword ? 'password' : 'text'" minlength="8" maxlength="100">-->
+<!--<mat-icon style="color: lightgray; cursor:pointer;" matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility' : 'visibility_off'}}</mat-icon>-->
+<!--</mat-form-field>-->

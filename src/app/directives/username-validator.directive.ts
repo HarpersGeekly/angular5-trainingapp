@@ -1,5 +1,5 @@
 import { Directive } from '@angular/core';
-import { NG_VALIDATORS, Validator, AbstractControl } from '@angular/forms';
+import {NG_VALIDATORS, Validator, AbstractControl, FormControl} from '@angular/forms';
 
 @Directive({
   selector: '[appUsernameValidator]',
@@ -14,5 +14,6 @@ export class UsernameValidatorDirective implements Validator {
     const valid = usernameRegEx.test(control.value);
     return control.value < 1 || valid ? null : {'appUsernameValidator': true};
   }
+
 
 }

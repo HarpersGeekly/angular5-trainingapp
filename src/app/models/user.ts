@@ -7,4 +7,5 @@ export class User {
   date: Date;
   formatDate: string;
   token: string;
+  profilePicture: string;
 }

@@ -65,6 +65,7 @@ import {ImageCropperModule} from 'ngx-image-cropper';
 import { RegisterV2Component } from './register-v2/register-v2.component';
 import { CustomValidatorsDirective } from './directives/custom-validators.directive';
 import { UniqueUsernameValidatorDirective } from './directives/unique-username-validator.directive';
+import { CommentComponent } from './comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import { UniqueUsernameValidatorDirective } from './directives/unique-username-v
     CustomValidatorsDirective,
     UniqueUsernameValidatorDirective,
     CommentCreateComponent,
+    CommentComponent,
   ],
   imports: [
     BrowserModule,
