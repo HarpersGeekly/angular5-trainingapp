@@ -1,92 +1,93 @@
 <mat-toolbar color="primary">
-  <mat-toolbar-row >
+  <mat-toolbar-row>
     <span class="brand-name" routerLink="/">Angular-5 trainingapp</span>
 
-    <ng-container *ngIf="userSvc.loggedInUser == null">
-      <span class="toolbar-spacer" ></span>
-      <mat-icon class="toolbar-icon">assignment_ind</mat-icon><span routerLink="/register" class="nav-link">Register</span>
-      <mat-icon class="toolbar-icon">delete</mat-icon><span routerLink="/login" class="nav-link">Login</span>
+    <ng-container *ngIf="authSvc.loggedInUserValue == null">
+      <span class="toolbar-spacer"></span>
+      <mat-icon class="toolbar-icon">assignment_ind</mat-icon>
+      <span routerLink="/register" class="nav-link">Register</span>
+      <mat-icon class="toolbar-icon">delete</mat-icon>
+      <span routerLink="/login" class="nav-link">Login</span>
     </ng-container>
-    <ng-container *ngIf="userSvc.loggedInUser != null">
-      <span class="toolbar-spacer" ></span>
-      <mat-icon class="toolbar-icon">forum</mat-icon><span routerLink="/post/create" class="nav-link">Create Post</span>
-      <mat-icon class="toolbar-icon">account_circle</mat-icon><span routerLink="/user/my-profile/{{userSvc.loggedInUser.id}}/{{userSvc.loggedInUser.username}}" class="nav-link">My Profile</span>
-      <mat-icon class="toolbar-icon">exit_to_app</mat-icon><span (click)="logout()" class="nav-link">Logout</span>
+    <ng-container *ngIf="authSvc.loggedInUserValue != null">
+      <span class="toolbar-spacer"></span>
+      <mat-icon class="toolbar-icon">forum</mat-icon>
+      <span routerLink="/post/create" class="nav-link">Create Post</span>
+      <mat-icon class="toolbar-icon">account_circle</mat-icon>
+      <span routerLink="/user/my-profile/{{authSvc.loggedInUserValue.id}}/{{authSvc.loggedInUserValue.username}}"
+            class="nav-link">My Profile</span> <!-- CHANGED ^^ FROM userSvc.loggedInUser.id & username -->
+      <mat-icon class="toolbar-icon">exit_to_app</mat-icon>
+      <span (click)="logout()" class="nav-link">Logout</span>
     </ng-container>
   </mat-toolbar-row>
 </mat-toolbar>
 
 
-
-
-
-
-
 <!--<mat-toolbar color="primary">-->
-  <!--<span class="fill-remaining-space">-->
-    <!--<button mat-icon-button [matMenuTriggerFor]="menu">-->
-      <!--<mat-icon>menu</mat-icon>-->
-    <!--</button>-->
-    <!--<mat-menu #menu="matMenu" [overlapTrigger]="false">-->
-      <!--<ng-container *ngIf="userSvc.loggedInUser == null">-->
-      <!--<button mat-menu-item>-->
-        <!--<mat-icon>home</mat-icon>-->
-        <!--<span routerLink="/register">Register</span>-->
-      <!--</button>-->
-      <!--</ng-container>-->
-      <!--<button mat-menu-item>-->
-        <!--<mat-icon>people_outline</mat-icon>-->
-        <!--<span>Connecting</span>-->
-      <!--</button>-->
-      <!--<button mat-menu-item>-->
-        <!--<mat-icon>videocam</mat-icon>-->
-        <!--<span>Let's talk</span>-->
-      <!--</button>-->
-      <!--<button mat-menu-item>-->
-        <!--<mat-icon>exit_to_app</mat-icon>-->
-        <!--<span>Logout</span>-->
-      <!--</button>-->
-    <!--</mat-menu>-->
-  <!--</span>-->
-  <!--<span class="fill-remaining-space">Application Title</span>-->
+<!--<span class="fill-remaining-space">-->
+<!--<button mat-icon-button [matMenuTriggerFor]="menu">-->
+<!--<mat-icon>menu</mat-icon>-->
+<!--</button>-->
+<!--<mat-menu #menu="matMenu" [overlapTrigger]="false">-->
+<!--<ng-container *ngIf="userSvc.loggedInUser == null">-->
+<!--<button mat-menu-item>-->
+<!--<mat-icon>home</mat-icon>-->
+<!--<span routerLink="/register">Register</span>-->
+<!--</button>-->
+<!--</ng-container>-->
+<!--<button mat-menu-item>-->
+<!--<mat-icon>people_outline</mat-icon>-->
+<!--<span>Connecting</span>-->
+<!--</button>-->
+<!--<button mat-menu-item>-->
+<!--<mat-icon>videocam</mat-icon>-->
+<!--<span>Let's talk</span>-->
+<!--</button>-->
+<!--<button mat-menu-item>-->
+<!--<mat-icon>exit_to_app</mat-icon>-->
+<!--<span>Logout</span>-->
+<!--</button>-->
+<!--</mat-menu>-->
+<!--</span>-->
+<!--<span class="fill-remaining-space">Application Title</span>-->
 <!--</mat-toolbar>-->
 
 
 <!--<nav class="navbar navbar-expand-lg navbar-light margin-bottom">-->
-  <!--<a class="navbar-brand" routerLink="">Angular 5 trainingapp</a>-->
-  <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
-    <!--<span class="navbar-toggler-icon"></span>-->
-  <!--</button>-->
+<!--<a class="navbar-brand" routerLink="">Angular 5 trainingapp</a>-->
+<!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--<span class="navbar-toggler-icon"></span>-->
+<!--</button>-->
 
-  <!--<div class="collapse navbar-collapse" id="navbarSupportedContent">-->
-    <!--<ul class="navbar-nav ml-auto">-->
+<!--<div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+<!--<ul class="navbar-nav ml-auto">-->
 
-      <!--&lt;!&ndash;<li>&ndash;&gt;-->
-        <!--&lt;!&ndash;<form class="form-inline my-2 my-lg-0">&ndash;&gt;-->
-          <!--&lt;!&ndash;<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">&ndash;&gt;-->
-          <!--&lt;!&ndash;<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>&ndash;&gt;-->
-        <!--&lt;!&ndash;</form>&ndash;&gt;-->
-      <!--&lt;!&ndash;</li>&ndash;&gt;-->
+<!--&lt;!&ndash;<li>&ndash;&gt;-->
+<!--&lt;!&ndash;<form class="form-inline my-2 my-lg-0">&ndash;&gt;-->
+<!--&lt;!&ndash;<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">&ndash;&gt;-->
+<!--&lt;!&ndash;<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>&ndash;&gt;-->
+<!--&lt;!&ndash;</form>&ndash;&gt;-->
+<!--&lt;!&ndash;</li>&ndash;&gt;-->
 
-      <!--&lt;!&ndash;<div *ngIf="condition; then thenBlock else elseBlock"></div>&ndash;&gt;-->
-      <!--&lt;!&ndash;<ng-template #thenBlock>Content to render when condition is true.</ng-template>&ndash;&gt;-->
-      <!--&lt;!&ndash;<ng-template #elseBlock>Content to render when condition is false.</ng-template>&ndash;&gt;-->
+<!--&lt;!&ndash;<div *ngIf="condition; then thenBlock else elseBlock"></div>&ndash;&gt;-->
+<!--&lt;!&ndash;<ng-template #thenBlock>Content to render when condition is true.</ng-template>&ndash;&gt;-->
+<!--&lt;!&ndash;<ng-template #elseBlock>Content to render when condition is false.</ng-template>&ndash;&gt;-->
 
-      <!--&lt;!&ndash;<span *ngIf>&ndash;&gt;-->
-        <!--&lt;!&ndash;if user is NOT logged in&ndash;&gt;-->
-      <!--<ng-container *ngIf="userSvc.loggedInUser == null">-->
-        <!--<li class="nav-item"><a routerLink="/register" class="nav-link">Register</a></li>-->
-        <!--<li class="nav-item"><a routerLink="/login" class="nav-link">Login</a></li>-->
-      <!--</ng-container>-->
-      <!--&lt;!&ndash;use a popover&ndash;&gt;-->
-      <!--&lt;!&ndash;</span>&ndash;&gt;-->
+<!--&lt;!&ndash;<span *ngIf>&ndash;&gt;-->
+<!--&lt;!&ndash;if user is NOT logged in&ndash;&gt;-->
+<!--<ng-container *ngIf="userSvc.loggedInUser == null">-->
+<!--<li class="nav-item"><a routerLink="/register" class="nav-link">Register</a></li>-->
+<!--<li class="nav-item"><a routerLink="/login" class="nav-link">Login</a></li>-->
+<!--</ng-container>-->
+<!--&lt;!&ndash;use a popover&ndash;&gt;-->
+<!--&lt;!&ndash;</span>&ndash;&gt;-->
 
-      <!--&lt;!&ndash;if user IS logged in&ndash;&gt;-->
-      <!--<ng-container *ngIf="userSvc.loggedInUser != null">-->
-        <!--<li class="nav-item"><a routerLink="/post/create" class="nav-link">Create Post</a></li>-->
-        <!--<li class="nav-item"><a routerLink="/user/my-profile/{{userSvc.loggedInUser.id}}/{{userSvc.loggedInUser.username}}" class="nav-link">My Profile</a></li>-->
-        <!--<li class="nav-item nav-link" style="cursor: pointer" (click)="logout()">Logout</li>-->
-      <!--</ng-container>-->
-    <!--</ul>-->
-  <!--</div>-->
+<!--&lt;!&ndash;if user IS logged in&ndash;&gt;-->
+<!--<ng-container *ngIf="userSvc.loggedInUser != null">-->
+<!--<li class="nav-item"><a routerLink="/post/create" class="nav-link">Create Post</a></li>-->
+<!--<li class="nav-item"><a routerLink="/user/my-profile/{{userSvc.loggedInUser.id}}/{{userSvc.loggedInUser.username}}" class="nav-link">My Profile</a></li>-->
+<!--<li class="nav-item nav-link" style="cursor: pointer" (click)="logout()">Logout</li>-->
+<!--</ng-container>-->
+<!--</ul>-->
+<!--</div>-->
 <!--</nav>-->

@@ -39,7 +39,7 @@
 }
 
 .flex-center {
-  display:flex;
+  display: flex;
   justify-content: center;
   align-content: center;
   align-items: center;
@@ -53,6 +53,7 @@
 .flex {
   display: flex;
 }
+
 .flex1 {
   flex: 1;
 }
@@ -114,18 +115,19 @@ body {
 }
 
 /*.navbar {*/
-  /*background-color: var(--main-bg-color) !important;*/
+/*background-color: var(--main-bg-color) !important;*/
 /*}*/
 
 /*.nav-tabs .nav-link.active {*/
-  /*background-color: var(--main-bg-color) !important;*/
-  /*border-color: #dee2e6 #dee2e6 var(--main-bg-color);*/
+/*background-color: var(--main-bg-color) !important;*/
+/*border-color: #dee2e6 #dee2e6 var(--main-bg-color);*/
 /*}*/
 
 
 .CodeMirror-scroll {
   max-height: 300px;
 }
+
 .CodeMirror-fullscreen.CodeMirror {
   max-height: none;
 }
@@ -149,11 +151,11 @@ body {
 }
 
 #profile-post-image > p > img {
-  max-width:300px;
+  max-width: 300px;
 }
 
 #index-post-image > p > img {
-  max-width:600px;
+  max-width: 600px;
 }
 
 #post-wrapper-show-page {
@@ -164,15 +166,19 @@ body {
 .voteUpIcon, .voteDownIcon {
   color: #8c8c8c;
 }
+
 .voteUpIconActive, .voteUpIcon:hover {
   color: #5bc0de;
 }
+
 .voteUpIconActive:hover {
   color: #1b6d85;
 }
+
 .voteDownIconActive, .voteDownIcon:hover {
   color: #ce8483;
 }
+
 .voteDownIconActive:hover {
   color: #761c19;
 }
@@ -217,11 +223,11 @@ body {
 
 
 /*================= forms =============*/
-.ng-valid[required], .ng-valid.required  {
+.ng-valid[required], .ng-valid.required {
   border-left: 5px solid #42A948; /* green */
 }
 
-.ng-invalid:not(form)  {
+.ng-invalid:not(form) {
   border-left: 5px solid #a94442; /* red */
 }
 
@@ -266,9 +272,10 @@ body {
 .error-snackbar .mat-simple-snackbar-action {
   color: black !important;
 }
+
 /**:focus {*/
-  /*outline: none !important;*/
-  /*border: 0 !important;*/
+/*outline: none !important;*/
+/*border: 0 !important;*/
 /*}*/
 
 

@@ -4,26 +4,42 @@
   <h1 [innerHTML]="post.htmlTitle">{{post.title}}</h1>
   <h2 [innerHTML]="post.htmlSubtitle">{{post.subtitle}}</h2>
   <span class="flex post-info-wrapper">
-          <span class="margin-right-sm">By:</span><span class="post-username cursor margin-right" [routerLink]="['/user', 'profile', post.user.id, post.user.username]">{{post.user.username}}</span>
-          <span class="margin-right-sm">{{post.hoursMinutes}}</span><span class="margin-right">{{post.formatDate}}</span>
+          <span class="margin-right-sm">By:</span><span class="post-username cursor margin-right"
+                                                        [routerLink]="['/user', 'profile', post.user.id, post.user.username]">{{post.user.username}}</span>
+          <span class="margin-right-sm">{{post.hoursMinutes}}</span><span
+    class="margin-right">{{post.formatDate}}</span>
           <span class="flex">
-            <mat-icon class="post-info-icon margin-left-xsm margin-right-xsm">thumb_up_alt</mat-icon>{{post.voteCount}}
-            <mat-icon class="post-info-icon margin-left margin-right-xsm">remove_red_eye</mat-icon>{{post.voteCount}}
-            <mat-icon class="post-info-icon margin-left margin-right-xsm">forum</mat-icon>{{commentSvc.comments.length}}
+            <mat-icon class="post-info-icon margin-left-xsm margin-right-xsm">thumb_up_alt</mat-icon>
+            {{post.voteCount}}
+            <mat-icon class="post-info-icon margin-left margin-right-xsm">remove_red_eye</mat-icon>
+            {{post.voteCount}}
+            <mat-icon class="post-info-icon margin-left margin-right-xsm">forum</mat-icon>
+            {{commentSvc.comments.length}}
           </span>
-        </span>  <div [innerHTML]="post.htmlLeadImage" id="index-post-image">{{post.leadImage}}</div>
+        </span>
+  <div [innerHTML]="post.htmlLeadImage" id="index-post-image">{{post.leadImage}}</div>
   <div class="post-show-body" [innerHTML]="post.htmlBody">{{post.body}}</div>
 
   <div class="vote-options-row">
-    <div class="thumbs-wrapper flex-center" *ngIf="userSvc.loggedInUser == null">
-      <button mat-icon-button routerLink="/login" class="cursor margin-left-xsm margin-right-xsm"><mat-icon >thumb_up</mat-icon></button>
+    <div class="thumbs-wrapper flex-center" *ngIf="authSvc.loggedInUserValue == null">
+      <button mat-icon-button routerLink="/login" class="cursor margin-left-xsm margin-right-xsm">
+        <mat-icon>thumb_up</mat-icon>
+      </button>
       <span class="margin-left-xsm margin-right-xsm">{{post.voteCount}}</span>
-      <button mat-icon-button routerLink="/login" class="cursor margin-left-xsm margin-right-xsm"><mat-icon>thumb_down</mat-icon></button>
+      <button mat-icon-button routerLink="/login" class="cursor margin-left-xsm margin-right-xsm">
+        <mat-icon>thumb_down</mat-icon>
+      </button>
     </div>
-    <div class="thumbs-wrapper flex-center" *ngIf="userSvc.loggedInUser != null">
-      <button mat-icon-button class="cursor margin-left-xsm margin-right-xsm" (click)="postVote(post.id, userSvc.loggedInUser.id, 1)"><mat-icon [ngClass]="post.userVote == 1 ? 'voteUpIconActive' : 'voteUpIcon'">thumb_up</mat-icon></button>
+    <div class="thumbs-wrapper flex-center" *ngIf="authSvc.loggedInUserValue != null">
+      <button mat-icon-button class="cursor margin-left-xsm margin-right-xsm"
+              (click)="postVote(post.id, authSvc.loggedInUserValue.id, 1)">
+        <mat-icon [ngClass]="post.userVote == 1 ? 'voteUpIconActive' : 'voteUpIcon'">thumb_up</mat-icon>
+      </button>
       <span class="margin-left-xsm margin-right-xsm">{{post.voteCount}}</span>
-      <button mat-icon-button class="cursor margin-left-xsm margin-right-xsm" (click)="postVote(post.id, userSvc.loggedInUser.id, -1)"><mat-icon [ngClass]="post.userVote == -1 ? 'voteDownIconActive' : 'voteDownIcon'">thumb_down</mat-icon></button>
+      <button mat-icon-button class="cursor margin-left-xsm margin-right-xsm"
+              (click)="postVote(post.id, authSvc.loggedInUserValue.id, -1)">
+        <mat-icon [ngClass]="post.userVote == -1 ? 'voteDownIconActive' : 'voteDownIcon'">thumb_down</mat-icon>
+      </button>
     </div>
 
     <span>
@@ -41,12 +57,12 @@
     </span>
   </div>
 
-  <div class="flex-center" *ngIf="userSvc.loggedInUser == null">
+  <div class="flex-center" *ngIf="authSvc.loggedInUserValue == null">
     <div>You must be <span><a routerLink="/login">logged in</a></span> to make comments</div>
   </div>
 
-  <div class="margin-top margin-bottom-lg" *ngIf="userSvc.loggedInUser != null">
-    <app-comment-create [post]="post" [user]="userSvc.loggedInUser"></app-comment-create>
+  <div class="margin-top margin-bottom-lg" *ngIf="authSvc.loggedInUserValue != null">
+    <app-comment-create [post]="post" [user]="authSvc.loggedInUserValue"></app-comment-create>
   </div>
   <mat-divider></mat-divider>
   <div>{{commentSvc.comments.length}} Comments</div>

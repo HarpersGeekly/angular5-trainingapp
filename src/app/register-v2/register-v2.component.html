@@ -2,8 +2,8 @@
 
   <!--============ Reactive Form Example =============== (blur)="validateUsername(userRegistrationForm.get('username').value)" -->
   <h2>Register</h2>
-<form [formGroup]="userRegistrationForm" (ngSubmit)="register()">
-  <!--(blur)="validateUsername(username.value)"-->
+  <form [formGroup]="userRegistrationForm" (ngSubmit)="register()">
+    <!--(blur)="validateUsername(username.value)"-->
 
 
     <mat-form-field class="example-full-width">
@@ -11,41 +11,41 @@
       <mat-error *ngIf="username.invalid">{{getErrorMessage()}}</mat-error>
     </mat-form-field>
 
-  <span *ngIf="userRegistrationForm.invalid">
+    <span *ngIf="userRegistrationForm.invalid">
     invalid.
   </span>
 
     <!--<mat-form-field class="example-full-width">-->
-  <!--<input matInput placeholder="Email address" type="email" formControlName="email" #email (blur)="validateEmail(email.value)">-->
-  <!--<mat-error>-->
+    <!--<input matInput placeholder="Email address" type="email" formControlName="email" #email (blur)="validateEmail(email.value)">-->
+    <!--<mat-error>-->
     <!--{{errors.email}}-->
-  <!--</mat-error>-->
-  <!--<mat-error *ngIf = "emailExists">-->
+    <!--</mat-error>-->
+    <!--<mat-error *ngIf = "emailExists">-->
     <!--This email already exists in our database-->
-  <!--</mat-error>-->
-<!--</mat-form-field>-->
+    <!--</mat-error>-->
+    <!--</mat-form-field>-->
 
-  <!--<mat-form-field class="example-full-width">-->
+    <!--<mat-form-field class="example-full-width">-->
     <!--<input matInput placeholder="Password" type="password" formControlName="password">-->
     <!--<mat-error>-->
-      <!--{{errors.password}}-->
+    <!--{{errors.password}}-->
     <!--</mat-error>-->
-  <!--</mat-form-field>-->
+    <!--</mat-form-field>-->
 
-  <!--<mat-form-field class="example-full-width">-->
+    <!--<mat-form-field class="example-full-width">-->
     <!--<input matInput placeholder="Confirm password" type="password" formControlName="confirmPassword" [errorStateMatcher]="confirmValidParentMatcher">-->
     <!--<mat-error>-->
-      <!--{{errors.confirmPassword}}-->
+    <!--{{errors.confirmPassword}}-->
     <!--</mat-error>-->
-  <!--</mat-form-field>-->
+    <!--</mat-form-field>-->
 
-  <div class="form-group">
-    <button mat-raised-button [disabled]="userRegistrationForm.invalid">Register</button>
-    <mat-spinner *ngIf="loading" [diameter]="30"></mat-spinner>
-    <a [routerLink]="['/login']" class="btn btn-link">Cancel</a>
-  </div>
+    <div class="form-group">
+      <button mat-raised-button [disabled]="userRegistrationForm.invalid">Register</button>
+      <mat-spinner *ngIf="loading" [diameter]="30"></mat-spinner>
+      <a [routerLink]="['/login']" class="btn btn-link">Cancel</a>
+    </div>
 
-</form>
+  </form>
 </div>
 
 <!--<mat-form-field class="example-full-width">-->

@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ImageCropperComponent } from './image-cropper.component';
+import {ImageCropperComponent} from './image-cropper.component';
 
 describe('ImageCropperComponent', () => {
   let component: ImageCropperComponent;
@@ -8,9 +8,9 @@ describe('ImageCropperComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ImageCropperComponent ]
+      declarations: [ImageCropperComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

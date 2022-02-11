@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {Post} from '../models/post';
 import {PostVote} from '../models/postVote';
 import {UserService} from './user.service';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
 
 @Injectable()
@@ -16,7 +16,8 @@ export class PostService {
   vote: PostVote;
   userId: number;
 
-  constructor(private http: HttpClient, private userSvc: UserService) { }
+  constructor(private http: HttpClient, private userSvc: UserService) {
+  }
 
   getPosts(id: number): Observable<Post[]> {
     let url: string = this.postsUrl;
@@ -29,12 +30,12 @@ export class PostService {
   }
 
   getPost(id: number): Observable<Post> {
-    if (this.userSvc.loggedInUser != null) {
-      this.userId = this.userSvc.loggedInUser.id;
-      return this.http.get<Post>(this.postsUrl + '/postById/' + id + '?userId=' + this.userId.toString());
-    } else {
+    // if (this.userSvc.loggedInUser != null) {
+    //   this.userId = this.userSvc.loggedInUser.id;
+    //   return this.http.get<Post>(this.postsUrl + '/postById/' + id + '?userId=' + this.userId.toString());
+    // } else {
       return this.http.get<Post>(this.postsUrl + '/postById/' + id);
-    }
+    // }
   }
 
   createPost(post: Post) {
@@ -58,13 +59,6 @@ export class PostService {
     return this.http.post<Post>(this.postsUrl + '/removeVote/' + postId + '/' + userId, this.vote);
   }
 }
-
-
-
-
-
-
-
 
 
 //   {headers: httpOptions.headers, observe: 'response'}).subscribe(response => {

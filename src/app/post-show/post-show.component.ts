@@ -7,6 +7,8 @@ import {AlertService} from '../services/alert.service';
 import {User} from '../models/user';
 import {Comment} from '../models/comment';
 import {CommentService} from '../services/comment.service';
+import {PostVote} from "../models/postVote";
+import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'app-post-show',
@@ -16,12 +18,15 @@ import {CommentService} from '../services/comment.service';
 export class PostShowComponent implements OnInit, AfterViewInit {
 
   post: Post;
+  vote: PostVote;
+  hasVoted: boolean = false;
   isOwnPost: boolean;
   loading: boolean;
 
   constructor(
     private postSvc: PostService,
     protected userSvc: UserService,
+    protected authSvc: AuthService,
     protected commentSvc: CommentService,
     private route: ActivatedRoute,
     private router: Router,
@@ -43,7 +48,7 @@ export class PostShowComponent implements OnInit, AfterViewInit {
     this.postSvc.getPost(id).subscribe(post => {
       this.loading = false;
       this.post = post;
-      this.isOwnPost = this.userSvc.loggedInUser.id === this.post.user.id;
+      this.isOwnPost = this.authSvc.loggedInUserValue.id === this.post.user.id;
     });
   }
 
@@ -74,6 +79,8 @@ export class PostShowComponent implements OnInit, AfterViewInit {
   }
 
   postVote(postId: number, userId: number, type: number) {
+    console.log("post voting");
+    console.log("post:" + postId, "userid:" + userId, "type:"  + type);
     if (this.post.userVote === 0) {
       this.postSvc.postVote(postId, userId, type).subscribe(response => {
         this.post = response;

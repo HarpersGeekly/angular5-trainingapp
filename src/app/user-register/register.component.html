@@ -3,31 +3,39 @@
   <form name="form" (ngSubmit)="form.form.valid && register()" #form="ngForm" novalidate>
     <div class="form-group" [ngClass]="{ 'has-error': form.submitted && !username.valid }">
       <label for="username">Username</label>
-      <input id="username" type="text" class="form-control" name="username" [(ngModel)]="user.username" #username="ngModel" required minlength="2" maxlength="20" appUsernameValidator (focusout)="findByUsername(user.username)"/>
+      <input id="username" type="text" class="form-control" name="username" [(ngModel)]="user.username"
+             #username="ngModel" required minlength="2" maxlength="20" appUsernameValidator
+             (focusout)="findByUsername(user.username)"/>
       <div *ngIf="form.submitted && !username.valid" class="help-block alert alert-danger">Username is Required</div>
       <div *ngIf="username.errors && (username.dirty || username.touched)">
         <p *ngIf="username?.errors.minlength" class="alert alert-danger">Username must be between 2-20 characters</p>
-        <p *ngIf="username?.errors.appUsernameValidator" class="alert alert-danger">Username must be alphanumeric only</p>
+        <p *ngIf="username?.errors.appUsernameValidator" class="alert alert-danger">Username must be alphanumeric
+          only</p>
       </div>
-      <p *ngIf="userExists" class="alert alert-danger">Sorry. That username is unavailable. Please choose a different username.</p>
+      <p *ngIf="userExists" class="alert alert-danger">Sorry. That username is unavailable. Please choose a different
+        username.</p>
     </div>
 
     <div class="form-group" [ngClass]="{ 'has-error': form.submitted && !email.valid }">
       <label for="email">Email</label>
-      <input id="email" type="text" class="form-control" name="email" [(ngModel)]="user.email" #email="ngModel" required maxlength="254" appEmailValidator (focusout)="findByEmail(user.email)"/>
+      <input id="email" type="text" class="form-control" name="email" [(ngModel)]="user.email" #email="ngModel" required
+             maxlength="254" appEmailValidator (focusout)="findByEmail(user.email)"/>
       <div *ngIf="form.submitted && !email.valid" class="help-block alert alert-danger">Email is required</div>
       <div *ngIf="email.errors && (email.dirty)">
         <p *ngIf="email?.errors.appEmailValidator" class="help-block alert alert-danger">Email must be valid</p>
       </div>
-      <p *ngIf="emailExists" class="alert alert-danger">Sorry. That email is unavailable. Provide a different email address.</p>
+      <p *ngIf="emailExists" class="alert alert-danger">Sorry. That email is unavailable. Provide a different email
+        address.</p>
     </div>
 
     <div class="form-group" [ngClass]="{ 'has-error': form.submitted && !password.valid }">
       <label for="password">Password</label>
-      <input id="password" type="password" class="form-control" name="password" [(ngModel)]="user.password" #password="ngModel" required minlength="8" maxlength="100"/>
+      <input id="password" type="password" class="form-control" name="password" [(ngModel)]="user.password"
+             #password="ngModel" required minlength="8" maxlength="100"/>
       <div *ngIf="form.submitted && !password.valid" class="help-block alert alert-danger">Password is required</div>
       <div *ngIf="password.errors && (password.dirty || password.touched)">
-        <p *ngIf="password?.errors.minlength" class="help-block alert alert-danger">Password must be between 8-100 characters</p>
+        <p *ngIf="password?.errors.minlength" class="help-block alert alert-danger">Password must be between 8-100
+          characters</p>
       </div>
     </div>
 

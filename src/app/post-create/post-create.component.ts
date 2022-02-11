@@ -5,6 +5,7 @@ import {inspect} from 'util';
 import {UserService} from '../services/user.service';
 import {Router} from '@angular/router';
 import {AlertService} from '../services/alert.service';
+import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'app-post-create',
@@ -21,15 +22,19 @@ export class PostCreateComponent implements OnInit {
 
   ngOnInit() {
   }
+
   constructor(
     private postSvc: PostService,
-    private userSvc: UserService,
+    private authSvc: AuthService,
     private router: Router,
-    private alertSvc: AlertService) { }
+    private alertSvc: AlertService) {
+  }
 
   createPost() {
     this.loading = true;
-    this.post.user = this.userSvc.loggedInUser;
+    this.post.user = this.authSvc.loggedInUserValue;
+    this.post.commentCount = 0;
+    console.log(this.authSvc.loggedInUser);
     this.postSvc.createPost(this.post).toPromise().then(post => {
       console.log('success: ' + inspect(post));
       this.loading = false;

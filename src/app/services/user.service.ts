@@ -1,9 +1,11 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {User} from '../models/user';
+import {map} from "rxjs/operators";
+import {AuthService} from "./auth.service";
 
-const httpOptions =  {
+const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
 
@@ -11,20 +13,10 @@ const httpOptions =  {
 export class UserService {
 
   user: User;
-  loggedInUser: User;
 
   private usersUrl = '/api/user'; // URL to rest api, look at file: proxy.conf.json
 
-  constructor(private http: HttpClient) { }
-
-  login(user: User) {
-    return this.http.post<any>(this.usersUrl + '/authenticate', user);
-  }
-
-  logout() {
-    // remove user from local storage to log user out
-    localStorage.removeItem('currentUser');
-    this.loggedInUser = null;
+  constructor(private http: HttpClient, private authSvc: AuthService) {
   }
 
   register(user: User) {
@@ -48,8 +40,28 @@ export class UserService {
   }
 
   update(user: User): Observable<any> {
-    return this.http.put<any>(this.usersUrl + '/editUser', JSON.stringify(user), {headers: httpOptions.headers, observe: 'response'});
+    return this.http.put<any>(this.usersUrl + '/editUser', JSON.stringify(user), {
+      headers: httpOptions.headers,
+      observe: 'response'
+    }).pipe(map(x => {
+      // update stored user if the logged in user updated their own record
+      if (user.id == this.authSvc.loggedInUserValue.id) {
+        // update local storage
+        localStorage.setItem('user', JSON.stringify(user));
+
+        // publish updated user to subscribers
+        this.authSvc.getLoggedInUserSubject.next(user);
+      }
+      return x;
+    }));
   }
+
+  // update(user: User): Observable<any> {
+  //   return this.http.put<any>(this.usersUrl + '/editUser', JSON.stringify(user), {
+  //     headers: httpOptions.headers,
+  //     observe: 'response'
+  //   });
+  // }
 
   delete(id: number) {
     return this.http.delete(this.usersUrl + '/deleteUser/' + id);

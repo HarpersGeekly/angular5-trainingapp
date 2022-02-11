@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AlertService} from '../services/alert.service';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
@@ -14,11 +14,12 @@ export class AlertComponent implements OnInit {
   // It does this by subscribing to the alert service's getMessage() method which returns an Observable.
   message: any;
 
-  constructor(private alertService: AlertService) { }
+  constructor(private alertService: AlertService) {
+  }
 
   ngOnInit() {
-      this.alertService.getMessage().subscribe(message => {
-        this.message = message;
+    this.alertService.getMessage().subscribe(message => {
+      this.message = message;
     });
   }
 

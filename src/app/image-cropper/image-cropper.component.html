@@ -1,4 +1,4 @@
-<input type="file" (change)="fileChangeEvent($event)" />
+<input type="file" (change)="fileChangeEvent($event)"/>
 <button (click)="rotateLeft()">Rotate left</button>
 <button (click)="rotateRight()">Rotate right</button>
 <button (click)="flipHorizontal()">Flip horizontal</button>
@@ -22,4 +22,4 @@
     [style.display]="showCropper ? null : 'none'"
   ></image-cropper>
 </div>
-<img [src]="croppedImage" />
+<img [src]="croppedImage"/>

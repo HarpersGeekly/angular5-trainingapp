@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Post} from '../models/post';
 import {PostService} from '../services/post.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -13,7 +13,9 @@ import {AlertService} from '../services/alert.service';
 export class PostEditComponent implements OnInit {
   post: Post;
   loading = false;
-  constructor(private postSvc: PostService, private router: Router, private route: ActivatedRoute, private alertSvc: AlertService) { }
+
+  constructor(private postSvc: PostService, private router: Router, private route: ActivatedRoute, private alertSvc: AlertService) {
+  }
 
   ngOnInit() {
     this.getPost();

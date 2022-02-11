@@ -5,7 +5,7 @@
 .mat-toolbar-row {
   background-color: var(--main-nav-background);
   color: var(--main-og-blue);
-  font-size:16px;
+  font-size: 16px;
   cursor: pointer;
   /*box-shadow: 0px 0px 20px darkgrey;*/
 }
@@ -19,7 +19,7 @@
 }
 
 .brand-name {
-  font-size:24px;
+  font-size: 24px;
   cursor: pointer;
 }
 

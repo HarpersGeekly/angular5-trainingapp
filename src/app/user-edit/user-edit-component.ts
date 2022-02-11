@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from '../services/user.service';
 import {UserProfileComponent} from '../user-profile/user-profile.component';
 import {User} from '../models/user';
 import {Router} from '@angular/router';
 import {AlertService} from '../services/alert.service';
+import {AuthService} from "../services/auth.service";
+import {pipe} from "rxjs";
+import {first} from "rxjs/operators";
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-user-edit',
@@ -13,9 +17,13 @@ import {AlertService} from '../services/alert.service';
 export class UserEditComponent implements OnInit {
   constructor(
     public userSvc: UserService,
+    public authSvc: AuthService,
     private userComponent: UserProfileComponent,
     private router: Router,
-    private alertService: AlertService) { }
+    private alertService: AlertService,
+    private snackBar: MatSnackBar) {
+  }
+
   userOnForm = new User();
   foundUser: User;
   userExists = false;
@@ -26,7 +34,7 @@ export class UserEditComponent implements OnInit {
   loadingBio = false;
 
   ngOnInit() {
-    this.userSvc.loggedInUser = this.userSvc.user;
+    //this.userSvc.user = this.userSvc.user;
     this.loading = false;
   }
 
@@ -43,7 +51,7 @@ export class UserEditComponent implements OnInit {
   }
 
   onChange(value, type) {
-      this.userOnForm[type] = value;
+    this.userOnForm[type] = value;
   }
 
   findByUsernameAndUpdate(username) {
@@ -95,26 +103,46 @@ export class UserEditComponent implements OnInit {
     this.updateUser(this.userOnForm);
   }
 
+  // updateUser(user: User) {
+  //   this.authSvc.update(user).subscribe(response => {
+  //     // is this overkill? setting the response to THREE users?
+  //     this.userSvc.user = response.body,
+  //     this.authSvc.loggedInUser = response.body,
+  //     this.userComponent.user = response.body;
+  //     this.alertService.success('Profile Updated!');
+  //     this.userComponent.showEditUserForm = false;
+  //     this.loading = false;
+  //   }, () => {
+  //     this.loading = false;
+  //     this.alertService.error('Sorry. There was an error when updating your account');
+  //   });
+  // }
+
   updateUser(user: User) {
-    this.userSvc.update(user).subscribe(response => {
-      // TODO is this overkill? setting the response to THREE users?
-      this.userSvc.user = response.body;
-      this.userSvc.loggedInUser = response.body;
-      this.userComponent.user = response.body;
-      this.alertService.success('Profile Updated!');
-      this.userComponent.showEditUserForm = false;
-      this.loading = false;
-    }, () => {
-      this.loading = false;
-      this.alertService.error('Sorry. There was an error when updating your account');
-    });
+    this.userSvc.update(user)
+      .pipe(first())
+      .subscribe({
+        next: () => {
+          this.loading = false;
+          //this.alertService.success('Profile Updated!');
+          this.snackBar.open('Profile Updated!', '', {
+            duration: 5000,
+            panelClass: ['success-snackbar']
+          });
+          this.userComponent.showEditUserForm = false;
+        },
+        error: error => {
+          this.alertService.error('Sorry. There was an error when updating your account');
+          this.loading = false;
+        }
+      });
   }
 
   deleteUser(id: number) {
     this.loading = true;
     this.userSvc.delete(id).subscribe(response => {
       this.loading = false;
-      this.userSvc.logout();
+      this.authSvc.logout();
       this.router.navigate(['/', 'register', {success: true}]);
       this.alertService.success('Sorry to see you go! This account has been deleted and removed from our database', true);
     }, () => {

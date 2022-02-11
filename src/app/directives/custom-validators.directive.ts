@@ -1,6 +1,6 @@
 import {Directive, Injectable} from '@angular/core';
 import {FormGroup, FormControl, FormGroupDirective, NgForm, ValidatorFn, AbstractControl} from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material';
+import {ErrorStateMatcher} from '@angular/material';
 import {UserService} from '../services/user.service';
 import {HttpErrorResponse} from '@angular/common/http';
 
@@ -11,7 +11,8 @@ import {HttpErrorResponse} from '@angular/common/http';
   selector: '[appCustomValidators]'
 })
 export class CustomValidatorsDirective {
-  constructor(public userSvc: UserService) {}
+  constructor(public userSvc: UserService) {
+  }
 
   /**
    * Validates that child controls in the form group are equal
@@ -19,7 +20,7 @@ export class CustomValidatorsDirective {
   static childrenEqual: ValidatorFn = (formGroup: FormGroup) => {
     const [firstControlName, ...otherControlNames] = Object.keys(formGroup.controls || {});
     const isValid = otherControlNames.every(controlName => formGroup.get(controlName).value === formGroup.get(firstControlName).value);
-    return isValid ? null : { childrenNotEqual: true };
+    return isValid ? null : {childrenNotEqual: true};
   }
 }
 

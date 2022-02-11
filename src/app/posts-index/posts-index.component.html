@@ -15,16 +15,23 @@
         </a>
         <h4 class="post-subtitle" [innerHTML]="post.htmlSubtitle">{{post.subtitle}}</h4>
         <span class="flex post-info-wrapper">
-          <span class="margin-right-sm">By:</span><span class="post-username margin-right" routerLink="/user/profile/{{post.user.id}}/{{post.user.username}}">{{post.user.username}}</span>
-          <span class="margin-right-sm">{{post.hoursMinutes}}</span><span class="margin-right">{{post.formatDate}}</span>
+          <span class="margin-right-sm">By:</span><span class="post-username margin-right"
+                                                        routerLink="/user/profile/{{post.user.id}}/{{post.user.username}}">{{post.user.username}}</span>
+          <span class="margin-right-sm">{{post.hoursMinutes}}</span><span
+          class="margin-right">{{post.formatDate}}</span>
           <!--<i class="fa fa-thumbs-up margin-right-lt"></i>{{post.voteCount}}-->
           <span class="flex">
-            <mat-icon class="post-info-icon margin-left-xsm margin-right-xsm">thumb_up_alt</mat-icon>{{post.voteCount}}
-            <mat-icon class="post-info-icon margin-left margin-right-xsm">remove_red_eye</mat-icon>{{post.voteCount}}
-            <mat-icon class="post-info-icon margin-left margin-right-xsm">forum</mat-icon>{{post.commentCount}}
+            <mat-icon class="post-info-icon margin-left-xsm margin-right-xsm">thumb_up_alt</mat-icon>
+            {{post.voteCount}}
+            <mat-icon class="post-info-icon margin-left margin-right-xsm">remove_red_eye</mat-icon>
+            {{post.voteCount}}
+            <mat-icon class="post-info-icon margin-left margin-right-xsm">forum</mat-icon>
+            {{post.commentCount}}
           </span>
         </span>
-        <a routerLink="/post/{{post.id}}/{{post.title}}"><div [innerHTML]="post.htmlLeadImage" id="index-post-image">{{post.leadImage}}</div></a>
+        <a routerLink="/post/{{post.id}}/{{post.title}}">
+          <div [innerHTML]="post.htmlLeadImage" id="index-post-image">{{post.leadImage}}</div>
+        </a>
       </div>
     </div>
   </div>

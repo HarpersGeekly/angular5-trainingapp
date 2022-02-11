@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   AbstractControl,
   AsyncValidatorFn,
@@ -10,7 +10,12 @@ import {
   ValidatorFn,
   Validators
 } from '@angular/forms';
-import {ConfirmValidParentMatcher, CustomValidatorsDirective, errorMessages, regExps} from '../directives/custom-validators.directive';
+import {
+  ConfirmValidParentMatcher,
+  CustomValidatorsDirective,
+  errorMessages,
+  regExps
+} from '../directives/custom-validators.directive';
 import {UserService} from '../services/user.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {uniqueUsernameValidator} from '../directives/unique-username-validator.directive';
@@ -45,6 +50,7 @@ export class RegisterV2Component {
       });
     };
   }
+
   // private validateUsername(control: AbstractControl) {
   //   return this.userSvc.findByUsername(control.value)
   //     .subscribe(res => {
@@ -87,10 +93,10 @@ export class RegisterV2Component {
   getErrorMessage() {
     return this.userRegistrationForm.controls['username'].hasError('required') ? 'Username is required' :
       this.userRegistrationForm.controls['username'].hasError('pattern') ? 'Username must be alphanumeric' :
-      this.userRegistrationForm.controls['username'].hasError('maxLength') ? 'Required length is at most 20 characters' :
-        this.userRegistrationForm.controls['username'].hasError('minLength') ? 'Required length is at least 2 characters' :
-        this.userRegistrationForm.controls['username'].hasError('alreadyExist') ? 'That user already exists' :
-          '';
+        this.userRegistrationForm.controls['username'].hasError('maxLength') ? 'Required length is at most 20 characters' :
+          this.userRegistrationForm.controls['username'].hasError('minLength') ? 'Required length is at least 2 characters' :
+            this.userRegistrationForm.controls['username'].hasError('alreadyExist') ? 'That user already exists' :
+              '';
   }
 
   register() {
@@ -100,19 +106,21 @@ export class RegisterV2Component {
   get username() {
     return this.userRegistrationForm.get('username');
   }
+
   get email() {
     return this.userRegistrationForm.get('email');
   }
+
   createForm() {
     this.userRegistrationForm = this.formBuilder.group({
       username: ['',
         [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(20),
-        Validators.pattern(/(?=^.{3,20}$)^[a-zA-Z][a-zA-Z0-9 ]*[._-]?[a-zA-Z0-9 ]+$/i)],
-          [this.uniqueUsernameValidator(this.userSvc)] // async validator
-    ],
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(20),
+          Validators.pattern(/(?=^.{3,20}$)^[a-zA-Z][a-zA-Z0-9 ]*[._-]?[a-zA-Z0-9 ]+$/i)],
+        [this.uniqueUsernameValidator(this.userSvc)] // async validator
+      ],
       email: ['', [
         Validators.required,
         Validators.email,
@@ -123,7 +131,7 @@ export class RegisterV2Component {
         Validators.pattern(regExps.password)
       ]],
       confirmPassword: ['', Validators.required]
-    }, { validator: CustomValidatorsDirective.childrenEqual});
+    }, {validator: CustomValidatorsDirective.childrenEqual});
   }
 }
 
@@ -131,12 +139,12 @@ export class RegisterV2Component {
 // public usernameIsTaken() {
 //   this.usernameExists = true;  // Var is bound to html conditional.
 
-  // Remove the already in database message after some time.
-  // setTimeout (() => {
-  //   this.usernameExists = false;
-  // }, 2000);
+// Remove the already in database message after some time.
+// setTimeout (() => {
+//   this.usernameExists = false;
+// }, 2000);
 
-  // Clear the field to reset validation and prepare for next attempt.
-  // this.userRegistrationForm.controls['username']
-  //   .setValue(null);
+// Clear the field to reset validation and prepare for next attempt.
+// this.userRegistrationForm.controls['username']
+//   .setValue(null);
 // }

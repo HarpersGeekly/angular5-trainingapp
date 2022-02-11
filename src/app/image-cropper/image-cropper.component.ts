@@ -19,29 +19,37 @@ export class ImageCropperComponent implements OnInit {
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;
   }
+
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = event.base64;
     console.log(event);
   }
+
   imageLoaded() {
     this.showCropper = true;
     console.log('Image loaded');
   }
+
   cropperReady() {
     console.log('Cropper ready');
   }
-  loadImageFailed () {
+
+  loadImageFailed() {
     console.log('Load failed');
   }
+
   rotateLeft() {
     this.imageCropper.rotateLeft();
   }
+
   rotateRight() {
     this.imageCropper.rotateRight();
   }
+
   flipHorizontal() {
     this.imageCropper.flipHorizontal();
   }
+
   flipVertical() {
     this.imageCropper.flipVertical();
   }

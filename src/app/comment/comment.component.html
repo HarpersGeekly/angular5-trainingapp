@@ -1,7 +1,9 @@
 <div *ngIf="!isCommentOnProfile" class="comment" [ngClass]="comment.hasBeenDeleted == true ? 'commentDeleted' : ''">
   <div *ngIf="!showEditCommentForm">
-    <span class="margin-right-sm">By:</span><span class="comment-username cursor margin-right" routerLink="/user/profile/{{comment.user.id}}/{{comment.user.username}}">{{comment.user.username}}</span>
-    <span class="margin-right-sm">{{comment.hoursMinutes}}</span><span class="margin-right">{{comment.formatDate}}</span>
+    <span class="margin-right-sm">By:</span><span class="comment-username cursor margin-right"
+                                                  routerLink="/user/profile/{{comment.user.id}}/{{comment.user.username}}">{{comment.user.username}}</span>
+    <span class="margin-right-sm">{{comment.hoursMinutes}}</span><span
+    class="margin-right">{{comment.formatDate}}</span>
   </div>
   <div *ngIf="!showEditCommentForm">
     <div *ngIf="!comment.hasBeenDeleted">{{comment.body}}</div>
@@ -10,34 +12,50 @@
   <div *ngIf="showEditCommentForm">
     <!--<form (ngSubmit)="onSubmit()" [formGroup]="commentForm">-->
 
-      <mat-form-field class="example-full-width" style="width: 100%;" hintLabel="">
-        <textarea matInput autofocus matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=20 formControlName="body" maxlength="1500">{{comment.body}}</textarea>
-        <!--<mat-hint align="left">{{commentForm.controls['body'].value?.length || 0}}/1500</mat-hint>-->
-        <!--<mat-hint align="left">{{comment.body.length}}/1500</mat-hint>-->
-      </mat-form-field>
+    <mat-form-field class="example-full-width" style="width: 100%;" hintLabel="">
+      <textarea matInput autofocus matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=20 formControlName="body"
+                maxlength="1500">{{comment.body}}</textarea>
+      <!--<mat-hint align="left">{{commentForm.controls['body'].value?.length || 0}}/1500</mat-hint>-->
+      <!--<mat-hint align="left">{{comment.body.length}}/1500</mat-hint>-->
+    </mat-form-field>
 
-      <div class="float-rt">
-        <button mat-button (click)="cancelComment()">CANCEL</button>
-        <!--<button mat-flat-button type="submit" [disabled]="commentForm.pristine || commentForm.controls['body'].value.length < 1 || commentForm.controls['body'].value.length > 1500">SUBMIT</button>-->
-      </div>
+    <div class="float-rt">
+      <button mat-button (click)="cancelComment()">CANCEL</button>
+      <!--<button mat-flat-button type="submit" [disabled]="commentForm.pristine || commentForm.controls['body'].value.length < 1 || commentForm.controls['body'].value.length > 1500">SUBMIT</button>-->
+    </div>
     <!--</form>-->
   </div>
 
-  <div *ngIf="userSvc.loggedInUser == null" class="thumbs-wrapper" >
-    <button mat-icon-button routerLink="/login" class="cursor margin-left-xsm margin-right-xsm"><mat-icon>thumb_up</mat-icon></button>
+  <div *ngIf="authSvc.loggedInUser == null" class="thumbs-wrapper">
+    <button mat-icon-button routerLink="/login" class="cursor margin-left-xsm margin-right-xsm">
+      <mat-icon>thumb_up</mat-icon>
+    </button>
     <span class="margin-left-xsm margin-right-xsm">{{comment.voteCount}}</span>
-    <button mat-icon-button routerLink="/login" class="cursor margin-left-xsm margin-right-xsm"><mat-icon>thumb_down</mat-icon></button>
+    <button mat-icon-button routerLink="/login" class="cursor margin-left-xsm margin-right-xsm">
+      <mat-icon>thumb_down</mat-icon>
+    </button>
   </div>
-  <div *ngIf="userSvc.loggedInUser != null && !showEditCommentForm" class="flex-align" >
+  <div *ngIf="authSvc.loggedInUser != null && !showEditCommentForm" class="flex-align">
     <ng-container>
-      <button *ngIf="!comment.hasBeenDeleted" mat-icon-button class="cursor margin-left-xsm margin-right-xsm" (click)="commentVote(comment.id, userSvc.loggedInUser.id, 1)"><mat-icon [ngClass]="comment.userVote == 1 ? 'voteUpIconActive' : 'voteUpIcon'">thumb_up</mat-icon></button>
-      <button *ngIf="comment.hasBeenDeleted" mat-icon-button class="margin-left-xsm margin-right-xsm"><mat-icon>thumb_up</mat-icon></button>
+      <button *ngIf="!comment.hasBeenDeleted" mat-icon-button class="cursor margin-left-xsm margin-right-xsm"
+              (click)="commentVote(comment.id, authSvc.loggedInUserValue.id, 1)">
+        <mat-icon [ngClass]="comment.userVote == 1 ? 'voteUpIconActive' : 'voteUpIcon'">thumb_up</mat-icon>
+      </button>
+      <button *ngIf="comment.hasBeenDeleted" mat-icon-button class="margin-left-xsm margin-right-xsm">
+        <mat-icon>thumb_up</mat-icon>
+      </button>
       <span class="margin-left-xsm margin-right-xsm">{{comment.voteCount}}</span>
-      <button *ngIf="!comment.hasBeenDeleted" mat-icon-button class="cursor margin-left-xsm margin-right-xsm" (click)="commentVote(comment.id, userSvc.loggedInUser.id, -1)"><mat-icon [ngClass]="comment.userVote == -1 ? 'voteDownIconActive' : 'voteDownIcon'">thumb_down</mat-icon></button>
-      <button *ngIf="comment.hasBeenDeleted" mat-icon-button class="margin-left-xsm margin-right-xsm"><mat-icon>thumb_down</mat-icon></button>
+      <button *ngIf="!comment.hasBeenDeleted" mat-icon-button class="cursor margin-left-xsm margin-right-xsm"
+              (click)="commentVote(comment.id, authSvc.loggedInUserValue.id, -1)">
+        <mat-icon [ngClass]="comment.userVote == -1 ? 'voteDownIconActive' : 'voteDownIcon'">thumb_down</mat-icon>
+      </button>
+      <button *ngIf="comment.hasBeenDeleted" mat-icon-button class="margin-left-xsm margin-right-xsm">
+        <mat-icon>thumb_down</mat-icon>
+      </button>
     </ng-container>
     <span class="margin-left">
-      <mat-icon *ngIf="isOwnComment && !comment.hasBeenDeleted" [matMenuTriggerFor]="appMenu"  class="cursor">more_horiz</mat-icon>
+      <mat-icon *ngIf="isOwnComment && !comment.hasBeenDeleted" [matMenuTriggerFor]="appMenu"
+                class="cursor">more_horiz</mat-icon>
       <mat-menu #appMenu="matMenu">
         <button mat-menu-item [matMenuTriggerFor]="comment_remove" class="dropdown-delete-btn"><mat-icon>delete</mat-icon>delete?</button>
         <button mat-menu-item (click)="toggleEditCommentForm()" class="dropdown-edit-btn"><mat-icon>edit</mat-icon>edit</button>
@@ -59,7 +77,8 @@
   <div>{{comment.body}}</div>
   <mat-icon>thumb_up</mat-icon>
   <span class="margin-left">
-      <mat-icon *ngIf="isOwnComment && !comment.hasBeenDeleted" [matMenuTriggerFor]="appMenu"  class="cursor">more_horiz</mat-icon>
+      <mat-icon *ngIf="isOwnComment && !comment.hasBeenDeleted" [matMenuTriggerFor]="appMenu"
+                class="cursor">more_horiz</mat-icon>
       <mat-menu #appMenu="matMenu">
         <button mat-menu-item [matMenuTriggerFor]="comment_remove" class="dropdown-delete-btn"><mat-icon>delete</mat-icon>delete?</button>
         <button mat-menu-item (click)="toggleEditCommentForm()" class="dropdown-edit-btn"><mat-icon>edit</mat-icon>edit</button>

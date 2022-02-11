@@ -7,8 +7,10 @@
     <div class="form-group" [ngClass]="{ 'has-error': form.submitted && !title.valid }">
       <label for="title">Title:</label>
 
-      <simplemde id="title" type="text" name="title" [(ngModel)]="post.title" [options]="{ toolbar: ['bold', 'italic', '|', 'preview'] }" #title="ngModel" [ngModelOptions]="{standalone: true}" required minlength="5" maxlength="100"></simplemde>
-      <textarea class="hidden" name="title" [(ngModel)]="post.title" #title="ngModel" ></textarea>
+      <simplemde id="title" type="text" name="title" [(ngModel)]="post.title"
+                 [options]="{ toolbar: ['bold', 'italic', '|', 'preview'] }" #title="ngModel"
+                 [ngModelOptions]="{standalone: true}" required minlength="5" maxlength="100"></simplemde>
+      <textarea class="hidden" name="title" [(ngModel)]="post.title" #title="ngModel"></textarea>
 
       <div *ngIf="form.submitted && !title.valid" class="help-block alert alert-danger">Title is Required</div>
       <div *ngIf="title.errors && (title.dirty || title.touched)">
@@ -18,7 +20,9 @@
 
     <div class="form-group" [ngClass]="{ 'has-error': form.submitted && !subtitle.valid }">
       <label for="subtitle">Subtitle:</label>
-      <simplemde id="subtitle" type="text" name="subtitle" [(ngModel)]="post.subtitle" [options]="{ toolbar: ['bold', 'italic', '|', 'preview'] }" #subtitle="ngModel" [ngModelOptions]="{standalone: true}" required minlength="5" maxlength="200"></simplemde>
+      <simplemde id="subtitle" type="text" name="subtitle" [(ngModel)]="post.subtitle"
+                 [options]="{ toolbar: ['bold', 'italic', '|', 'preview'] }" #subtitle="ngModel"
+                 [ngModelOptions]="{standalone: true}" required minlength="5" maxlength="200"></simplemde>
       <textarea class="hidden" name="subtitle" [(ngModel)]="post.subtitle" #subtitle="ngModel"></textarea>
 
       <div *ngIf="form.submitted && !subtitle.valid" class="help-block alert alert-danger">Subtitle is required</div>
@@ -26,14 +30,17 @@
 
     <div class="form-group" [ngClass]="{ 'has-error': form.submitted && !leadImage.valid }">
       <label for="leadImage">Headline Lead Image:</label>
-      <simplemde id="leadImage" type="text" name="leadImage" [(ngModel)]="post.leadImage" [options]="{ toolbar: ['image', '|', 'preview'] }" #leadImage="ngModel" [ngModelOptions]="{standalone: true}"></simplemde>
+      <simplemde id="leadImage" type="text" name="leadImage" [(ngModel)]="post.leadImage"
+                 [options]="{ toolbar: ['image', '|', 'preview'] }" #leadImage="ngModel"
+                 [ngModelOptions]="{standalone: true}"></simplemde>
       <textarea class="hidden" name="leadImage" [(ngModel)]="post.leadImage" #leadImage="ngModel"></textarea>
 
     </div>
 
     <div class="form-group" [ngClass]="{ 'has-error': form.submitted && !body.valid }">
       <label for="body">Post Body:</label>
-      <simplemde id="body" type="text" name="body" [(ngModel)]="post.body" #body="ngModel" [ngModelOptions]="{standalone: true}" required minlength="5" maxlength="50000"></simplemde>
+      <simplemde id="body" type="text" name="body" [(ngModel)]="post.body" #body="ngModel"
+                 [ngModelOptions]="{standalone: true}" required minlength="5" maxlength="50000"></simplemde>
       <textarea class="hidden" name="body" [(ngModel)]="post.body" #body="ngModel"></textarea>
 
       <div *ngIf="form.submitted && !body.valid" class="help-block alert alert-danger">Body is required</div>
@@ -41,7 +48,8 @@
 
     <div class="form-group">
       <button [disabled]="loading" class="btn btn-primary">Create Post</button>
-      <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+      <img *ngIf="loading"
+           src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
       <!--<a [routerLink]="['/login']" class="btn btn-link">Cancel</a>-->
     </div>
     <app-alert></app-alert>

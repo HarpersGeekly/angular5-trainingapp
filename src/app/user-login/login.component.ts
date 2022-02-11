@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
 import {UserService} from '../services/user.service';
 import {MatSnackBar} from '@angular/material';
+import {AuthService} from "../services/auth.service";
 
 @Component({
   moduleId: module.id,
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private userService: UserService,
+    private authService: AuthService,
     private snackBar: MatSnackBar) {
   }
 
@@ -29,11 +30,18 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.loading = true;
-    this.userService.login(this.model).toPromise().then(response => {
+    console.log("login returning from backend");
+    console.log(this.model);
+    this.authService.login(this.model).toPromise().then(response => { //THIS IS USING THE AUTH SERVICE BUT CAN USE THE USER SERVICE: WIP
+      console.log("response" + JSON.stringify(response));
       if (response && response.token) {
-        localStorage.setItem('currentUser', JSON.stringify(response));
-        this.userService.loggedInUser = response;
-        this.router.navigate(['/user/profile/' + this.userService.loggedInUser.id + '/' + this.userService.loggedInUser.username]);
+        //localStorage.setItem('currentUser', JSON.stringify(response.token));
+        //sessionStorage.setItem('currentUser', JSON.stringify(response.token));
+        //this.userService.loggedInUser = response;
+        this.authService.loggedInUser = response;
+        //console.log(this.userService.loggedInUser);
+        //this.router.navigate(['/user/profile/' + this.userService.loggedInUser.id + '/' + this.userService.loggedInUser.username]);
+        this.router.navigate(['/user/profile/' + this.authService.loggedInUserValue.id + '/' + this.authService.loggedInUserValue.username]);
         this.snackBar.open('Login Successful!', '', {
           duration: 3000,
           panelClass: ['success-snackbar']
@@ -43,8 +51,8 @@ export class LoginComponent implements OnInit {
           duration: 3000,
           panelClass: ['error-snackbar']
         });
-          this.loading = false;
-        }
+        this.loading = false;
+      }
     });
   }
 }

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
 import {UserService} from '../services/user.service';
 import {AlertService} from '../services/alert.service';
 import {User} from '../models/user';
@@ -24,7 +24,8 @@ export class RegisterComponent {
     private router: Router,
     private userSvc: UserService,
     private alertService: AlertService,
-    private snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar) {
+  }
 
   register() {
     this.loading = true;
@@ -50,7 +51,7 @@ export class RegisterComponent {
   }
 
   findByUsername(username) {
-  this.userSvc.findByUsername(username).toPromise().then(response => {
+    this.userSvc.findByUsername(username).toPromise().then(response => {
       this.foundUser = response;
       if (this.foundUser == null || undefined) {
         this.userExists = false;
@@ -60,6 +61,7 @@ export class RegisterComponent {
       }
     });
   }
+
   findByEmail(email) {
     this.userSvc.findByEmail(email).toPromise().then(user => {
       this.foundEmailUser = user;

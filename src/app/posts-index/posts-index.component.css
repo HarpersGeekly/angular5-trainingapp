@@ -5,7 +5,7 @@
   transition: color 0.1s linear;
   -webkit-transition: color 0.1s linear;
   -moz-transition: color 0.1s linear;
-  position : relative; /* needed for ::before to work, which has absolute. */
+  position: relative; /* needed for ::before to work, which has absolute. */
 }
 
 .post-title:hover {

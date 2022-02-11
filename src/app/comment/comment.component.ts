@@ -3,6 +3,7 @@ import {Comment} from '../models/comment';
 import {UserService} from '../services/user.service';
 import {CommentService} from '../services/comment.service';
 import {MatSnackBar} from '@angular/material';
+import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'app-comment',
@@ -16,10 +17,11 @@ export class CommentComponent implements OnInit {
   isOwnComment: boolean;
   showEditCommentForm = false;
 
-  constructor(public commentSvc: CommentService, public userSvc: UserService, private snackBar: MatSnackBar) { }
+  constructor(public commentSvc: CommentService, public authSvc: AuthService, private snackBar: MatSnackBar) {
+  }
 
   ngOnInit() {
-    this.isOwnComment = this.userSvc.loggedInUser.id === this.comment.user.id;
+    this.isOwnComment = this.authSvc.loggedInUserValue.id === this.comment.user.id;
   }
 
   deleteComment(id: number) {

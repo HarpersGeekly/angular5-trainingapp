@@ -1,6 +1,6 @@
 <div class="container">
   <ng-container *ngIf="isOwnProfile">
-    <h3 class="profileUsername">Welcome, {{userSvc.loggedInUser?.username}}!</h3>
+    <h3 class="profileUsername">Welcome, {{authSvc.loggedInUserValue?.username}}!</h3>
   </ng-container>
   <!--if not your profile-->
   <ng-container *ngIf="!isOwnProfile">
@@ -12,32 +12,40 @@
   <h5 class="profileEmail">Email: {{user?.email}}</h5>
   <h5 id="profileBio">Bio: {{user?.bio == null ? '(No Bio)' : user?.bio}}</h5>
 
-  <h3 *ngIf="isOwnProfile">You are currently logged in. <span *ngIf="posts?.length > 0"><a routerLink="/post/create"> Create a post.</a></span></h3>
+  <h3 *ngIf="isOwnProfile">You are currently logged in. <span *ngIf="posts?.length > 0"><a routerLink="/post/create"> Create a post.</a></span>
+  </h3>
 </div>
 
 <div class="container">
 
   <mat-tab-group>
     <mat-tab label="Posts">
-        <div *ngIf="posts?.length == 0">Posts are empty. <a routerLink="/post/create" *ngIf="isOwnProfile"> Create a post.</a></div>
-        <div *ngFor="let post of sortedPostsById(posts)" class="margin-top">
-          <div class="post-wrapper">
-            <a routerLink="/post/{{post.id}}/{{post.title}}">
-              <h4 [innerHTML]="post.htmlTitle" id="profile-post-title">{{post.title}}</h4>
-            </a>
-            <h5 [innerHTML]="post.htmlSubtitle" id="profile-post-subtitle">{{post.subtitle}}</h5>
-            <span class="flex post-info-wrapper">
-              <span class="margin-right-sm">{{post.hoursMinutes}}</span><span class="margin-right">{{post.formatDate}}</span>
+      <div *ngIf="posts?.length == 0">Posts are empty. <a routerLink="/post/create" *ngIf="isOwnProfile"> Create a
+        post.</a></div>
+      <div *ngFor="let post of sortedPostsById(posts)" class="margin-top">
+        <div class="post-wrapper">
+          <a routerLink="/post/{{post.id}}/{{post.title}}">
+            <h4 [innerHTML]="post.htmlTitle" id="profile-post-title">{{post.title}}</h4>
+          </a>
+          <h5 [innerHTML]="post.htmlSubtitle" id="profile-post-subtitle">{{post.subtitle}}</h5>
+          <span class="flex post-info-wrapper">
+              <span class="margin-right-sm">{{post.hoursMinutes}}</span><span
+            class="margin-right">{{post.formatDate}}</span>
 
             </span>
-            <a routerLink="/post/{{post.id}}/{{post.title}}"><div [innerHTML]="post.htmlLeadImage" id="profile-post-image">{{post.leadImage}}</div></a>
-            <div class="flex" style="width:30%;justify-content: space-between;">
+          <a routerLink="/post/{{post.id}}/{{post.title}}">
+            <div [innerHTML]="post.htmlLeadImage" id="profile-post-image">{{post.leadImage}}</div>
+          </a>
+          <div class="flex" style="width:30%;justify-content: space-between;">
               <span class="flex">
-                <mat-icon class="post-info-icon margin-left-xsm margin-right-xsm">thumb_up_alt_sharp</mat-icon>{{post.voteCount}}
-                <mat-icon class="post-info-icon margin-left margin-right-xsm">remove_red_eye</mat-icon>{{post.voteCount}}
-                <mat-icon class="post-info-icon margin-left margin-right-xsm">forum</mat-icon>{{post.commentCount}}
+                <mat-icon class="post-info-icon margin-left-xsm margin-right-xsm">thumb_up_alt_sharp</mat-icon>
+                {{post.voteCount}}
+                <mat-icon class="post-info-icon margin-left margin-right-xsm">remove_red_eye</mat-icon>
+                {{post.voteCount}}
+                <mat-icon class="post-info-icon margin-left margin-right-xsm">forum</mat-icon>
+                {{post.commentCount}}
               </span>
-              <span>
+            <span>
                 <mat-icon [matMenuTriggerFor]="appMenu" *ngIf="isOwnProfile" class="cursor">more_horiz</mat-icon>
                 <mat-menu #appMenu="matMenu">
                   <button mat-menu-item [matMenuTriggerFor]="post_remove" class="dropdown-delete-btn"><mat-icon>delete</mat-icon>delete?</button>
@@ -50,10 +58,10 @@
                   </mat-menu>
                 </mat-menu>
               </span>
-            </div>
-
           </div>
+
         </div>
+      </div>
     </mat-tab>
     <mat-tab label="Comments">
       <div *ngIf="userComments?.length == 0">Comments are empty.</div>
@@ -62,16 +70,16 @@
       </div>
     </mat-tab>
     <mat-tab label="Account Settings" *ngIf="isOwnProfile">
-        <div class="container margin-top">
-            <button mat-raised-button (click)="toggleEditUserForm()">
-              Edit Account
-            </button>
+      <div class="container margin-top">
+        <button mat-raised-button (click)="toggleEditUserForm()">
+          Edit Account
+        </button>
         <!--<button class="btn" ng-click="toggleEditPasswordForm()"></button>-->
-          <button mat-raised-button (click)="openDialog()">Change Profile Picture</button>
-          <ng-container *ngIf="showEditUserForm">
-            <app-user-edit></app-user-edit>
-          </ng-container>
-        </div>
+        <button mat-raised-button (click)="openDialog()">Change Profile Picture</button>
+        <ng-container *ngIf="showEditUserForm">
+          <app-user-edit></app-user-edit>
+        </ng-container>
+      </div>
     </mat-tab>
   </mat-tab-group>
 

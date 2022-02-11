@@ -1,7 +1,8 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import { Post } from '../models/post';
-import { PostService } from '../services/post.service';
+import {Post} from '../models/post';
+import {PostService} from '../services/post.service';
 import {UserService} from '../services/user.service';
+import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'app-posts-index',
@@ -10,13 +11,16 @@ import {UserService} from '../services/user.service';
 })
 export class PostsIndexComponent implements OnInit, AfterViewInit {
   posts: Post[];
-  constructor(private postSvc: PostService, protected userSvc: UserService) {
+
+  constructor(private postSvc: PostService, protected authSvc: AuthService) {
   }
 
   ngOnInit() {
     // check for user in localStorage
     if (localStorage.getItem('currentUser')) {
-      this.userSvc.loggedInUser = JSON.parse(localStorage.getItem('currentUser'));
+      this.authSvc.loggedInUser = JSON.parse(localStorage.getItem('currentUser'));
+      console.log("logged in user: " + this.authSvc.loggedInUserValue.token);
+      console.log("logged in user: " + this.authSvc.loggedInUserValue.username);
     }
     this.getPosts();
   }

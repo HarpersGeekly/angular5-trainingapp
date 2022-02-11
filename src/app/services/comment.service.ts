@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Comment} from '../models/comment';
 import {Observable} from 'rxjs/Observable';
@@ -8,7 +8,8 @@ export class CommentService {
   private commentUrl = '/api/comment';
   comments: Comment[];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getCommentsByUser(userId: number): Observable<Comment[]> {
     return this.http.get<Comment[]>(this.commentUrl + '/commentsByUser/' + userId);

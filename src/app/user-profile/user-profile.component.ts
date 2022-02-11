@@ -7,6 +7,7 @@ import {PostService} from '../services/post.service';
 import {AlertService} from '../services/alert.service';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {CommentService} from '../services/comment.service';
+import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'app-user-profile',
@@ -24,12 +25,14 @@ export class UserProfileComponent implements OnInit {
 
   constructor(
     public userSvc: UserService,
+    public authSvc: AuthService,
     private postSvc: PostService,
     private commentSvc: CommentService,
     private route: ActivatedRoute,
     private alertSvc: AlertService,
     public dialog: MatDialog,
-    public snackBar: MatSnackBar) { }
+    public snackBar: MatSnackBar) {
+  }
 
   ngOnInit() {
     this.getUser();
@@ -42,10 +45,10 @@ export class UserProfileComponent implements OnInit {
     this.userSvc.getUser(id).subscribe(user => {
       this.userSvc.user = user; // any component that injects the UserService can use this user
       this.user = this.userSvc.user;
-      if (this.userSvc.loggedInUser != null || undefined) {
-        if (this.userSvc.loggedInUser.id === this.user.id) {
-          this.userSvc.loggedInUser = this.user;
-          this.isOwnProfile = (this.userSvc.loggedInUser.id === this.user.id);
+      if (this.authSvc.loggedInUser != null || undefined) {
+        if (this.authSvc.loggedInUserValue.id === this.user.id) {
+          this.authSvc.getLoggedInUserSubject.next(this.user);
+          this.isOwnProfile = (this.authSvc.loggedInUserValue.id === this.user.id);
         }
       }
     });
@@ -56,6 +59,7 @@ export class UserProfileComponent implements OnInit {
     this.postSvc.getPosts(id).subscribe(posts =>
       this.posts = posts);
   }
+
   getComments() {
     const id = +this.route.snapshot.paramMap.get('id');
     this.commentSvc.getCommentsByUser(id).subscribe(cmts => {
@@ -78,14 +82,14 @@ export class UserProfileComponent implements OnInit {
         });
         // this.alertSvc.success('Post Deleted!');
       });
-      }, () => {
-        console.log('error');
-      this.snackBar.open( 'Sorry. There was error deleting this post', 'OK', {
+    }, () => {
+      console.log('error');
+      this.snackBar.open('Sorry. There was error deleting this post', 'OK', {
         duration: 3000,
         panelClass: ['error-snackbar']
       });
-        // this.alertSvc.error('');
-        });
+      // this.alertSvc.error('');
+    });
   }
 
   // openSnackBar(message: string, action: string, className: string) {
