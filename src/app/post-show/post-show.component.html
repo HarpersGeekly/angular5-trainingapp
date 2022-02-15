@@ -33,12 +33,14 @@
     <div class="thumbs-wrapper flex-center" *ngIf="authSvc.loggedInUserValue != null">
       <button mat-icon-button class="cursor margin-left-xsm margin-right-xsm"
               (click)="postVote(post.id, authSvc.loggedInUserValue.id, 1)">
-        <mat-icon [ngClass]="post.userVote == 1 ? 'voteUpIconActive' : 'voteUpIcon'">thumb_up</mat-icon>
+        <mat-icon *ngIf= "!hasVotedUp" [ngClass]="post.userVote == 1 ? 'voteUpIconActive' : 'voteUpIcon'">thumb_up</mat-icon>
+        <mat-icon *ngIf= "hasVotedUp" class="voteUpIconActive">thumb_up</mat-icon>
       </button>
       <span class="margin-left-xsm margin-right-xsm">{{post.voteCount}}</span>
       <button mat-icon-button class="cursor margin-left-xsm margin-right-xsm"
               (click)="postVote(post.id, authSvc.loggedInUserValue.id, -1)">
-        <mat-icon [ngClass]="post.userVote == -1 ? 'voteDownIconActive' : 'voteDownIcon'">thumb_down</mat-icon>
+        <mat-icon *ngIf= "!hasVotedDown" [ngClass]="post.userVote == -1 ? 'voteDownIconActive' : 'voteDownIcon'">thumb_down</mat-icon>
+        <mat-icon *ngIf= "hasVotedDown" class="voteDownIconActive">thumb_down</mat-icon>
       </button>
     </div>
 

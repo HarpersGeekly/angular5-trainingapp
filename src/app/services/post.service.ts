@@ -13,7 +13,7 @@ const httpOptions = {
 export class PostService {
   private postsUrl = '/api/post';  // URL to rest api, look at file: proxy.conf.json
   successfulDelete: boolean;
-  vote: PostVote;
+  vote: Observable<PostVote>;
   userId: number;
 
   constructor(private http: HttpClient, private userSvc: UserService) {
@@ -53,6 +53,10 @@ export class PostService {
 
   postVote(postId: number, userId: number, type: number): Observable<Post> {
     return this.http.post<Post>(this.postsUrl + '/postVote/' + postId + '/' + userId + '/' + type, this.vote);
+  }
+
+  getVote(postId: number, userId: number) {
+    return this.http.get<PostVote>(this.postsUrl + '/postVote/' + postId + '/' + userId)
   }
 
   removeVote(postId: number, userId: number): Observable<Post> {
