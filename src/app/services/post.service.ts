@@ -13,7 +13,7 @@ const httpOptions = {
 export class PostService {
   private postsUrl = '/api/post';  // URL to rest api, look at file: proxy.conf.json
   successfulDelete: boolean;
-  vote: Observable<PostVote>;
+  vote: PostVote;
   userId: number;
 
   constructor(private http: HttpClient, private userSvc: UserService) {

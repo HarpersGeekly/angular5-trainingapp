@@ -2,14 +2,10 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {PostService} from '../services/post.service';
 import {Post} from '../models/post';
 import {ActivatedRoute, Router} from '@angular/router';
-import {UserService} from '../services/user.service';
 import {AlertService} from '../services/alert.service';
-import {User} from '../models/user';
 import {Comment} from '../models/comment';
 import {CommentService} from '../services/comment.service';
-import {PostVote} from "../models/postVote";
 import {AuthService} from "../services/auth.service";
-import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-post-show',
@@ -93,32 +89,82 @@ export class PostShowComponent implements OnInit, AfterViewInit {
       this.alertSvc.success('Post Deleted!');
     }, () => {
       console.log('error');
-      this.alertSvc.error('Sorry. There was error deleting this post');
+      this.alertSvc.error('Sorry. There was an error deleting this post');
     });
   }
 
   postVote(postId: number, userId: number, type: number) {
-    //TODO still an error when you arrive on a page that has already been voted on, it requires two clicks to remove the vote
     console.log("post voting");
     console.log("post:" + postId, "userid:" + userId, "type:"  + type);
-    if (this.post.userVote === 0) {
+    if (!this.hasVotedUp && !this.hasVotedDown) {
       this.postSvc.postVote(postId, userId, type).subscribe(response => {
         this.post = response;
+        this.getVote();
+      }, () => {
+        console.log('error');
+        this.alertSvc.error('Failed to vote. Try again later.');
       });
     }
-    if (this.post.userVote === type) {
-      this.postSvc.removeVote(postId, userId).subscribe(response => {
-        this.post = response;
-      });
-    } else {
+    if (this.hasVotedUp && type == 1) {
+      console.log("I've voted up, and want to remove up");
       this.postSvc.removeVote(postId, userId).subscribe(post => {
-        this.postSvc.postVote(postId, userId, type).subscribe(response => {
+        this.post = post;
+        this.getVote();
+      }, () => {
+        console.log('error');
+        this.alertSvc.error('Failed to remove vote. Try again later.');
+      });
+    }
+    if (this.hasVotedUp && type == -1) {
+      console.log("I've voted up, and want to take away up to vote down");
+      this.postSvc.removeVote(postId, userId).subscribe(post => {
+        this.postSvc.postVote(postId, userId, -1).subscribe(response => {
           this.post = response;
-          this.hasVotedUp = false;
-          this.hasVotedDown = false;
+          this.getVote();
+        }, () => {
+          console.log('error');
+          this.alertSvc.error('Failed to vote. Try again later.');
         });
       });
     }
+    if (this.hasVotedDown && type == -1) {
+      console.log("I've voted down, and want to remove down");
+      this.postSvc.removeVote(postId, userId).subscribe(post => {
+        this.post = post;
+        this.getVote();
+      });
+    }
+    if (this.hasVotedDown && type == 1) {
+      console.log("I've voted down, and want to take away down to vote up");
+      this.postSvc.removeVote(postId, userId).subscribe(post => {
+        this.postSvc.postVote(postId, userId, 1).subscribe(response => {
+          this.post = response;
+          this.getVote();
+        });
+      });
+    }
+
+    //=====old code for voting:
+    // Had issue where if you visited the site and had previously voted, it wouldn't take away the current vote on first click after init, had to click twice
+    // if (this.post.userVote === 0) {
+    //   this.postSvc.postVote(postId, userId, type).subscribe(response => {
+    //     this.post = response;
+    //   });
+    // }
+    // if (this.post.userVote === type) {
+    //   this.postSvc.removeVote(postId, userId).subscribe(response => {
+    //     this.post = response;
+    //   });
+    // } else {
+    //   this.postSvc.removeVote(postId, userId).subscribe(post => {
+    //     this.postSvc.postVote(postId, userId, type).subscribe(response => {
+    //       this.post = response;
+    //       this.hasVotedUp = false;
+    //       this.hasVotedDown = false;
+    //     });
+    //   });
+    // }
   }
+
 
 }
