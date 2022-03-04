@@ -1,7 +1,8 @@
 <div *ngIf="!isCommentOnProfile" class="comment" [ngClass]="comment.hasBeenDeleted == true ? 'commentDeleted' : ''">
   <div *ngIf="!showEditCommentForm">
-    <span class="margin-right-sm">By:</span><span class="comment-username cursor margin-right"
+    <span class="margin-right-sm">By:</span><span *ngIf="!comment.hasBeenDeleted" class="comment-username cursor margin-right"
                                                   routerLink="/user/profile/{{comment.user.id}}/{{comment.user.username}}">{{comment.user.username}}</span>
+    <span *ngIf="comment.hasBeenDeleted">[deleted]</span>
     <span class="margin-right-sm">{{comment.hoursMinutes}}</span><span
     class="margin-right">{{comment.formatDate}}</span>
   </div>
