@@ -17,4 +17,5 @@ export class Post {
   voteCount: number;
   userVote: number;
   commentCount: number;
+  viewCount: number;
 }

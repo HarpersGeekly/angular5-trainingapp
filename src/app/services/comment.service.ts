@@ -19,6 +19,10 @@ export class CommentService {
     return this.http.get<Comment[]>(this.commentUrl + '/commentsByPost/' + postId);
   }
 
+  // getCommentsByParent(commentId: number): Observable<Comment[]> {
+  //   return this.http.get<Comment[]>(this.commentUrl + '/commentsByParent/' + commentId);
+  // }
+
   create(comment: Comment) {
     return this.http.post<Comment>(this.commentUrl + '/saveComment', comment);
   }

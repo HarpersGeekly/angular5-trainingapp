@@ -27,27 +27,27 @@
     <!--</form>-->
   </div>
 
-  <div *ngIf="authSvc.loggedInUser == null" class="thumbs-wrapper">
+  <div *ngIf="authSvc.loggedInUserValue == null" class="thumbs-wrapper">
     <button mat-icon-button routerLink="/login" class="cursor margin-left-xsm margin-right-xsm">
       <mat-icon>thumb_up</mat-icon>
     </button>
     <span class="margin-left-xsm margin-right-xsm">{{comment.voteCount}}</span>
-    <button mat-icon-button routerLink="/login" class="cursor margin-left-xsm margin-right-xsm">
-      <mat-icon>thumb_down</mat-icon>
-    </button>
+<!--    <button mat-icon-button routerLink="/login" class="cursor margin-left-xsm margin-right-xsm">-->
+<!--      <mat-icon>thumb_down</mat-icon>-->
+<!--    </button>-->
   </div>
-  <div *ngIf="authSvc.loggedInUser != null && !showEditCommentForm" class="flex-align">
+  <div *ngIf="authSvc.loggedInUserValue != null && !showEditCommentForm" class="flex-align">
     <ng-container>
-      <button *ngIf="!comment.hasBeenDeleted" mat-icon-button class="cursor margin-left-xsm margin-right-xsm"
-              (click)="commentVote(comment.id, authSvc.loggedInUserValue.id, 1)">
+      <button *ngIf="!comment.hasBeenDeleted" mat-icon-button class="cursor margin-left-xsm margin-right-xsm">
+<!--              (click)="commentVote(comment.id, authSvc.loggedInUserValue.id, 1)"-->
         <mat-icon [ngClass]="comment.userVote == 1 ? 'voteUpIconActive' : 'voteUpIcon'">thumb_up</mat-icon>
       </button>
       <button *ngIf="comment.hasBeenDeleted" mat-icon-button class="margin-left-xsm margin-right-xsm">
         <mat-icon>thumb_up</mat-icon>
       </button>
       <span class="margin-left-xsm margin-right-xsm">{{comment.voteCount}}</span>
-      <button *ngIf="!comment.hasBeenDeleted" mat-icon-button class="cursor margin-left-xsm margin-right-xsm"
-              (click)="commentVote(comment.id, authSvc.loggedInUserValue.id, -1)">
+      <button *ngIf="!comment.hasBeenDeleted" mat-icon-button class="cursor margin-left-xsm margin-right-xsm">
+<!--              (click)="commentVote(comment.id, authSvc.loggedInUserValue.id, -1)">-->
         <mat-icon [ngClass]="comment.userVote == -1 ? 'voteDownIconActive' : 'voteDownIcon'">thumb_down</mat-icon>
       </button>
       <button *ngIf="comment.hasBeenDeleted" mat-icon-button class="margin-left-xsm margin-right-xsm">

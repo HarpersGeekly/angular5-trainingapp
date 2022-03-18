@@ -12,7 +12,7 @@ import {AuthService} from "../services/auth.service";
 })
 export class CommentComponent implements OnInit {
 
-  @Input() comment: any;
+  @Input() comment: Comment;
   @Input() isCommentOnProfile: boolean;
   isOwnComment: boolean;
   showEditCommentForm = false;
@@ -21,12 +21,21 @@ export class CommentComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.isOwnComment = this.authSvc.loggedInUserValue.id === this.comment.user.id;
+    if (this.authSvc.loggedInUserValue != null) {
+      this.isOwnComment = this.authSvc.loggedInUserValue.id === this.comment.user.id;
+    }
   }
+
+  // getCommentsByParent(id: number) {
+  //   this.commentSvc.getCommentsByParent(id).subscribe(comments => {
+  //     console.log("comments: " + comments);
+  //   })
+  // }
 
   deleteComment(id: number) {
     this.commentSvc.delete(id).subscribe(response => {
-      this.comment = response;
+      // this.comment = response;
+      this.comment.hasBeenDeleted = true;
       this.snackBar.open('Comment Deleted!', '', {
         duration: 3000,
         panelClass: ['success-snackbar']

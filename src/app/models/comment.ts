@@ -13,4 +13,6 @@ export class Comment {
   isParentComment: boolean;
   hasBeenDeleted: boolean;
   userVote: number;
+  parentId: number;
+  createdAt: string;
 }

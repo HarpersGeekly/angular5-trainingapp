@@ -46,13 +46,16 @@ export class PostShowComponent implements OnInit, AfterViewInit {
     this.postSvc.getPost(id).subscribe(post => {
       this.loading = false;
       this.post = post;
-      this.isOwnPost = this.authSvc.loggedInUserValue.id === this.post.user.id;
+      if (this.authSvc.loggedInUserValue != null) {
+        this.isOwnPost = this.authSvc.loggedInUserValue.id === this.post.user.id;
+      }
     });
   }
 
   getVote() {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.postSvc.getVote(id, this.authSvc.loggedInUserValue.id).subscribe(response => {
+    if (this.authSvc.loggedInUserValue != null) {
+      this.postSvc.getVote(id, this.authSvc.loggedInUserValue.id).subscribe(response => {
         console.log(response);
         if (response && response['upvote'] === true) {
           this.hasVotedUp = true;
@@ -64,7 +67,8 @@ export class PostShowComponent implements OnInit, AfterViewInit {
           this.hasVotedUp = false;
           this.hasVotedDown = false;
         }
-    })
+      })
+    }
   }
 
   getComments() {
